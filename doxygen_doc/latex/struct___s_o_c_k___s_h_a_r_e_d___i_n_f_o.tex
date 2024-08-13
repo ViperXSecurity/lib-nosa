@@ -1,0 +1,112 @@
+\doxysection{\+\_\+\+SOCK\+\_\+\+SHARED\+\_\+\+INFO Struct Reference}
+\hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}{}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}\index{\_SOCK\_SHARED\_INFO@{\_SOCK\_SHARED\_INFO}}
+
+
+{\ttfamily \#include $<$nosa.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a3c6458b0022cbf811176c10da7b5c307}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a3c6458b0022cbf811176c10da7b5c307} 
+SOCKET\+\_\+\+STATE {\bfseries State}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a3cea555d737508db44be06ab8bfcf5b7}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a3cea555d737508db44be06ab8bfcf5b7} 
+INT {\bfseries Address\+Family}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ab54e9d41e6c82092e24a06d50e10975f}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ab54e9d41e6c82092e24a06d50e10975f} 
+INT {\bfseries Socket\+Type}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a02ea32d0cf89340e8bd9e7b3f16a4f04}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a02ea32d0cf89340e8bd9e7b3f16a4f04} 
+INT {\bfseries Protocol}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a23de3d5c137ae7e3140d3ddb00b52a8e}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a23de3d5c137ae7e3140d3ddb00b52a8e} 
+INT {\bfseries Size\+Of\+Local\+Address}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9c7257062e377d3f2957f35508709ed5}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9c7257062e377d3f2957f35508709ed5} 
+INT {\bfseries Size\+Of\+Remote\+Address}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9181c883a3f14e66e5b751f08045444d}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9181c883a3f14e66e5b751f08045444d} 
+struct linger {\bfseries Linger\+Data}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_aa84df60a9f9a57417d9b71db5d450aaf}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_aa84df60a9f9a57417d9b71db5d450aaf} 
+ULONG {\bfseries Send\+Timeout}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a25858e3312946269101566b093437b53}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a25858e3312946269101566b093437b53} 
+ULONG {\bfseries Recv\+Timeout}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a7f65f92365a0030b977952e22e8f7503}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a7f65f92365a0030b977952e22e8f7503} 
+ULONG {\bfseries Size\+Of\+Recv\+Buffer}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a3fa68d91a36a3c5c77b1ddfddbfd5b67}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a3fa68d91a36a3c5c77b1ddfddbfd5b67} 
+ULONG {\bfseries Size\+Of\+Send\+Buffer}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ad709525e0abd5e2c536a3323512e35c4}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ad709525e0abd5e2c536a3323512e35c4} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>BOOLEAN {\bfseries Listening}: 1\\
+\>BOOLEAN {\bfseries Broadcast}: 1\\
+\>BOOLEAN {\bfseries Debug}: 1\\
+\>BOOLEAN {\bfseries OobInline}: 1\\
+\>BOOLEAN {\bfseries ReuseAddresses}: 1\\
+\>BOOLEAN {\bfseries ExclusiveAddressUse}: 1\\
+\>BOOLEAN {\bfseries NonBlocking}: 1\\
+\>BOOLEAN {\bfseries DontUseWildcard}: 1\\
+\>BOOLEAN {\bfseries ReceiveShutdown}: 1\\
+\>BOOLEAN {\bfseries SendShutdown}: 1\\
+\>BOOLEAN {\bfseries UseDelayedAcceptance}: 1\\
+\>BOOLEAN {\bfseries UseSAN}: 1\\
+\>BOOLEAN {\bfseries HasGUID}: 1\\
+\} {\bfseries Flags}\\
+
+\end{tabbing}\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_afc2c867c855e51093fd37493bed94394}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_afc2c867c855e51093fd37493bed94394} 
+DWORD {\bfseries Create\+Flags}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_aef8b86ad468b0fb56d30ca7c60b5909b}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_aef8b86ad468b0fb56d30ca7c60b5909b} 
+DWORD {\bfseries Catalog\+Entry\+Id}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ad5773ad5fc0b4bb7a197f5545af964d5}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ad5773ad5fc0b4bb7a197f5545af964d5} 
+DWORD {\bfseries Service\+Flags1}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9a727da5cd979fa750cce6a2394124e9}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9a727da5cd979fa750cce6a2394124e9} 
+DWORD {\bfseries Provider\+Flags}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_acf58362193a53f8ea9ea93b961387477}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_acf58362193a53f8ea9ea93b961387477} 
+DWORD {\bfseries Group\+ID}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a035f966606f97424972ae7260968f9d4}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a035f966606f97424972ae7260968f9d4} 
+DWORD {\bfseries Group\+Type}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ab48c1f4fdb60705dbf304efe76852fe2}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ab48c1f4fdb60705dbf304efe76852fe2} 
+INT {\bfseries Group\+Priority}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a85734d58e5276286c92b8bdcf1513a56}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a85734d58e5276286c92b8bdcf1513a56} 
+INT {\bfseries Socket\+Last\+Error}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ab68059d83091d120bcf1236428c322fa}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_ab68059d83091d120bcf1236428c322fa} 
+HWND {\bfseries h\+Wnd}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a83a9feab706c4875dc877643c6556bb2}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a83a9feab706c4875dc877643c6556bb2} 
+LONG {\bfseries Padding}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9536d1222297fed2744b6b709ef0bef1}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a9536d1222297fed2744b6b709ef0bef1} 
+DWORD {\bfseries Sequence\+Number}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a95ddfb4430fc9398b00b5716be4029e6}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a95ddfb4430fc9398b00b5716be4029e6} 
+UINT {\bfseries w\+Msg}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a7beeafd43026ea3e61037b13ee3af606}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a7beeafd43026ea3e61037b13ee3af606} 
+LONG {\bfseries Async\+Events}
+\item 
+\Hypertarget{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a2171459992057101541b09d155078343}\label{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o_a2171459992057101541b09d155078343} 
+LONG {\bfseries Async\+Disabled\+Events}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure representing AFD (Ancillary Function Driver) shared informations. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Alexa\+Souza/source/repos/\+Console\+Application1/\+Console\+Application1/nosa.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,55 @@
+\doxysection{\+\_\+\+AFD\+\_\+\+CREATE\+\_\+\+PACKET Struct Reference}
+\hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t}{}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t}\index{\_AFD\_CREATE\_PACKET@{\_AFD\_CREATE\_PACKET}}
+
+
+{\ttfamily \#include $<$nosa.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_ab13007028d8b2f24fd0956a117bdd7a9}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_ab13007028d8b2f24fd0956a117bdd7a9} 
+uint32\+\_\+t {\bfseries Next\+Entry\+Offset}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_ac38b9f3f98cf89eba135666d266b70a4}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_ac38b9f3f98cf89eba135666d266b70a4} 
+uint8\+\_\+t {\bfseries Flags}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a2949b8a9bbde8bb3309aa3c1723f563c}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a2949b8a9bbde8bb3309aa3c1723f563c} 
+uint8\+\_\+t {\bfseries Ea\+Name\+Length}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_af4895654daa4470fdeb9dbf4960256b3}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_af4895654daa4470fdeb9dbf4960256b3} 
+uint16\+\_\+t {\bfseries Ea\+Value\+Length}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a6435fb07a83b88901e1b9a995a64974f}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a6435fb07a83b88901e1b9a995a64974f} 
+char {\bfseries Ea\+Name} \mbox{[}16\mbox{]}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a92d8e253e9991e478f0ac16371c9c3a8}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a92d8e253e9991e478f0ac16371c9c3a8} 
+uint32\+\_\+t {\bfseries Endpoint\+Flags}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_aa3456b5ffae8033cd0b718adbed516d6}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_aa3456b5ffae8033cd0b718adbed516d6} 
+uint32\+\_\+t {\bfseries Group\+ID}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_acff89a07eb90b9b71995638f1b4ffc31}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_acff89a07eb90b9b71995638f1b4ffc31} 
+uint32\+\_\+t {\bfseries Address\+Family}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_ac1e17f07013a249775bd3303600e1016}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_ac1e17f07013a249775bd3303600e1016} 
+uint32\+\_\+t {\bfseries Socket\+Type}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a9bbe147bdf7a8ed66965f67ccdf5bc6f}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a9bbe147bdf7a8ed66965f67ccdf5bc6f} 
+uint32\+\_\+t {\bfseries Protocol}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_aa4e9b23d6f70621556146601b4309c30}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_aa4e9b23d6f70621556146601b4309c30} 
+uint64\+\_\+t {\bfseries Size\+Of\+Transport\+Name}
+\item 
+\Hypertarget{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a53db27f789dfb22cefbf929a3ae5f4d5}\label{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t_a53db27f789dfb22cefbf929a3ae5f4d5} 
+char {\bfseries Transport\+Name} \mbox{[}5\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure representing an AFD\+\_\+\+CREATE\+\_\+\+PACKET.
+
+This structure contains information related to creating an AFD packet. It includes fields for various parameters such as Next\+Entry\+Offset, Flags, Ea\+Name\+Length, Ea\+Value\+Length, Ea\+Name, Endpoint\+Flags, Group\+ID, Address\+Family, Socket\+Type, Protocol, Size\+Of\+Transport\+Name, and Transport\+Name. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Alexa\+Souza/source/repos/\+Console\+Application1/\+Console\+Application1/nosa.\+h\end{DoxyCompactItemize}

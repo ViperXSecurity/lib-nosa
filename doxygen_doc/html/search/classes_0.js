@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['_5fafd_5faccept_5fdata_0',['_AFD_ACCEPT_DATA',['../a00071.html',1,'']]],
+  ['_5fafd_5fbind_5fdata_1',['_AFD_BIND_DATA',['../a00063.html',1,'']]],
+  ['_5fafd_5fconnect_5finfo_2',['_AFD_CONNECT_INFO',['../a00091.html',1,'']]],
+  ['_5fafd_5fcreate_5fpacket_3',['_AFD_CREATE_PACKET',['../a00059.html',1,'']]],
+  ['_5fafd_5flisten_5fdata_4',['_AFD_LISTEN_DATA',['../a00067.html',1,'']]],
+  ['_5fafd_5frecv_5finfo_5',['_AFD_RECV_INFO',['../a00099.html',1,'']]],
+  ['_5fafd_5frecv_5finfo_5fudp_6',['_AFD_RECV_INFO_UDP',['../a00103.html',1,'']]],
+  ['_5fafd_5fsend_5finfo_7',['_AFD_SEND_INFO',['../a00107.html',1,'']]],
+  ['_5fafd_5fsend_5finfo_5fudp_8',['_AFD_SEND_INFO_UDP',['../a00111.html',1,'']]],
+  ['_5fafd_5fwsabuf_9',['_AFD_WSABUF',['../a00095.html',1,'']]],
+  ['_5fclient_5fid_10',['_CLIENT_ID',['../a00035.html',1,'']]],
+  ['_5fdomain_5finfo_11',['_DOMAIN_INFO',['../a00115.html',1,'']]],
+  ['_5finitial_5fteb_12',['_INITIAL_TEB',['../a00055.html',1,'']]],
+  ['_5fio_5fstatus_5fblock_13',['_IO_STATUS_BLOCK',['../a00039.html',1,'']]],
+  ['_5fobject_5fattributes_14',['_OBJECT_ATTRIBUTES',['../a00051.html',1,'']]],
+  ['_5fsock_5fshared_5finfo_15',['_SOCK_SHARED_INFO',['../a00079.html',1,'']]],
+  ['_5fsockaddr_5fstorage_16',['_SOCKADDR_STORAGE',['../a00075.html',1,'']]],
+  ['_5fsocket_5fcontext_17',['_SOCKET_CONTEXT',['../a00087.html',1,'']]],
+  ['_5fsystem_5fhandle_5finformation_18',['_SYSTEM_HANDLE_INFORMATION',['../a00031.html',1,'']]],
+  ['_5fsystem_5fhandle_5ftable_5fentry_5finfo_19',['_SYSTEM_HANDLE_TABLE_ENTRY_INFO',['../a00027.html',1,'']]],
+  ['_5funicode_5fstring_20',['_UNICODE_STRING',['../a00047.html',1,'']]],
+  ['_5fwsaprotocol_5finfow_21',['_WSAPROTOCOL_INFOW',['../a00023.html',1,'']]],
+  ['_5fwsaprotocolchain_22',['_WSAPROTOCOLCHAIN',['../a00019.html',1,'']]]
+];

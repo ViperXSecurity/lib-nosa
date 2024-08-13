@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['securitydescriptor_0',['SecurityDescriptor',['../a00051.html#adfce0bf43dbfa60476b4d786c7d78610',1,'_OBJECT_ATTRIBUTES']]],
+  ['securityqualityofservice_1',['SecurityQualityOfService',['../a00051.html#a9fe901e278495c5490b3288d26636482',1,'_OBJECT_ATTRIBUTES']]],
+  ['sendshutdown_2',['SendShutdown',['../a00079.html#a6764e2efdeabd40e49b279ec4bc51ec6',1,'_SOCK_SHARED_INFO']]],
+  ['sendtimeout_3',['SendTimeout',['../a00079.html#aa84df60a9f9a57417d9b71db5d450aaf',1,'_SOCK_SHARED_INFO']]],
+  ['sequencenumber_4',['SequenceNumber',['../a00071.html#af1225fb7a8cd4fad88f7bb5c5d2c6056',1,'_AFD_ACCEPT_DATA::SequenceNumber'],['../a00079.html#a9536d1222297fed2744b6b709ef0bef1',1,'_SOCK_SHARED_INFO::SequenceNumber']]],
+  ['serviceflags1_5',['ServiceFlags1',['../a00079.html#ad5773ad5fc0b4bb7a197f5545af964d5',1,'_SOCK_SHARED_INFO']]],
+  ['shareddata_6',['SharedData',['../a00087.html#a75130dbf568bafd7eb17abb1946152df',1,'_SOCKET_CONTEXT']]],
+  ['sharetype_7',['ShareType',['../a00063.html#ad436bcab782464eb8c8fa7098fdd96f4',1,'_AFD_BIND_DATA']]],
+  ['size_8',['Size',['../a00011.html#ab9729c02022f1d2f205f410af3f2ebe7',1,'buffer_data_t']]],
+  ['sizeofhelperdata_9',['SizeOfHelperData',['../a00087.html#af972ca0849c2c385099cdea06b79679c',1,'_SOCKET_CONTEXT']]],
+  ['sizeoflocaladdress_10',['SizeOfLocalAddress',['../a00079.html#a23de3d5c137ae7e3140d3ddb00b52a8e',1,'_SOCK_SHARED_INFO']]],
+  ['sizeofrecvbuffer_11',['SizeOfRecvBuffer',['../a00079.html#a7f65f92365a0030b977952e22e8f7503',1,'_SOCK_SHARED_INFO']]],
+  ['sizeofremoteaddress_12',['SizeOfRemoteAddress',['../a00079.html#a9c7257062e377d3f2957f35508709ed5',1,'_SOCK_SHARED_INFO::SizeOfRemoteAddress'],['../a00111.html#aba28c4444e23752313f5298ebd9eca08',1,'_AFD_SEND_INFO_UDP::SizeOfRemoteAddress']]],
+  ['sizeofsendbuffer_13',['SizeOfSendBuffer',['../a00079.html#a3fa68d91a36a3c5c77b1ddfddbfd5b67',1,'_SOCK_SHARED_INFO']]],
+  ['sizeoftransportname_14',['SizeOfTransportName',['../a00059.html#aa4e9b23d6f70621556146601b4309c30',1,'_AFD_CREATE_PACKET']]],
+  ['socketlasterror_15',['SocketLastError',['../a00079.html#a85734d58e5276286c92b8bdcf1513a56',1,'_SOCK_SHARED_INFO']]],
+  ['sockettype_16',['SocketType',['../a00059.html#ac1e17f07013a249775bd3303600e1016',1,'_AFD_CREATE_PACKET::SocketType'],['../a00079.html#ab54e9d41e6c82092e24a06d50e10975f',1,'_SOCK_SHARED_INFO::SocketType']]],
+  ['ss_5ffamily_17',['ss_family',['../a00075.html#a8f0c51932acff546109bb8ac0c65fd2a',1,'_SOCKADDR_STORAGE']]],
+  ['stackallocationbase_18',['StackAllocationBase',['../a00055.html#a3ebeba69fc448e6cf06735d9c5a1afab',1,'_INITIAL_TEB']]],
+  ['stackbase_19',['StackBase',['../a00055.html#a13437bda722ecc146005d46a5500beaa',1,'_INITIAL_TEB']]],
+  ['stacklimit_20',['StackLimit',['../a00055.html#abc46fe95f51b69e51a9daaa887ef5875',1,'_INITIAL_TEB']]],
+  ['state_21',['State',['../a00079.html#a3c6458b0022cbf811176c10da7b5c307',1,'_SOCK_SHARED_INFO']]],
+  ['status_22',['Status',['../a00039.html#a98a2af831f09a3521dec87991ebb2126',1,'_IO_STATUS_BLOCK']]],
+  ['szprotocol_23',['szProtocol',['../a00023.html#a0d76268e5f6640d1a2be5a43974b0278',1,'_WSAPROTOCOL_INFOW']]]
+];

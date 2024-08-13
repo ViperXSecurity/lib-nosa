@@ -1,0 +1,1622 @@
+\doxysection{nosa.\+h}
+\hypertarget{nosa_8h_source}{}\label{nosa_8h_source}\index{C:/Users/AlexaSouza/source/repos/ConsoleApplication1/ConsoleApplication1/nosa.h@{C:/Users/AlexaSouza/source/repos/ConsoleApplication1/ConsoleApplication1/nosa.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ LOG\_H}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ LOG\_H}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ Logging\ levels}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ LOG\_LEVEL\_DEBUG\ 0}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ LOG\_LEVEL\_INFO\ \ 1}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ LOG\_LEVEL\_WARN\ \ 2}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ LOG\_LEVEL\_ERROR\ 3}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Set\ the\ current\ log\ level}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ CURRENT\_LOG\_LEVEL}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ CURRENT\_LOG\_LEVEL\ LOG\_LEVEL\_DEBUG}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ Macro\ to\ get\ the\ current\ time\ as\ a\ string}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ GET\_CURRENT\_TIME\_STR(buffer,\ size)\ \(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ SYSTEMTIME\ st;\ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ GetSystemTime(\&st);\ \(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ snprintf(buffer,\ size,\ "{}\%02d:\%02d:\%02d"{},\ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ st.wHour,\ st.wMinute,\ st.wSecond);\ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ Base\ logging\ macro,\ used\ by\ other\ macros}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ LOG(level,\ level\_str,\ format,\ ...)\ \(\backslash\)}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (level\ >=\ CURRENT\_LOG\_LEVEL)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ char\ time\_str[16];\ \(\backslash\)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ char\ *filename\ =\ strrchr(\_\_FILE\_\_,\ '\(\backslash\)\(\backslash\)');\ \(\backslash\)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ GET\_CURRENT\_TIME\_STR(time\_str,\ sizeof(time\_str));\ \(\backslash\)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ "{}[\%s]\ \%s:\%s:\%d:\ "{}\ format\ "{}\(\backslash\)n\(\backslash\)n"{},\ \(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time\_str,\ level\_str,\ filename,\ \_\_LINE\_\_,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ Log\ macros\ for\ different\ levels}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ LOG\_DEBUG(format,\ ...)\ LOG(LOG\_LEVEL\_DEBUG,\ "{}DEBUG"{},\ format,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ LOG\_INFO(format,\ ...)\ \ LOG(LOG\_LEVEL\_INFO,\ \ "{}INFO"{},\ \ format,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ LOG\_WARN(format,\ ...)\ \ LOG(LOG\_LEVEL\_WARN,\ \ "{}WARN"{},\ \ format,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ LOG\_ERROR(format,\ ...)\ LOG(LOG\_LEVEL\_ERROR,\ "{}ERROR"{},\ format,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LOG\_H}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ Initializeobject\_attributes(p,\ n,\ a,\ r,\ s)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ (p)-\/>Length\ =\ sizeof(OBJECT\_ATTRIBUTES);\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ (p)-\/>RootDirectory\ =\ r;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ (p)-\/>Attributes\ =\ a;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ (p)-\/>ObjectName\ =\ n;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ (p)-\/>SecurityDescriptor\ =\ s;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ (p)-\/>SecurityQualityOfService\ =\ NULL;\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#pragma\ push(pack,\ 1)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#pragma\ warning(push)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#pragma\ warning(disable:\ \_VCRUNTIME\_DISABLED\_WARNINGS)}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{char}\ \ \ \ \ \ \ \ int8\_t;}
+\DoxyCodeLine{00061\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ \ \ \ \ \ \ \ \ \ \ \ \ \ int16\_t;}
+\DoxyCodeLine{00062\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t;}
+\DoxyCodeLine{00063\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ \ \ \ int64\_t;}
+\DoxyCodeLine{00064\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \ \ \ \ \ uint8\_t;}
+\DoxyCodeLine{00065\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \ \ \ \ uint16\_t;}
+\DoxyCodeLine{00066\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ uint32\_t;}
+\DoxyCodeLine{00067\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ uint64\_t;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structbuffer__data__t}{buffer\_data\_t}}}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ uint32\_t\ Size;}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{char}\ \_4[4];}
+\DoxyCodeLine{00073\ \ \ \ \ int64\_t\ VirtualAddress;}
+\DoxyCodeLine{00074\ \ \ \ \ int32\_t\ pad;}
+\DoxyCodeLine{00075\ \ \ \ \ int32\_t\ pad1;}
+\DoxyCodeLine{00076\ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structuserbuf__t}{userbuf\_t}}}
+\DoxyCodeLine{00079\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structbuffer__data__t}{buffer\_data\_t}}*\ buffer\_data;}
+\DoxyCodeLine{00081\ \ \ \ \ int32\_t\ num\_buffers;}
+\DoxyCodeLine{00082\ \ \ \ \ int32\_t\ field\_c;}
+\DoxyCodeLine{00083\ \ \ \ \ uint32\_t\ length;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{char}\ \_14[1];}
+\DoxyCodeLine{00085\ \ \ \ \ uint8\_t\ field\_15;}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{char}\ \_16[2];}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#pragma\ push(pop)}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ NT\_SUCCESS(Status)\ (((NTSTATUS)(Status))\ >=\ 0)}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ SystemHandleInformation\ \ \ \ \ \ \ \ \ \ \ \ \ 0x10}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ SystemHandleInformationSize\ \ \ \ \ \ \ \ \ 0x400000}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ FILE\_SUPERSEDE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ FILE\_OPEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ FILE\_CREATE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ FILE\_OPEN\_IF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ FILE\_OVERWRITE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ FILE\_OVERWRITE\_IF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x5}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ FILE\_MAXIMUM\_DISPOSITION\ \ \ \ \ \ \ \ \ \ \ \ 0x5}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ OBJ\_INHERIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2L}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ OBJ\_PERMANENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x10L}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ OBJ\_EXCLUSIVE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x20L}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ OBJ\_CASE\_INSENSITIVE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x40L}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ OBJ\_OPENIF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x80L}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ OBJ\_OPENLINK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x100L}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ OBJ\_KERNEL\_HANDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x200L}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ OBJ\_FORCE\_ACCESS\_CHECK\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x400L}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ OBJ\_IGNORE\_IMPERSONATED\_DEVICEMAP\ \ \ 0x800L}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ OBJ\_DONT\_REPARSE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1000L}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ OBJ\_VALID\_ATTRIBUTES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1FF2L}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ AFD\_ENDPOINT\_CONNECTIONLESS\ \ \ \ \ \ \ \ \ 0x1}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ AFD\_ENDPOINT\_MESSAGE\_ORIENTED\ \ \ \ \ \ \ 0x10}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ AFD\_ENDPOINT\_RAW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x100}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ AFD\_ENDPOINT\_MULTIPOINT\ \ \ \ \ \ \ \ \ \ \ \ \ 0x1000}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ AFD\_ENDPOINT\_C\_ROOT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x10000}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ AFD\_ENDPOINT\_D\_ROOT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x100000}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_BROADCAST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_MULTICAST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x8}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_PARTIAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x10}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_NORMAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x20}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_EXPEDITED\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x40}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_PEEK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x80}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_NO\_RESPONSE\_EXP\ \ \ \ \ \ \ \ \ 0x100}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_COPY\_LOOKAHEAD\ \ \ \ \ \ \ \ \ \ 0x200}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_ENTIRE\_MESSAGE\ \ \ \ \ \ \ \ \ \ 0x400}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_AT\_DISPATCH\_LEVEL\ \ \ \ \ \ \ 0x800}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_CONTROL\_INFO\ \ \ \ \ \ \ \ \ \ \ \ 0x1000}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_FORCE\_INDICATION\ \ \ \ \ \ \ \ 0x2000}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ TDI\_RECEIVE\_NO\_PUSH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4000}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#define\ MAX\_PROTOCOL\_CHAIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 7}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ WSAPROTOCOL\_LEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 255}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ IOCTL\_AFD\_BIND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x12003}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#define\ IOCTL\_AFD\_DOCONNECT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x12007}}
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#define\ IOCTL\_AFD\_DOCONNECT\_EX\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x120c7}}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ IOCTL\_AFD\_RECV\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x12017}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#define\ IOCTL\_AFD\_SEND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1201F}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#define\ IOCTL\_AFD\_SET\_CONTEXT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x12047}}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#define\ IOCTL\_AFD\_GET\_CONTEXT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x12043}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#define\ SOCK\_CONTEXT\_BUF\_SIZE\ (\ sizeof(SOCK\_SHARED\_INFO)\ +\ \(\backslash\)}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sizeof(GUID)+\ \(\backslash\)}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sizeof(PVOID)\ +\ 8\ +\ \(\backslash\)}}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2\ *\ sizeof(SOCKADDR\_STORAGE)))}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#define\ SOCK\_CONTEXT\_ADDR\_SIZE\ (sizeof(SOCKADDR\_STORAGE))}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#define\ INADDR\_ANY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#define\ INADDR\_LOOPBACK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x7f000001}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#define\ INADDR\_BROADCAST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xffffffff}}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#define\ INADDR\_NONE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xffffffff}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#define\ DNS\_SERVER\ "{}8.8.8.8"{}}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#define\ DNS\_PORT\ 53}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#define\ MAX\_RECV\_BYTES\ 0x1000}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#define\ MAX\_SENT\_BYTES\ 0x1000}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#pragma\ comment(lib,\ "{}ntdll.lib"{})}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l_c_h_a_i_n}{\_WSAPROTOCOLCHAIN}}}
+\DoxyCodeLine{00170\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{int}\ ChainLen;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ the\ length\ of\ the\ chain,\ \ \ \ \ */}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{/*\ length\ =\ 0\ means\ layered\ protocol,\ */}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{comment}{/*\ length\ =\ 1\ means\ base\ protocol,\ */}}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{comment}{/*\ length\ >\ 1\ means\ protocol\ chain\ */}}
+\DoxyCodeLine{00175\ \ \ \ \ DWORD\ ChainEntries[MAX\_PROTOCOL\_CHAIN];\ \textcolor{comment}{/*\ a\ list\ of\ dwCatalogEntryIds\ */}}
+\DoxyCodeLine{00176\ \}\ \mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l_c_h_a_i_n}{WSAPROTOCOLCHAIN}},\ *\ \mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l_c_h_a_i_n}{LPWSAPROTOCOLCHAIN}};}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w}{\_WSAPROTOCOL\_INFOW}}}
+\DoxyCodeLine{00179\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ DWORD\ dwServiceFlags1;}
+\DoxyCodeLine{00181\ \ \ \ \ DWORD\ dwServiceFlags2;}
+\DoxyCodeLine{00182\ \ \ \ \ DWORD\ dwServiceFlags3;}
+\DoxyCodeLine{00183\ \ \ \ \ DWORD\ dwServiceFlags4;}
+\DoxyCodeLine{00184\ \ \ \ \ DWORD\ dwProviderFlags;}
+\DoxyCodeLine{00185\ \ \ \ \ GUID\ ProviderId;}
+\DoxyCodeLine{00186\ \ \ \ \ DWORD\ dwCatalogEntryId;}
+\DoxyCodeLine{00187\ \ \ \ \ \mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l_c_h_a_i_n}{WSAPROTOCOLCHAIN}}\ ProtocolChain;}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{int}\ iVersion;}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{int}\ iAddressFamily;}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{int}\ iMaxSockAddr;}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{int}\ iMinSockAddr;}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{int}\ iSocketType;}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{int}\ iProtocol;}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordtype}{int}\ iProtocolMaxOffset;}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{int}\ iNetworkByteOrder;}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{int}\ iSecurityScheme;}
+\DoxyCodeLine{00197\ \ \ \ \ DWORD\ dwMessageSize;}
+\DoxyCodeLine{00198\ \ \ \ \ DWORD\ dwProviderReserved;}
+\DoxyCodeLine{00199\ \ \ \ \ WCHAR\ szProtocol[WSAPROTOCOL\_LEN\ +\ 1];}
+\DoxyCodeLine{00200\ \}\ \mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w}{WSAPROTOCOL\_INFOW}},\ *\ \mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w}{LPWSAPROTOCOL\_INFOW}};}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___s_y_s_t_e_m___h_a_n_d_l_e___t_a_b_l_e___e_n_t_r_y___i_n_f_o}{\_SYSTEM\_HANDLE\_TABLE\_ENTRY\_INFO}}}
+\DoxyCodeLine{00203\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ USHORT\ UniqueProcessId;}
+\DoxyCodeLine{00205\ \ \ \ \ USHORT\ CreatorBackTraceIndex;}
+\DoxyCodeLine{00206\ \ \ \ \ UCHAR\ ObjectTypeIndex;}
+\DoxyCodeLine{00207\ \ \ \ \ UCHAR\ HandleAttributes;}
+\DoxyCodeLine{00208\ \ \ \ \ USHORT\ HandleValue;}
+\DoxyCodeLine{00209\ \ \ \ \ PVOID\ Object;}
+\DoxyCodeLine{00210\ \ \ \ \ ULONG\ GrantedAccess;}
+\DoxyCodeLine{00211\ \}\ \mbox{\hyperlink{struct___s_y_s_t_e_m___h_a_n_d_l_e___t_a_b_l_e___e_n_t_r_y___i_n_f_o}{SYSTEM\_HANDLE\_TABLE\_ENTRY\_INFO}},\ *\ \mbox{\hyperlink{struct___s_y_s_t_e_m___h_a_n_d_l_e___t_a_b_l_e___e_n_t_r_y___i_n_f_o}{PSYSTEM\_HANDLE\_TABLE\_ENTRY\_INFO}};}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___s_y_s_t_e_m___h_a_n_d_l_e___i_n_f_o_r_m_a_t_i_o_n}{\_SYSTEM\_HANDLE\_INFORMATION}}}
+\DoxyCodeLine{00214\ \{}
+\DoxyCodeLine{00215\ \ \ \ \ ULONG\ NumberOfHandles;}
+\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{struct___s_y_s_t_e_m___h_a_n_d_l_e___t_a_b_l_e___e_n_t_r_y___i_n_f_o}{SYSTEM\_HANDLE\_TABLE\_ENTRY\_INFO}}\ Handles[1];}
+\DoxyCodeLine{00217\ \}\ \mbox{\hyperlink{struct___s_y_s_t_e_m___h_a_n_d_l_e___i_n_f_o_r_m_a_t_i_o_n}{SYSTEM\_HANDLE\_INFORMATION}},\ *\ \mbox{\hyperlink{struct___s_y_s_t_e_m___h_a_n_d_l_e___i_n_f_o_r_m_a_t_i_o_n}{PSYSTEM\_HANDLE\_INFORMATION}};}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_EVENT\_TYPE}
+\DoxyCodeLine{00220\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ NotificationEvent,}
+\DoxyCodeLine{00222\ \ \ \ \ SynchronizationEvent}
+\DoxyCodeLine{00223\ \}\ EVENT\_TYPE;}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___c_l_i_e_n_t___i_d}{\_CLIENT\_ID}}}
+\DoxyCodeLine{00226\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ HANDLE\ UniqueProcess;}
+\DoxyCodeLine{00228\ \ \ \ \ HANDLE\ UniqueThread;}
+\DoxyCodeLine{00229\ \}\ \mbox{\hyperlink{struct___c_l_i_e_n_t___i_d}{CLIENT\_ID}},\ *\ \mbox{\hyperlink{struct___c_l_i_e_n_t___i_d}{PCLIENT\_ID}};}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{\_IO\_STATUS\_BLOCK}}}
+\DoxyCodeLine{00232\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{union}}
+\DoxyCodeLine{00234\ \ \ \ \ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ NTSTATUS\ Status;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ PVOID\ Pointer;}
+\DoxyCodeLine{00237\ \ \ \ \ \};}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ ULONG\_PTR\ Information;}
+\DoxyCodeLine{00240\ \}\ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}},\ *\ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{PIO\_STATUS\_BLOCK}};}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___u_n_i_c_o_d_e___s_t_r_i_n_g}{\_UNICODE\_STRING}}}
+\DoxyCodeLine{00243\ \{}
+\DoxyCodeLine{00244\ \ \ \ \ USHORT\ Length;}
+\DoxyCodeLine{00245\ \ \ \ \ USHORT\ MaximumLength;}
+\DoxyCodeLine{00246\ \ \ \ \ PWSTR\ Buffer;}
+\DoxyCodeLine{00247\ \}\ \mbox{\hyperlink{struct___u_n_i_c_o_d_e___s_t_r_i_n_g}{UNICODE\_STRING}},\ *\ \mbox{\hyperlink{struct___u_n_i_c_o_d_e___s_t_r_i_n_g}{PUNICODE\_STRING}};}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___o_b_j_e_c_t___a_t_t_r_i_b_u_t_e_s}{\_OBJECT\_ATTRIBUTES}}}
+\DoxyCodeLine{00250\ \{}
+\DoxyCodeLine{00251\ \ \ \ \ ULONG\ Length;}
+\DoxyCodeLine{00252\ \ \ \ \ HANDLE\ RootDirectory;}
+\DoxyCodeLine{00253\ \ \ \ \ \mbox{\hyperlink{struct___u_n_i_c_o_d_e___s_t_r_i_n_g}{PUNICODE\_STRING}}\ ObjectName;}
+\DoxyCodeLine{00254\ \ \ \ \ ULONG\ Attributes;}
+\DoxyCodeLine{00255\ \ \ \ \ PVOID\ SecurityDescriptor;\ \ \ \ \ \ \ \textcolor{comment}{//\ Points\ to\ type\ SECURITY\_DESCRIPTOR}}
+\DoxyCodeLine{00256\ \ \ \ \ PVOID\ SecurityQualityOfService;\ \textcolor{comment}{//\ Points\ to\ type\ SECURITY\_QUALITY\_OF\_SERVICE}}
+\DoxyCodeLine{00257\ \}\ \mbox{\hyperlink{struct___o_b_j_e_c_t___a_t_t_r_i_b_u_t_e_s}{OBJECT\_ATTRIBUTES}},\ *\ \mbox{\hyperlink{struct___o_b_j_e_c_t___a_t_t_r_i_b_u_t_e_s}{POBJECT\_ATTRIBUTES}};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___i_n_i_t_i_a_l___t_e_b}{\_INITIAL\_TEB}}}
+\DoxyCodeLine{00260\ \{}
+\DoxyCodeLine{00261\ \ \ \ \ PVOID\ StackBase;}
+\DoxyCodeLine{00262\ \ \ \ \ PVOID\ StackLimit;}
+\DoxyCodeLine{00263\ \ \ \ \ PVOID\ StackAllocationBase;}
+\DoxyCodeLine{00264\ \}\ \mbox{\hyperlink{struct___i_n_i_t_i_a_l___t_e_b}{INITIAL\_TEB}},\ *\ \mbox{\hyperlink{struct___i_n_i_t_i_a_l___t_e_b}{PINITIAL\_TEB}};}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \textcolor{keyword}{typedef}\ VOID(NTAPI*\ PIO\_APC\_ROUTINE)(}
+\DoxyCodeLine{00267\ \ \ \ \ PVOID\ ApcContext,}
+\DoxyCodeLine{00268\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{PIO\_STATUS\_BLOCK}}\ IoStatusBlock,}
+\DoxyCodeLine{00269\ \ \ \ \ ULONG\ Reserved}
+\DoxyCodeLine{00270\ \ \ \ \ );}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \textcolor{comment}{//\ Define\ the\ AFD\_CREATE\_PACKET\ structure\ with\ proper\ packing}}
+\DoxyCodeLine{00273\ \textcolor{preprocessor}{\#pragma\ pack(push,\ 1)}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00282\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t}{\_AFD\_CREATE\_PACKET}}}
+\DoxyCodeLine{00283\ \{}
+\DoxyCodeLine{00284\ \ \ \ \ uint32\_t\ NextEntryOffset;}
+\DoxyCodeLine{00285\ \ \ \ \ uint8\_t\ Flags;}
+\DoxyCodeLine{00286\ \ \ \ \ uint8\_t\ EaNameLength;}
+\DoxyCodeLine{00287\ \ \ \ \ uint16\_t\ EaValueLength;}
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordtype}{char}\ EaName[16];}
+\DoxyCodeLine{00289\ \ \ \ \ uint32\_t\ EndpointFlags;}
+\DoxyCodeLine{00290\ \ \ \ \ uint32\_t\ GroupID;}
+\DoxyCodeLine{00291\ \ \ \ \ uint32\_t\ AddressFamily;}
+\DoxyCodeLine{00292\ \ \ \ \ uint32\_t\ SocketType;}
+\DoxyCodeLine{00293\ \ \ \ \ uint32\_t\ Protocol;}
+\DoxyCodeLine{00294\ \ \ \ \ uint64\_t\ SizeOfTransportName;}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{char}\ TransportName[5];\ \textcolor{comment}{//\ 2\ wchar\_t\ characters}}
+\DoxyCodeLine{00296\ \}\ \mbox{\hyperlink{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t}{AFD\_CREATE\_PACKET}};}
+\DoxyCodeLine{00297\ \textcolor{preprocessor}{\#pragma\ pack(pop)}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00302\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___b_i_n_d___d_a_t_a}{\_AFD\_BIND\_DATA}}}
+\DoxyCodeLine{00303\ \{}
+\DoxyCodeLine{00304\ \ \ \ \ ULONG\ ShareType;}
+\DoxyCodeLine{00305\ \ \ \ \ SOCKADDR\_IN\ addr;}
+\DoxyCodeLine{00306\ \}\ \mbox{\hyperlink{struct___a_f_d___b_i_n_d___d_a_t_a}{AFD\_BIND\_DATA}},\ *\ \mbox{\hyperlink{struct___a_f_d___b_i_n_d___d_a_t_a}{PAFD\_BIND\_DATA}};}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00311\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___l_i_s_t_e_n___d_a_t_a}{\_AFD\_LISTEN\_DATA}}\ \{}
+\DoxyCodeLine{00312\ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ UseSAN;}
+\DoxyCodeLine{00313\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Backlog;}
+\DoxyCodeLine{00314\ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ UseDelayedAcceptance;}
+\DoxyCodeLine{00315\ \}\ \mbox{\hyperlink{struct___a_f_d___l_i_s_t_e_n___d_a_t_a}{AFD\_LISTEN\_DATA}},\ *\ \mbox{\hyperlink{struct___a_f_d___l_i_s_t_e_n___d_a_t_a}{PAFD\_LISTEN\_DATA}};}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00320\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___a_c_c_e_p_t___d_a_t_a}{\_AFD\_ACCEPT\_DATA}}\ \{}
+\DoxyCodeLine{00321\ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ UseSAN;}
+\DoxyCodeLine{00322\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SequenceNumber;}
+\DoxyCodeLine{00323\ \ \ \ \ HANDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ListenHandle;}
+\DoxyCodeLine{00324\ \}\ \mbox{\hyperlink{struct___a_f_d___a_c_c_e_p_t___d_a_t_a}{AFD\_ACCEPT\_DATA}},\ *\ \mbox{\hyperlink{struct___a_f_d___a_c_c_e_p_t___d_a_t_a}{PAFD\_ACCEPT\_DATA}};}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \textcolor{comment}{//\ SOCKADDR\_STORAGE\ structure\ definition}}
+\DoxyCodeLine{00327\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___s_o_c_k_a_d_d_r___s_t_o_r_a_g_e}{\_SOCKADDR\_STORAGE}}\ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordtype}{short}\ ss\_family;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Address\ family}}
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordtype}{char}\ \_\_ss\_pad1[6];\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Padding\ to\ ensure\ alignment}}
+\DoxyCodeLine{00330\ \ \ \ \ \_\_int64\ \_\_ss\_align;\ \ \ \ \ \ \ \textcolor{comment}{//\ Force\ alignment\ to\ 64-\/bit\ boundary}}
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{keywordtype}{char}\ \_\_ss\_pad2[112];\ \ \ \ \ \ \textcolor{comment}{//\ Additional\ padding\ to\ bring\ the\ size\ to\ 128\ bytes}}
+\DoxyCodeLine{00332\ \}\ \mbox{\hyperlink{struct___s_o_c_k_a_d_d_r___s_t_o_r_a_g_e}{SOCKADDR\_STORAGE}};}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00337\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_SOCKET\_STATE}
+\DoxyCodeLine{00338\ \{}
+\DoxyCodeLine{00339\ \ \ \ \ SocketUndefined\ =\ -\/1,}
+\DoxyCodeLine{00340\ \ \ \ \ SocketOpen,}
+\DoxyCodeLine{00341\ \ \ \ \ SocketBound,}
+\DoxyCodeLine{00342\ \ \ \ \ SocketBoundUdp,}
+\DoxyCodeLine{00343\ \ \ \ \ SocketConnected,}
+\DoxyCodeLine{00344\ \ \ \ \ SocketClosed}
+\DoxyCodeLine{00345\ \}\ SOCKET\_STATE,\ *\ PSOCKET\_STATE;}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00350\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}{\_SOCK\_SHARED\_INFO}}\ \{}
+\DoxyCodeLine{00351\ \ \ \ \ SOCKET\_STATE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ State;}
+\DoxyCodeLine{00352\ \ \ \ \ INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AddressFamily;}
+\DoxyCodeLine{00353\ \ \ \ \ INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SocketType;}
+\DoxyCodeLine{00354\ \ \ \ \ INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Protocol;}
+\DoxyCodeLine{00355\ \ \ \ \ INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SizeOfLocalAddress;}
+\DoxyCodeLine{00356\ \ \ \ \ INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SizeOfRemoteAddress;}
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keyword}{struct\ }linger\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LingerData;}
+\DoxyCodeLine{00358\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SendTimeout;}
+\DoxyCodeLine{00359\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RecvTimeout;}
+\DoxyCodeLine{00360\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SizeOfRecvBuffer;}
+\DoxyCodeLine{00361\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SizeOfSendBuffer;}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Listening\ :\ 1;}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Broadcast\ :\ 1;}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Debug\ :\ 1;}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OobInline\ :\ 1;}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ReuseAddresses\ :\ 1;}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ExclusiveAddressUse\ :\ 1;}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NonBlocking\ :\ 1;}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DontUseWildcard\ :\ 1;}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ReceiveShutdown\ :\ 1;}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SendShutdown\ :\ 1;}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UseDelayedAcceptance\ :\ 1;}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UseSAN\ :\ 1;}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ BOOLEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HasGUID\ :\ 1;}
+\DoxyCodeLine{00376\ \ \ \ \ \}\ Flags;}
+\DoxyCodeLine{00377\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CreateFlags;}
+\DoxyCodeLine{00378\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CatalogEntryId;}
+\DoxyCodeLine{00379\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ServiceFlags1;}
+\DoxyCodeLine{00380\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ProviderFlags;}
+\DoxyCodeLine{00381\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GroupID;}
+\DoxyCodeLine{00382\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GroupType;}
+\DoxyCodeLine{00383\ \ \ \ \ INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GroupPriority;}
+\DoxyCodeLine{00384\ \ \ \ \ INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SocketLastError;}
+\DoxyCodeLine{00385\ \ \ \ \ HWND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hWnd;}
+\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#ifndef\ \_WIN64}}
+\DoxyCodeLine{00387\ \ \ \ \ LONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Padding;}
+\DoxyCodeLine{00388\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00389\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SequenceNumber;}
+\DoxyCodeLine{00390\ \ \ \ \ UINT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wMsg;}
+\DoxyCodeLine{00391\ \ \ \ \ LONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AsyncEvents;}
+\DoxyCodeLine{00392\ \ \ \ \ LONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AsyncDisabledEvents;}
+\DoxyCodeLine{00393\ \}\ \mbox{\hyperlink{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}{SOCK\_SHARED\_INFO}},\ *\ \mbox{\hyperlink{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}{PSOCK\_SHARED\_INFO}};}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00398\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___s_o_c_k_e_t___c_o_n_t_e_x_t}{\_SOCKET\_CONTEXT}}\ \{}
+\DoxyCodeLine{00399\ \ \ \ \ \mbox{\hyperlink{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}{SOCK\_SHARED\_INFO}}\ SharedData;}
+\DoxyCodeLine{00400\ \ \ \ \ GUID\ Guid;}
+\DoxyCodeLine{00401\ \ \ \ \ ULONG\ SizeOfHelperData;}
+\DoxyCodeLine{00402\ \ \ \ \ ULONG\ Padding;}
+\DoxyCodeLine{00403\ \ \ \ \ SOCKADDR\ LocalAddress;}
+\DoxyCodeLine{00404\ \ \ \ \ SOCKADDR\ RemoteAddress;}
+\DoxyCodeLine{00405\ \ \ \ \ PVOID\ Helper;}
+\DoxyCodeLine{00406\ \}\ \mbox{\hyperlink{struct___s_o_c_k_e_t___c_o_n_t_e_x_t}{SOCKET\_CONTEXT}},\ *\ \mbox{\hyperlink{struct___s_o_c_k_e_t___c_o_n_t_e_x_t}{PSOCKET\_CONTEXT}};}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00411\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___c_o_n_n_e_c_t___i_n_f_o}{\_AFD\_CONNECT\_INFO}}}
+\DoxyCodeLine{00412\ \{}
+\DoxyCodeLine{00413\ \ \ \ \ uint64\_t\ UseSAN;}
+\DoxyCodeLine{00414\ \ \ \ \ uint64\_t\ Root;}
+\DoxyCodeLine{00415\ \ \ \ \ uint64\_t\ Unknown;}
+\DoxyCodeLine{00416\ \ \ \ \ SOCKADDR\_IN\ Bind;}
+\DoxyCodeLine{00417\ \}\ \mbox{\hyperlink{struct___a_f_d___c_o_n_n_e_c_t___i_n_f_o}{AFD\_CONNECT\_INFO}},\ *\ \mbox{\hyperlink{struct___a_f_d___c_o_n_n_e_c_t___i_n_f_o}{PAFD\_CONNECT\_INFO}};}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00422\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{\_AFD\_WSABUF}}}
+\DoxyCodeLine{00423\ \{}
+\DoxyCodeLine{00424\ \ \ \ \ ULONG\_PTR\ len;}
+\DoxyCodeLine{00425\ \ \ \ \ PVOID\ buf;}
+\DoxyCodeLine{00426\ \}\ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{AFD\_WSABUF}},\ *\ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{PAFD\_WSABUF}};}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00431\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___r_e_c_v___i_n_f_o}{\_AFD\_RECV\_INFO}}}
+\DoxyCodeLine{00432\ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{PAFD\_WSABUF}}\ BufferArray;}
+\DoxyCodeLine{00434\ \ \ \ \ DWORD\ BufferCount;}
+\DoxyCodeLine{00435\ \ \ \ \ DWORD\ AfdFlags;}
+\DoxyCodeLine{00436\ \ \ \ \ DWORD\ TdiFlags;}
+\DoxyCodeLine{00437\ \}\ \mbox{\hyperlink{struct___a_f_d___r_e_c_v___i_n_f_o}{AFD\_RECV\_INFO}},\ *\ \mbox{\hyperlink{struct___a_f_d___r_e_c_v___i_n_f_o}{PAFD\_RECV\_INFO}};}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00442\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___r_e_c_v___i_n_f_o___u_d_p}{\_AFD\_RECV\_INFO\_UDP}}\ \{}
+\DoxyCodeLine{00443\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{PAFD\_WSABUF}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ BufferArray;}
+\DoxyCodeLine{00444\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BufferCount;}
+\DoxyCodeLine{00445\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AfdFlags;}
+\DoxyCodeLine{00446\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TdiFlags;}
+\DoxyCodeLine{00447\ \ \ \ \ PVOID\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Address;}
+\DoxyCodeLine{00448\ \ \ \ \ PINT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AddressLength;}
+\DoxyCodeLine{00449\ \}\ \mbox{\hyperlink{struct___a_f_d___r_e_c_v___i_n_f_o___u_d_p}{AFD\_RECV\_INFO\_UDP}},\ *\ \mbox{\hyperlink{struct___a_f_d___r_e_c_v___i_n_f_o___u_d_p}{PAFD\_RECV\_INFO\_UDP}};}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00454\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{struct___a_f_d___s_e_n_d___i_n_f_o}{\_AFD\_SEND\_INFO}}\ \{}
+\DoxyCodeLine{00455\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{PAFD\_WSABUF}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ BufferArray;}
+\DoxyCodeLine{00456\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BufferCount;}
+\DoxyCodeLine{00457\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AfdFlags;}
+\DoxyCodeLine{00458\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TdiFlags;}
+\DoxyCodeLine{00459\ \}\ \mbox{\hyperlink{struct___a_f_d___s_e_n_d___i_n_f_o}{AFD\_SEND\_INFO}},\ *\ \mbox{\hyperlink{struct___a_f_d___s_e_n_d___i_n_f_o}{PAFD\_SEND\_INFO}};}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00464\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___a_f_d___s_e_n_d___i_n_f_o___u_d_p}{\_AFD\_SEND\_INFO\_UDP}}\ \{}
+\DoxyCodeLine{00465\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{PAFD\_WSABUF}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ BufferArray;}
+\DoxyCodeLine{00466\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BufferCount;}
+\DoxyCodeLine{00467\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AfdFlags;}
+\DoxyCodeLine{00468\ \textcolor{preprocessor}{\#if\ 1\ }\textcolor{comment}{/*\ timurrrr:\ based\ on\ XP+win7\ observation:\ i\#418\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00469\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnknownGap[9];}
+\DoxyCodeLine{00470\ \ \ \ \ ULONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SizeOfRemoteAddress;}
+\DoxyCodeLine{00471\ \ \ \ \ PVOID\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RemoteAddress;}
+\DoxyCodeLine{00472\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00473\ \ \ \ \ TDI\_REQUEST\_SEND\_DATAGRAM\ \ \ \ \ \ \ TdiRequest;}
+\DoxyCodeLine{00474\ \ \ \ \ TDI\_CONNECTION\_INFORMATION\ \ \ \ \ \ TdiConnection;}
+\DoxyCodeLine{00475\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00476\ \}\ \mbox{\hyperlink{struct___a_f_d___s_e_n_d___i_n_f_o___u_d_p}{AFD\_SEND\_INFO\_UDP}},\ *\ \mbox{\hyperlink{struct___a_f_d___s_e_n_d___i_n_f_o___u_d_p}{PAFD\_SEND\_INFO\_UDP}};}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00481\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct___d_o_m_a_i_n___i_n_f_o}{\_DOMAIN\_INFO}}}
+\DoxyCodeLine{00482\ \{}
+\DoxyCodeLine{00483\ \ \ \ \ uint32\_t\ hex\_ip\_address;}
+\DoxyCodeLine{00484\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ ip\_address\_str[16];}
+\DoxyCodeLine{00485\ \}\mbox{\hyperlink{struct___d_o_m_a_i_n___i_n_f_o}{DOMAIN\_INFO}};}
+\DoxyCodeLine{00486\ }
+\DoxyCodeLine{00487\ \textcolor{keyword}{typedef}\ NTSTATUS(NTAPI*\ NtClose\_t)(HANDLE\ Handle);}
+\DoxyCodeLine{00488\ \textcolor{keyword}{typedef}\ NTSTATUS(NTAPI*\ NtCreateEvent\_t)(PHANDLE\ EventHandle,\ ACCESS\_MASK\ DesiredAccess,\ \mbox{\hyperlink{struct___o_b_j_e_c_t___a_t_t_r_i_b_u_t_e_s}{POBJECT\_ATTRIBUTES}}\ object\_attributes,\ EVENT\_TYPE\ EventType,}
+\DoxyCodeLine{00489\ \ \ \ \ BOOLEAN\ InitialState);}
+\DoxyCodeLine{00490\ \textcolor{keyword}{typedef}\ NTSTATUS(NTAPI*\ NtDeviceIoControlFile\_t)(HANDLE\ FileHandle,\ HANDLE\ Event,\ PIO\_APC\_ROUTINE\ ApcRoutine,\ PVOID\ ApcContext,}
+\DoxyCodeLine{00491\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{PIO\_STATUS\_BLOCK}}\ IoStatusBlock,\ ULONG\ IoControlCode,\ PVOID\ InputBuffer,\ ULONG\ InputBufferLength,}
+\DoxyCodeLine{00492\ \ \ \ \ PVOID\ OutputBuffer,\ ULONG\ OutputBufferLength);}
+\DoxyCodeLine{00493\ \textcolor{keyword}{typedef}\ NTSTATUS(NTAPI*\ NtWaitForSingleObject\_t)(HANDLE\ Handle,\ BOOLEAN\ Alertable,\ PLARGE\_INTEGER\ Timeout);}
+\DoxyCodeLine{00494\ }
+\DoxyCodeLine{00495\ \textcolor{comment}{//\ Function\ pointers}}
+\DoxyCodeLine{00496\ NtClose\_t\ NtClose;}
+\DoxyCodeLine{00497\ NtCreateEvent\_t\ NtCreateEvent;}
+\DoxyCodeLine{00498\ NtDeviceIoControlFile\_t\ NtDeviceIoControlFile;}
+\DoxyCodeLine{00499\ NtWaitForSingleObject\_t\ NtWaitForSingleObject;}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00508\ \textcolor{keywordtype}{int}\ is\_digit(\textcolor{keywordtype}{char}\ ch)}
+\DoxyCodeLine{00509\ \{}
+\DoxyCodeLine{00510\ \ \ \ \ \textcolor{keywordflow}{return}\ ch\ >=\ \textcolor{charliteral}{'0'}\ \&\&\ ch\ <=\ \textcolor{charliteral}{'9'};}
+\DoxyCodeLine{00511\ \}}
+\DoxyCodeLine{00512\ }
+\DoxyCodeLine{00520\ \textcolor{keywordtype}{int}\ is\_hex\_digit(\textcolor{keywordtype}{char}\ ch)}
+\DoxyCodeLine{00521\ \{}
+\DoxyCodeLine{00522\ \ \ \ \ \textcolor{keywordflow}{return}\ (ch\ >=\ \textcolor{charliteral}{'0'}\ \&\&\ ch\ <=\ \textcolor{charliteral}{'9'})\ ||\ (ch\ >=\ \textcolor{charliteral}{'a'}\ \&\&\ ch\ <=\ \textcolor{charliteral}{'f'})\ ||\ (ch\ >=\ \textcolor{charliteral}{'A'}\ \&\&\ ch\ <=\ \textcolor{charliteral}{'F'});}
+\DoxyCodeLine{00523\ \}}
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00525\ \textcolor{comment}{//\ Function\ to\ check\ if\ a\ string\ is\ an\ IPv4\ address}}
+\DoxyCodeLine{00526\ \textcolor{keywordtype}{int}\ is\_ipv4\_address(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host)}
+\DoxyCodeLine{00527\ \{}
+\DoxyCodeLine{00528\ \ \ \ \ \textcolor{keywordtype}{int}\ dots\ =\ 0;}
+\DoxyCodeLine{00529\ \ \ \ \ \textcolor{keywordtype}{int}\ digits\ =\ 0;}
+\DoxyCodeLine{00530\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ptr\ =\ host;}
+\DoxyCodeLine{00531\ }
+\DoxyCodeLine{00532\ \ \ \ \ \textcolor{keywordflow}{while}\ (*ptr)\ \{}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*ptr\ ==\ \textcolor{charliteral}{'.'})\ \{}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (digits\ ==\ 0)\ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ No\ digits\ before\ the\ dot}}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ dots++;}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ digits\ =\ 0;\ \textcolor{comment}{//\ Reset\ digit\ count\ for\ the\ next\ block}}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (is\_digit(*ptr))\ \{}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ digits++;}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (digits\ >\ 3)\ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Too\ many\ digits\ in\ one\ block}}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Invalid\ character\ for\ an\ IPv4\ address}}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ ptr++;}
+\DoxyCodeLine{00546\ \ \ \ \ \}}
+\DoxyCodeLine{00547\ }
+\DoxyCodeLine{00548\ \ \ \ \ \textcolor{comment}{//\ There\ should\ be\ exactly\ 3\ dots\ and\ at\ least\ one\ digit\ after\ the\ last\ dot}}
+\DoxyCodeLine{00549\ \ \ \ \ \textcolor{keywordflow}{return}\ (dots\ ==\ 3\ \&\&\ digits\ >\ 0)\ ?\ 1\ :\ 0;}
+\DoxyCodeLine{00550\ \}}
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00559\ \textcolor{keywordtype}{int}\ is\_ipv6\_address(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host)}
+\DoxyCodeLine{00560\ \{}
+\DoxyCodeLine{00561\ \ \ \ \ \textcolor{keywordtype}{int}\ colons\ =\ 0;}
+\DoxyCodeLine{00562\ \ \ \ \ \textcolor{keywordtype}{int}\ double\_colon\ =\ 0;}
+\DoxyCodeLine{00563\ \ \ \ \ \textcolor{keywordtype}{int}\ hex\_digits\ =\ 0;}
+\DoxyCodeLine{00564\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ptr\ =\ host;}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \ \ \ \ \textcolor{keywordflow}{while}\ (*ptr)\ \{}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*ptr\ ==\ \textcolor{charliteral}{':'})\ \{}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_digits\ ==\ 0\ \&\&\ colons\ >\ 0\ \&\&\ *(ptr\ -\/\ 1)\ !=\ \textcolor{charliteral}{':'})\ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ No\ hex\ digits\ between\ colons}}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*(ptr\ +\ 1)\ ==\ \textcolor{charliteral}{':'})\ \{}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (double\_colon)\ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Only\ one\ double\ colon\ allowed}}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ double\_colon\ =\ 1;}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ptr++;\ \textcolor{comment}{//\ Skip\ the\ second\ colon\ of\ the\ double\ colon}}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ colons++;}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ hex\_digits\ =\ 0;\ \textcolor{comment}{//\ Reset\ hex\ digit\ count\ for\ the\ next\ block}}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (is\_hex\_digit(*ptr))\ \{}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ hex\_digits++;}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_digits\ >\ 4)\ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Each\ block\ in\ IPv6\ should\ not\ exceed\ 4\ hex\ digits}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Invalid\ character\ for\ an\ IPv6\ address}}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ ptr++;}
+\DoxyCodeLine{00585\ \ \ \ \ \}}
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \ \ \ \ \textcolor{comment}{//\ Valid\ IPv6\ addresses\ have\ between\ 2\ and\ 7\ colons,\ or\ a\ single\ double\ colon}}
+\DoxyCodeLine{00588\ \ \ \ \ \textcolor{keywordflow}{return}\ (colons\ >=\ 2\ \&\&\ colons\ <=\ 7)\ ||\ (double\_colon\ \&\&\ colons\ <\ 7);}
+\DoxyCodeLine{00589\ \}}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00598\ \textcolor{keywordtype}{int}\ is\_domain\_name(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host)}
+\DoxyCodeLine{00599\ \{}
+\DoxyCodeLine{00600\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ptr\ =\ host;}
+\DoxyCodeLine{00601\ \ \ \ \ \textcolor{keywordtype}{int}\ has\_dot\ =\ 0;}
+\DoxyCodeLine{00602\ }
+\DoxyCodeLine{00603\ \ \ \ \ \textcolor{comment}{//\ First,\ check\ if\ the\ string\ is\ an\ IP\ address}}
+\DoxyCodeLine{00604\ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_ipv4\_address(host))\ \{}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ It's\ an\ IP\ address,\ not\ a\ domain\ name}}
+\DoxyCodeLine{00606\ \ \ \ \ \}}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00608\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ string\ contains\ valid\ domain\ name\ characters}}
+\DoxyCodeLine{00609\ \ \ \ \ \textcolor{keywordflow}{while}\ (*ptr)\ \{}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*ptr\ ==\ \textcolor{charliteral}{'.'})\ \{}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \ \ \ \ has\_dot\ =\ 1;}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!((*ptr\ >=\ \textcolor{charliteral}{'a'}\ \&\&\ *ptr\ <=\ \textcolor{charliteral}{'z'})\ ||\ (*ptr\ >=\ \textcolor{charliteral}{'A'}\ \&\&\ *ptr\ <=\ \textcolor{charliteral}{'Z'})\ ||\ is\_digit(*ptr)\ ||\ *ptr\ ==\ \textcolor{charliteral}{'-\/'}))\ \{}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Invalid\ character\ for\ a\ domain\ name}}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ ptr++;}
+\DoxyCodeLine{00617\ \ \ \ \ \}}
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ \ \ \ \ \textcolor{comment}{//\ A\ valid\ domain\ name\ should\ have\ at\ least\ one\ dot\ and\ should\ not\ start\ or\ end\ with\ a\ dot}}
+\DoxyCodeLine{00620\ \ \ \ \ \textcolor{keywordflow}{return}\ has\_dot\ \&\&\ host[0]\ !=\ \textcolor{charliteral}{'.'}\ \&\&\ host[ptr\ -\/\ host\ -\/\ 1]\ !=\ \textcolor{charliteral}{'.'}\ ?\ 1\ :\ 0;}
+\DoxyCodeLine{00621\ \}}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00630\ ULONG\ htonl(ULONG\ hostlong)}
+\DoxyCodeLine{00631\ \{}
+\DoxyCodeLine{00632\ \ \ \ \ \textcolor{keywordflow}{return}\ ((hostlong\ \&\ 0xFF000000L)\ >>\ 24)\ |}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ ((hostlong\ \&\ 0x00FF0000L)\ >>\ 8)\ |}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ ((hostlong\ \&\ 0x0000FF00L)\ <<\ 8)\ |}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ ((hostlong\ \&\ 0x000000FFL)\ <<\ 24);}
+\DoxyCodeLine{00636\ \}}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00645\ USHORT\ htons(USHORT\ netshort)}
+\DoxyCodeLine{00646\ \{}
+\DoxyCodeLine{00647\ \ \ \ \ \textcolor{keywordflow}{return}\ (netshort\ <<\ 8)\ |\ (UCHAR)((((ULONG\_PTR)netshort)\ >>\ 8)\ \&\ 0xff);}
+\DoxyCodeLine{00648\ \ \ \ \ \textcolor{comment}{//or}}
+\DoxyCodeLine{00649\ \ \ \ \ \textcolor{comment}{//return\ \_byteswap\_ushort(netshort);}}
+\DoxyCodeLine{00650\ \}}
+\DoxyCodeLine{00651\ }
+\DoxyCodeLine{00659\ USHORT\ ntohs(USHORT\ netshort)}
+\DoxyCodeLine{00660\ \{}
+\DoxyCodeLine{00661\ \ \ \ \ \textcolor{keywordflow}{return}\ (netshort\ >>\ 8)\ |\ ((netshort\ \&\ 0x00FF)\ <<\ 8);}
+\DoxyCodeLine{00662\ \}}
+\DoxyCodeLine{00663\ }
+\DoxyCodeLine{00672\ ULONG\ inet\_addr(PCSTR\ cp)}
+\DoxyCodeLine{00673\ \{}
+\DoxyCodeLine{00674\ \ \ \ \ ULONG\ val,\ base,\ n;}
+\DoxyCodeLine{00675\ \ \ \ \ UCHAR\ c;}
+\DoxyCodeLine{00676\ \ \ \ \ ULONG\ parts[4],\ *\ pp\ =\ parts;}
+\DoxyCodeLine{00677\ \ \ \ \ \textcolor{keywordflow}{if}\ (!cp)\ \textcolor{keywordflow}{return}\ INADDR\_ANY;}
+\DoxyCodeLine{00678\ \ \ \ \ \textcolor{keywordflow}{if}\ (!isdigit(*cp))\ \textcolor{keywordflow}{return}\ INADDR\_NONE;}
+\DoxyCodeLine{00679\ }
+\DoxyCodeLine{00680\ again:}
+\DoxyCodeLine{00681\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00682\ \textcolor{comment}{\ \ \ \ \ *\ Collect\ number\ up\ to\ \`{}\`{}.''.}}
+\DoxyCodeLine{00683\ \textcolor{comment}{\ \ \ \ \ *\ Values\ are\ specified\ as\ for\ C:}}
+\DoxyCodeLine{00684\ \textcolor{comment}{\ \ \ \ \ *\ 0x=hex,\ 0=octal,\ other=decimal.}}
+\DoxyCodeLine{00685\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00686\ \ \ \ \ val\ =\ 0;}
+\DoxyCodeLine{00687\ \ \ \ \ base\ =\ 10;}
+\DoxyCodeLine{00688\ \ \ \ \ \textcolor{keywordflow}{if}\ (*cp\ ==\ \textcolor{charliteral}{'0'})}
+\DoxyCodeLine{00689\ \ \ \ \ \{}
+\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*++cp\ ==\ \textcolor{charliteral}{'x'}\ ||\ *cp\ ==\ \textcolor{charliteral}{'X'})}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \ \ \ \ base\ =\ 16,\ cp++;}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \ \ \ \ base\ =\ 8;}
+\DoxyCodeLine{00694\ \ \ \ \ \}}
+\DoxyCodeLine{00695\ \ \ \ \ \textcolor{keywordflow}{while}\ ((c\ =\ *cp))}
+\DoxyCodeLine{00696\ \ \ \ \ \{}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isdigit(c))}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ (val\ *\ base)\ +\ (c\ -\/\ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \ \ \ \ cp++;}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (base\ ==\ 16\ \&\&\ isxdigit(c))}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ (val\ <<\ 4)\ +\ (c\ +\ 10\ -\/\ (islower(c)\ ?\ \textcolor{charliteral}{'a'}\ :\ \textcolor{charliteral}{'A'}));}
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ \ \ \ \ cp++;}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00710\ \ \ \ \ \}}
+\DoxyCodeLine{00711\ \ \ \ \ \textcolor{keywordflow}{if}\ (*cp\ ==\ \textcolor{charliteral}{'.'})}
+\DoxyCodeLine{00712\ \ \ \ \ \{}
+\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00714\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Internet\ format:}}
+\DoxyCodeLine{00715\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ a.b.c.d}}
+\DoxyCodeLine{00716\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ a.b.c\ \ \ \ (with\ c\ treated\ as\ 16-\/bits)}}
+\DoxyCodeLine{00717\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ a.b\ \ \ \ (with\ b\ treated\ as\ 24\ bits)}}
+\DoxyCodeLine{00718\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pp\ >=\ parts\ +\ 4)\ \textcolor{keywordflow}{return}\ (INADDR\_NONE);}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ *pp++\ =\ val;}
+\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ cp++;}
+\DoxyCodeLine{00722\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ again;}
+\DoxyCodeLine{00723\ \ \ \ \ \}}
+\DoxyCodeLine{00724\ \ \ \ \ \textcolor{comment}{//Check\ for\ trailing\ characters.}}
+\DoxyCodeLine{00725\ \ \ \ \ \textcolor{keywordflow}{if}\ (*cp\ \&\&\ !isspace((UCHAR)*cp))\ \textcolor{keywordflow}{return}\ (INADDR\_NONE);}
+\DoxyCodeLine{00726\ }
+\DoxyCodeLine{00727\ \ \ \ \ *pp++\ =\ val;}
+\DoxyCodeLine{00728\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00729\ \textcolor{comment}{\ \ \ \ \ *\ Concoct\ the\ address\ according\ to}}
+\DoxyCodeLine{00730\ \textcolor{comment}{\ \ \ \ \ *\ the\ number\ of\ parts\ specified.}}
+\DoxyCodeLine{00731\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00732\ \ \ \ \ n\ =\ (ULONG)(pp\ -\/\ parts);}
+\DoxyCodeLine{00733\ \ \ \ \ \textcolor{keywordflow}{switch}\ (n)}
+\DoxyCodeLine{00734\ \ \ \ \ \{}
+\DoxyCodeLine{00735\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ \textcolor{comment}{/*\ a\ -\/-\/\ 32\ bits\ */}}
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ val\ =\ parts[0];}
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00738\ }
+\DoxyCodeLine{00739\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ \textcolor{comment}{/*\ a.b\ -\/-\/\ 8.24\ bits\ */}}
+\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ val\ =\ (parts[0]\ <<\ 24)\ |\ (parts[1]\ \&\ 0xffffff);}
+\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00742\ }
+\DoxyCodeLine{00743\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:\ \textcolor{comment}{/*\ a.b.c\ -\/-\/\ 8.8.16\ bits\ */}}
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ val\ =\ (parts[0]\ <<\ 24)\ |\ ((parts[1]\ \&\ 0xff)\ <<\ 16)\ |\ (parts[2]\ \&\ 0xffff);}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00746\ }
+\DoxyCodeLine{00747\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:\ \textcolor{comment}{/*\ a.b.c.d\ -\/-\/\ 8.8.8.8\ bits\ */}}
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ val\ =\ (parts[0]\ <<\ 24)\ |\ ((parts[1]\ \&\ 0xff)\ <<\ 16)\ |\ ((parts[2]\ \&\ 0xff)\ <<\ 8)\ |\ (parts[3]\ \&\ 0xff);}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00750\ }
+\DoxyCodeLine{00751\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (INADDR\_NONE);}
+\DoxyCodeLine{00753\ \ \ \ \ \}}
+\DoxyCodeLine{00754\ \ \ \ \ val\ =\ htonl(val);}
+\DoxyCodeLine{00755\ \ \ \ \ \textcolor{keywordflow}{return}\ (val);}
+\DoxyCodeLine{00756\ \}}
+\DoxyCodeLine{00757\ }
+\DoxyCodeLine{00765\ ULONG\ convert\_ip\_to\_htonl(PCSTR\ ip\_address)}
+\DoxyCodeLine{00766\ \{}
+\DoxyCodeLine{00767\ \ \ \ \ ULONG\ parts[4]\ =\ \{\ 0\ \};\ \ \textcolor{comment}{//\ Array\ to\ store\ the\ four\ parts\ of\ the\ IP\ address}}
+\DoxyCodeLine{00768\ \ \ \ \ ULONG\ result\ =\ 0;}
+\DoxyCodeLine{00769\ \ \ \ \ \textcolor{keywordtype}{int}\ part\_index\ =\ 0;}
+\DoxyCodeLine{00770\ \ \ \ \ \textcolor{keywordtype}{int}\ part\_value\ =\ 0;}
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00772\ \ \ \ \ \textcolor{comment}{//\ Loop\ through\ each\ character\ in\ the\ string}}
+\DoxyCodeLine{00773\ \ \ \ \ \textcolor{keywordflow}{while}\ (*ip\_address)\ \{}
+\DoxyCodeLine{00774\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isdigit(*ip\_address))\ \{}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Build\ the\ current\ part\ by\ shifting\ the\ previous\ value\ by\ 10\ and\ adding\ the\ new\ digit}}
+\DoxyCodeLine{00776\ \ \ \ \ \ \ \ \ \ \ \ \ part\_value\ =\ part\_value\ *\ 10\ +\ (*ip\_address\ -\/\ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (*ip\_address\ ==\ \textcolor{charliteral}{'.'})\ \{}
+\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Store\ the\ current\ part\ in\ the\ parts\ array}}
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ parts[part\_index++]\ =\ part\_value;}
+\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \ \ \ \ part\_value\ =\ 0;}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ ip\_address++;}
+\DoxyCodeLine{00784\ \ \ \ \ \}}
+\DoxyCodeLine{00785\ \ \ \ \ \textcolor{comment}{//\ Store\ the\ last\ part}}
+\DoxyCodeLine{00786\ \ \ \ \ parts[part\_index]\ =\ part\_value;}
+\DoxyCodeLine{00787\ }
+\DoxyCodeLine{00788\ \ \ \ \ \textcolor{comment}{//\ Combine\ the\ four\ parts\ into\ a\ single\ 32-\/bit\ integer}}
+\DoxyCodeLine{00789\ \ \ \ \ result\ =\ (parts[0]\ <<\ 24)\ |\ (parts[1]\ <<\ 16)\ |\ (parts[2]\ <<\ 8)\ |\ parts[3];}
+\DoxyCodeLine{00790\ }
+\DoxyCodeLine{00791\ \ \ \ \ \textcolor{comment}{//\ Convert\ to\ network\ byte\ order}}
+\DoxyCodeLine{00792\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00793\ \}}
+\DoxyCodeLine{00794\ }
+\DoxyCodeLine{00802\ \textcolor{keywordtype}{char}*\ convert\_htonl\_to\_ip\_address(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ network\_order\_ip)\ \{}
+\DoxyCodeLine{00803\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ ip\_address[16];\ \ \textcolor{comment}{//\ Buffer\ to\ hold\ the\ printable\ IP\ address}}
+\DoxyCodeLine{00804\ }
+\DoxyCodeLine{00805\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ bytes[4];}
+\DoxyCodeLine{00806\ \ \ \ \ bytes[0]\ =\ (network\_order\_ip\ >>\ 24)\ \&\ 0xFF;}
+\DoxyCodeLine{00807\ \ \ \ \ bytes[1]\ =\ (network\_order\_ip\ >>\ 16)\ \&\ 0xFF;}
+\DoxyCodeLine{00808\ \ \ \ \ bytes[2]\ =\ (network\_order\_ip\ >>\ 8)\ \&\ 0xFF;}
+\DoxyCodeLine{00809\ \ \ \ \ bytes[3]\ =\ network\_order\_ip\ \&\ 0xFF;}
+\DoxyCodeLine{00810\ }
+\DoxyCodeLine{00811\ \ \ \ \ \textcolor{comment}{//\ Format\ the\ bytes\ into\ a\ string}}
+\DoxyCodeLine{00812\ \ \ \ \ snprintf(ip\_address,\ \textcolor{keyword}{sizeof}(ip\_address),\ \textcolor{stringliteral}{"{}\%u.\%u.\%u.\%u"{}},\ bytes[0],\ bytes[1],\ bytes[2],\ bytes[3]);}
+\DoxyCodeLine{00813\ }
+\DoxyCodeLine{00814\ \ \ \ \ \textcolor{keywordflow}{return}\ ip\_address;}
+\DoxyCodeLine{00815\ \}}
+\DoxyCodeLine{00824\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ build\_dns\_query(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ domain,\ \textcolor{keywordtype}{int}*\ query\_len)\ \{}
+\DoxyCodeLine{00825\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ query[512];\ \ \textcolor{comment}{//\ DNS\ query\ buffer}}
+\DoxyCodeLine{00826\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ qname;}
+\DoxyCodeLine{00827\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ len;}
+\DoxyCodeLine{00828\ }
+\DoxyCodeLine{00829\ \ \ \ \ \textcolor{comment}{//\ DNS\ Header}}
+\DoxyCodeLine{00830\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ transaction\_id\ =\ htons(0x2);}
+\DoxyCodeLine{00831\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ flags\ =\ htons(0x0100);}
+\DoxyCodeLine{00832\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ questions\ =\ htons(1);}
+\DoxyCodeLine{00833\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ answer\_rrs\ =\ htons(0);}
+\DoxyCodeLine{00834\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ authority\_rrs\ =\ htons(0);}
+\DoxyCodeLine{00835\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ additional\_rrs\ =\ htons(0);}
+\DoxyCodeLine{00836\ }
+\DoxyCodeLine{00837\ \ \ \ \ \textcolor{comment}{//\ Build\ header}}
+\DoxyCodeLine{00838\ \ \ \ \ memcpy(query,\ \&transaction\_id,\ 2);}
+\DoxyCodeLine{00839\ \ \ \ \ memcpy(query\ +\ 2,\ \&flags,\ 2);}
+\DoxyCodeLine{00840\ \ \ \ \ memcpy(query\ +\ 4,\ \&questions,\ 2);}
+\DoxyCodeLine{00841\ \ \ \ \ memcpy(query\ +\ 6,\ \&answer\_rrs,\ 2);}
+\DoxyCodeLine{00842\ \ \ \ \ memcpy(query\ +\ 8,\ \&authority\_rrs,\ 2);}
+\DoxyCodeLine{00843\ \ \ \ \ memcpy(query\ +\ 10,\ \&additional\_rrs,\ 2);}
+\DoxyCodeLine{00844\ }
+\DoxyCodeLine{00845\ \ \ \ \ \textcolor{comment}{//\ Build\ question}}
+\DoxyCodeLine{00846\ \ \ \ \ qname\ =\ query\ +\ 12;}
+\DoxyCodeLine{00847\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ dot\_pos\ =\ strchr(domain,\ \textcolor{charliteral}{'.'});}
+\DoxyCodeLine{00848\ \ \ \ \ \textcolor{keywordtype}{int}\ subdomain\_detected\ =\ (dot\_pos\ !=\ NULL\ \&\&\ strchr(dot\_pos\ +\ 1,\ \textcolor{charliteral}{'.'})\ !=\ NULL);}
+\DoxyCodeLine{00849\ }
+\DoxyCodeLine{00850\ \ \ \ \ \textcolor{keywordflow}{while}\ (dot\_pos)\ \{}
+\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ len\ =\ dot\_pos\ -\/\ domain;}
+\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ *qname++\ =\ len;}
+\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ memcpy(qname,\ domain,\ len);}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ qname\ +=\ len;}
+\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ domain\ =\ dot\_pos\ +\ 1;}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ dot\_pos\ =\ strchr(domain,\ \textcolor{charliteral}{'.'});}
+\DoxyCodeLine{00857\ \ \ \ \ \}}
+\DoxyCodeLine{00858\ \ \ \ \ len\ =\ strlen(domain);}
+\DoxyCodeLine{00859\ \ \ \ \ *qname++\ =\ len;}
+\DoxyCodeLine{00860\ \ \ \ \ memcpy(qname,\ domain,\ len);}
+\DoxyCodeLine{00861\ \ \ \ \ qname\ +=\ len;}
+\DoxyCodeLine{00862\ \ \ \ \ *qname++\ =\ 0x00;}
+\DoxyCodeLine{00863\ }
+\DoxyCodeLine{00864\ \ \ \ \ \textcolor{comment}{//\ Type\ and\ Class}}
+\DoxyCodeLine{00865\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ qtype\ =\ htons(1);\ \ \textcolor{comment}{//\ Type\ A\ for\ IPv4\ addresses}}
+\DoxyCodeLine{00866\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ qclass\ =\ htons(1);\ \textcolor{comment}{//\ Class\ IN}}
+\DoxyCodeLine{00867\ \ \ \ \ memcpy(qname,\ \&qtype,\ 2);}
+\DoxyCodeLine{00868\ \ \ \ \ memcpy(qname\ +\ 2,\ \&qclass,\ 2);}
+\DoxyCodeLine{00869\ }
+\DoxyCodeLine{00870\ \ \ \ \ *query\_len\ =\ qname\ +\ 4\ -\/\ query;}
+\DoxyCodeLine{00871\ }
+\DoxyCodeLine{00872\ \ \ \ \ \textcolor{comment}{//\ Debug\ or\ logging\ purposes}}
+\DoxyCodeLine{00873\ \ \ \ \ \textcolor{keywordflow}{if}\ (subdomain\_detected)\ \{}
+\DoxyCodeLine{00874\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Subdomain\ detected.\(\backslash\)n"{}});}
+\DoxyCodeLine{00875\ \ \ \ \ \}}
+\DoxyCodeLine{00876\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00877\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}No\ subdomain\ detected.\(\backslash\)n"{}});}
+\DoxyCodeLine{00878\ \ \ \ \ \}}
+\DoxyCodeLine{00879\ }
+\DoxyCodeLine{00880\ \ \ \ \ \textcolor{keywordflow}{return}\ query;}
+\DoxyCodeLine{00881\ \}}
+\DoxyCodeLine{00882\ }
+\DoxyCodeLine{00891\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ parse\_dns\_response(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ response,\ \textcolor{keywordtype}{int}\ response\_len)}
+\DoxyCodeLine{00892\ \{}
+\DoxyCodeLine{00893\ \ \ \ \ \textcolor{comment}{//\ Skip\ the\ DNS\ header\ and\ question\ section}}
+\DoxyCodeLine{00894\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ answer\_section\ =\ response\ +\ 12;}
+\DoxyCodeLine{00895\ \ \ \ \ \textcolor{keywordflow}{while}\ (*answer\_section\ !=\ 0)\ answer\_section++;}
+\DoxyCodeLine{00896\ \ \ \ \ answer\_section\ +=\ 5;\ \textcolor{comment}{//\ Skip\ the\ null\ byte\ and\ QTYPE,\ QCLASS}}
+\DoxyCodeLine{00897\ }
+\DoxyCodeLine{00898\ \ \ \ \ \textcolor{comment}{//\ Parse\ the\ answer\ section}}
+\DoxyCodeLine{00899\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ answer\_type;}
+\DoxyCodeLine{00900\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ answer\_data\_len;}
+\DoxyCodeLine{00901\ }
+\DoxyCodeLine{00902\ \ \ \ \ \textcolor{keywordflow}{while}\ (answer\_section\ -\/\ response\ <\ response\_len)}
+\DoxyCodeLine{00903\ \ \ \ \ \{}
+\DoxyCodeLine{00904\ \ \ \ \ \ \ \ \ answer\_section\ +=\ 2;\ \textcolor{comment}{//\ Skip\ the\ NAME\ field}}
+\DoxyCodeLine{00905\ \ \ \ \ \ \ \ \ answer\_type\ =\ ntohs(*(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}*)(answer\_section));}
+\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ answer\_section\ +=\ 8;\ \textcolor{comment}{//\ Skip\ TYPE,\ CLASS,\ TTL}}
+\DoxyCodeLine{00907\ \ \ \ \ \ \ \ \ answer\_data\_len\ =\ ntohs(*(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}*)(answer\_section));}
+\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ answer\_section\ +=\ 2;}
+\DoxyCodeLine{00909\ }
+\DoxyCodeLine{00910\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (answer\_type\ ==\ 1\ \&\&\ answer\_data\_len\ ==\ 4)\ \textcolor{comment}{//\ A\ record}}
+\DoxyCodeLine{00911\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00912\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ip\_address\ =\ *(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*)(answer\_section);}
+\DoxyCodeLine{00913\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ip\_address;}
+\DoxyCodeLine{00914\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00915\ }
+\DoxyCodeLine{00916\ \ \ \ \ \ \ \ \ answer\_section\ +=\ answer\_data\_len;}
+\DoxyCodeLine{00917\ \ \ \ \ \}}
+\DoxyCodeLine{00918\ }
+\DoxyCodeLine{00919\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ No\ IP\ address\ found}}
+\DoxyCodeLine{00920\ \}}
+\DoxyCodeLine{00921\ }
+\DoxyCodeLine{00930\ \textcolor{keywordtype}{void}\ hexdump(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{00931\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ data\ =\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*)buffer;}
+\DoxyCodeLine{00932\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ i,\ j;}
+\DoxyCodeLine{00933\ }
+\DoxyCodeLine{00934\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ size;\ i\ +=\ 16)\ \{}
+\DoxyCodeLine{00935\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ the\ offset}}
+\DoxyCodeLine{00936\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%08zx\ \ "{}},\ i);}
+\DoxyCodeLine{00937\ }
+\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ the\ hex\ bytes}}
+\DoxyCodeLine{00939\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 16;\ j++)\ \{}
+\DoxyCodeLine{00940\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ +\ j\ <\ size)\ \{}
+\DoxyCodeLine{00941\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%02x\ "{}},\ data[i\ +\ j]);}
+\DoxyCodeLine{00942\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00943\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00944\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ \ \ "{}});\ \textcolor{comment}{//\ Fill\ in\ the\ blank\ for\ alignment}}
+\DoxyCodeLine{00945\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00946\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00947\ }
+\DoxyCodeLine{00948\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ the\ ASCII\ representation}}
+\DoxyCodeLine{00949\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ |"{}});}
+\DoxyCodeLine{00950\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 16;\ j++)\ \{}
+\DoxyCodeLine{00951\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ +\ j\ <\ size)\ \{}
+\DoxyCodeLine{00952\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ c\ =\ data[i\ +\ j];}
+\DoxyCodeLine{00953\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%c"{}},\ isprint(c)\ ?\ c\ :\ \textcolor{charliteral}{'.'});}
+\DoxyCodeLine{00954\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00955\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00956\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{00957\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00958\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00959\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}|\(\backslash\)n"{}});}
+\DoxyCodeLine{00960\ \ \ \ \ \}}
+\DoxyCodeLine{00961\ }
+\DoxyCodeLine{00962\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00963\ \}}
+\DoxyCodeLine{00964\ }
+\DoxyCodeLine{00971\ \textcolor{keywordtype}{int}\ get\_nt\_functions(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00972\ \{}
+\DoxyCodeLine{00973\ \ \ \ \ HMODULE\ hNtdll\ =\ LoadLibraryA(\textcolor{stringliteral}{"{}ntdll.dll"{}});}
+\DoxyCodeLine{00974\ }
+\DoxyCodeLine{00975\ \ \ \ \ \textcolor{keywordflow}{if}\ (!hNtdll)}
+\DoxyCodeLine{00976\ \ \ \ \ \{}
+\DoxyCodeLine{00977\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ load\ ntdll.dll"{}});}
+\DoxyCodeLine{00978\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00979\ \ \ \ \ \}}
+\DoxyCodeLine{00980\ }
+\DoxyCodeLine{00981\ \ \ \ \ \textcolor{comment}{//\ Load\ function\ addresses}}
+\DoxyCodeLine{00982\ \ \ \ \ NtClose\ =\ (NtClose\_t)GetProcAddress(hNtdll,\ \textcolor{stringliteral}{"{}NtClose"{}});}
+\DoxyCodeLine{00983\ \ \ \ \ NtCreateEvent\ =\ (NtCreateEvent\_t)GetProcAddress(hNtdll,\ \textcolor{stringliteral}{"{}NtCreateEvent"{}});}
+\DoxyCodeLine{00984\ \ \ \ \ NtDeviceIoControlFile\ =\ (NtDeviceIoControlFile\_t)GetProcAddress(hNtdll,\ \textcolor{stringliteral}{"{}NtDeviceIoControlFile"{}});}
+\DoxyCodeLine{00985\ \ \ \ \ NtWaitForSingleObject\ =\ (NtWaitForSingleObject\_t)GetProcAddress(hNtdll,\ \textcolor{stringliteral}{"{}NtWaitForSingleObject"{}});}
+\DoxyCodeLine{00986\ }
+\DoxyCodeLine{00987\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ any\ function\ failed\ to\ load}}
+\DoxyCodeLine{00988\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NtClose\ ||\ !NtCreateEvent\ ||\ !NtDeviceIoControlFile\ ||\ !NtWaitForSingleObject)}
+\DoxyCodeLine{00989\ \ \ \ \ \{}
+\DoxyCodeLine{00990\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ get\ one\ or\ more\ functions\ from\ ntdll.dll"{}});}
+\DoxyCodeLine{00991\ \ \ \ \ \ \ \ \ FreeLibrary(hNtdll);}
+\DoxyCodeLine{00992\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00993\ \ \ \ \ \}}
+\DoxyCodeLine{00994\ }
+\DoxyCodeLine{00995\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00996\ \}}
+\DoxyCodeLine{00997\ }
+\DoxyCodeLine{01007\ NTSTATUS\ create\_context(}
+\DoxyCodeLine{01008\ \ \ \ \ DWORD\ addr\_family,}
+\DoxyCodeLine{01009\ \ \ \ \ DWORD\ socket\_type,}
+\DoxyCodeLine{01010\ \ \ \ \ DWORD\ socket\_protocol,}
+\DoxyCodeLine{01011\ \ \ \ \ LPVOID\ out\_buf}
+\DoxyCodeLine{01012\ )\ \{}
+\DoxyCodeLine{01013\ \ \ \ \ NTSTATUS\ status\ =\ NULL;}
+\DoxyCodeLine{01014\ \ \ \ \ ULONG\ len;}
+\DoxyCodeLine{01015\ \ \ \ \ BYTE\ buffer[SOCK\_CONTEXT\_BUF\_SIZE];}
+\DoxyCodeLine{01016\ \ \ \ \ \mbox{\hyperlink{struct___s_o_c_k_e_t___c_o_n_t_e_x_t}{PSOCKET\_CONTEXT}}\ sockctx;}
+\DoxyCodeLine{01017\ \ \ \ \ SOCKET\ sock\ =\ INVALID\_SOCKET;}
+\DoxyCodeLine{01018\ }
+\DoxyCodeLine{01019\ \ \ \ \ sockctx\ =\ (\mbox{\hyperlink{struct___s_o_c_k_e_t___c_o_n_t_e_x_t}{PSOCKET\_CONTEXT}})\&buffer[0];}
+\DoxyCodeLine{01020\ \ \ \ \ \mbox{\hyperlink{struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w}{WSAPROTOCOL\_INFOW}}\ wsapi;}
+\DoxyCodeLine{01021\ \ \ \ \ ULONG\ sockaddr\_paddsize,\ sockaddr\_2paddsize;}
+\DoxyCodeLine{01022\ \ \ \ \ ULONG\ ctxsize;}
+\DoxyCodeLine{01023\ }
+\DoxyCodeLine{01024\ \ \ \ \ \textcolor{comment}{//\ Initialize\ wsapi\ structure\ with\ relevant\ data}}
+\DoxyCodeLine{01025\ \ \ \ \ memset(\&wsapi,\ 0,\ \textcolor{keyword}{sizeof}(wsapi));}
+\DoxyCodeLine{01026\ \ \ \ \ wsapi.iAddressFamily\ =\ addr\_family;\ \textcolor{comment}{//\ Example\ initialization,\ actual\ values\ may\ differ}}
+\DoxyCodeLine{01027\ \ \ \ \ wsapi.iSocketType\ =\ socket\_type;\ \ \ \ \textcolor{comment}{//\ Example\ socket\ type}}
+\DoxyCodeLine{01028\ \ \ \ \ wsapi.iProtocol\ =\ socket\_protocol;\ \ \ \ \ \ \textcolor{comment}{//\ Example\ protocol}}
+\DoxyCodeLine{01029\ \ \ \ \ wsapi.iMaxSockAddr\ =\ \textcolor{keyword}{sizeof}(SOCKADDR\_IN);\ \textcolor{comment}{//\ Example\ address\ size}}
+\DoxyCodeLine{01030\ \ \ \ \ wsapi.dwCatalogEntryId\ =\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example\ catalog\ entry\ ID}}
+\DoxyCodeLine{01031\ \ \ \ \ wsapi.dwServiceFlags1\ =\ 0;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example\ service\ flags}}
+\DoxyCodeLine{01032\ \ \ \ \ wsapi.dwProviderFlags\ =\ 0;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example\ provider\ flags}}
+\DoxyCodeLine{01033\ \ \ \ \ wsapi.ProviderId\ =\ GUID\_NULL;\ \ \ \ \ \ \ \textcolor{comment}{//\ Example\ GUID,\ use\ actual\ GUID\ if\ needed}}
+\DoxyCodeLine{01034\ }
+\DoxyCodeLine{01035\ \ \ \ \ memset(\&sockctx-\/>SharedData,\ 0,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}{SOCK\_SHARED\_INFO}}));}
+\DoxyCodeLine{01036\ \ \ \ \ sockctx-\/>SharedData.AddressFamily\ =\ wsapi.iAddressFamily;}
+\DoxyCodeLine{01037\ \ \ \ \ sockctx-\/>SharedData.SocketType\ =\ wsapi.iSocketType;}
+\DoxyCodeLine{01038\ \ \ \ \ sockctx-\/>SharedData.Protocol\ =\ wsapi.iProtocol;}
+\DoxyCodeLine{01039\ \ \ \ \ sockctx-\/>SharedData.SizeOfLocalAddress\ =\ wsapi.iMaxSockAddr;}
+\DoxyCodeLine{01040\ \ \ \ \ sockctx-\/>SharedData.SizeOfRemoteAddress\ =\ wsapi.iMaxSockAddr;}
+\DoxyCodeLine{01041\ \ \ \ \ sockctx-\/>SharedData.SizeOfRecvBuffer\ =\ (1\ <<\ 16);}
+\DoxyCodeLine{01042\ \ \ \ \ sockctx-\/>SharedData.SizeOfSendBuffer\ =\ (1\ <<\ 16);}
+\DoxyCodeLine{01043\ \ \ \ \ sockctx-\/>SharedData.CreateFlags\ =\ 1;}
+\DoxyCodeLine{01044\ \ \ \ \ sockctx-\/>SharedData.CatalogEntryId\ =\ wsapi.dwCatalogEntryId;}
+\DoxyCodeLine{01045\ \ \ \ \ sockctx-\/>SharedData.ServiceFlags1\ =\ wsapi.dwServiceFlags1;}
+\DoxyCodeLine{01046\ \ \ \ \ sockctx-\/>SharedData.ProviderFlags\ =\ wsapi.dwProviderFlags;}
+\DoxyCodeLine{01047\ \ \ \ \ sockctx-\/>Guid\ =\ wsapi.ProviderId;}
+\DoxyCodeLine{01048\ \ \ \ \ sockctx-\/>SizeOfHelperData\ =\ \textcolor{keyword}{sizeof}(PVOID);}
+\DoxyCodeLine{01049\ }
+\DoxyCodeLine{01050\ \ \ \ \ sockaddr\_paddsize\ =\ (wsapi.iMaxSockAddr\ \&\ 0xF0)\ +\ (((wsapi.iMaxSockAddr\ \&\ 0xF)\ >\ 0)\ <<\ 4);}
+\DoxyCodeLine{01051\ \ \ \ \ \textcolor{keywordflow}{if}\ (sockaddr\_paddsize\ <\ \textcolor{keyword}{sizeof}(SOCKADDR))\ \{}
+\DoxyCodeLine{01052\ \ \ \ \ \ \ \ \ sockaddr\_paddsize\ =\ \textcolor{keyword}{sizeof}(SOCKADDR);}
+\DoxyCodeLine{01053\ \ \ \ \ \}}
+\DoxyCodeLine{01054\ }
+\DoxyCodeLine{01055\ \ \ \ \ sockaddr\_2paddsize\ =\ sockaddr\_paddsize\ *\ 2;}
+\DoxyCodeLine{01056\ \ \ \ \ ctxsize\ =\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o}{SOCK\_SHARED\_INFO}})\ +\ 8\ +\ \textcolor{keyword}{sizeof}(PVOID)\ +\ sockaddr\_2paddsize;}
+\DoxyCodeLine{01057\ }
+\DoxyCodeLine{01058\ \ \ \ \ sockctx-\/>SharedData.Flags.HasGUID\ =\ 1;}
+\DoxyCodeLine{01059\ \ \ \ \ memset(\&sockctx-\/>LocalAddress,\ 0,\ sockaddr\_2paddsize);}
+\DoxyCodeLine{01060\ \ \ \ \ *(\textcolor{keywordtype}{int}*)(((\textcolor{keywordtype}{char}*)\&sockctx-\/>LocalAddress)\ +\ sockaddr\_2paddsize)\ =\ addr\_family;}
+\DoxyCodeLine{01061\ \ \ \ \ ctxsize\ +=\ \textcolor{keyword}{sizeof}(GUID);}
+\DoxyCodeLine{01062\ }
+\DoxyCodeLine{01063\ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ contents\ of\ the\ sockctx\ buffer\ to\ out\_buf}}
+\DoxyCodeLine{01064\ \ \ \ \ memcpy(out\_buf,\ sockctx,\ ctxsize);}
+\DoxyCodeLine{01065\ }
+\DoxyCodeLine{01066\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{01067\ \}}
+\DoxyCodeLine{01068\ }
+\DoxyCodeLine{01077\ NTSTATUS\ afd\_create(}
+\DoxyCodeLine{01078\ \ \ \ \ PHANDLE\ socket\_handle,}
+\DoxyCodeLine{01079\ \ \ \ \ DWORD\ SocketType,}
+\DoxyCodeLine{01080\ \ \ \ \ DWORD\ socketProtocol}
+\DoxyCodeLine{01081\ )\ \{}
+\DoxyCodeLine{01082\ \ \ \ \ HANDLE\ hEvent\ =\ NULL;}
+\DoxyCodeLine{01083\ \ \ \ \ HANDLE\ hSocket\ =\ socket\_handle;}
+\DoxyCodeLine{01084\ \ \ \ \ DWORD\ dwStatus\ =\ 0;}
+\DoxyCodeLine{01085\ }
+\DoxyCodeLine{01086\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatusBlock\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01087\ \ \ \ \ \mbox{\hyperlink{struct___o_b_j_e_c_t___a_t_t_r_i_b_u_t_e_s}{OBJECT\_ATTRIBUTES}}\ object\_attributes\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01088\ \ \ \ \ \mbox{\hyperlink{struct___u_n_i_c_o_d_e___s_t_r_i_n_g}{UNICODE\_STRING}}\ object\_file\_path\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01089\ }
+\DoxyCodeLine{01090\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ AFD\_CREATE\_PACKET\ structure}}
+\DoxyCodeLine{01091\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t}{AFD\_CREATE\_PACKET}}\ packet\ =}
+\DoxyCodeLine{01092\ \ \ \ \ \{}
+\DoxyCodeLine{01093\ \ \ \ \ \ \ \ \ .NextEntryOffset\ =\ 0x00000000,}
+\DoxyCodeLine{01094\ \ \ \ \ \ \ \ \ .Flags\ =\ 0x00,}
+\DoxyCodeLine{01095\ \ \ \ \ \ \ \ \ .EaValueLength\ =\ 0x001E,}
+\DoxyCodeLine{01096\ \ \ \ \ \ \ \ \ .EaName\ =\ \textcolor{stringliteral}{"{}AfdOpenPacketXX\(\backslash\)0"{}},}
+\DoxyCodeLine{01097\ \ \ \ \ \ \ \ \ .EaNameLength\ =\ (\textcolor{keyword}{sizeof}(packet.EaName)\ -\/\ 1),}
+\DoxyCodeLine{01098\ \ \ \ \ \ \ \ \ .EndpointFlags\ =\ 0x00000000,}
+\DoxyCodeLine{01099\ \ \ \ \ \ \ \ \ .GroupID\ =\ 0x00000000,}
+\DoxyCodeLine{01100\ \ \ \ \ \ \ \ \ .AddressFamily\ =\ AF\_INET,}
+\DoxyCodeLine{01101\ \ \ \ \ \ \ \ \ .SocketType\ =\ SocketType,}
+\DoxyCodeLine{01102\ \ \ \ \ \ \ \ \ .Protocol\ =\ socketProtocol,}
+\DoxyCodeLine{01103\ \ \ \ \ \ \ \ \ .SizeOfTransportName\ =\ 0x0,}
+\DoxyCodeLine{01104\ \ \ \ \ \ \ \ \ .TransportName\ =\ \textcolor{stringliteral}{"{}\(\backslash\)x60\(\backslash\)xEF\(\backslash\)x3D\(\backslash\)x47\(\backslash\)xFE"{}}}
+\DoxyCodeLine{01105\ \ \ \ \ \ \ \ \ \textcolor{comment}{//.TransportName\ =\ "{}\(\backslash\)x41\(\backslash\)x41\(\backslash\)x41\(\backslash\)x41"{}\ //\ whatever}}
+\DoxyCodeLine{01106\ \ \ \ \ \};}
+\DoxyCodeLine{01107\ }
+\DoxyCodeLine{01108\ \ \ \ \ \textcolor{comment}{//\ set\ afd\ endpoint\ path}}
+\DoxyCodeLine{01109\ \ \ \ \ memset((\textcolor{keywordtype}{void}*)\&object\_file\_path,\ 0,\ \textcolor{keyword}{sizeof}(object\_file\_path));}
+\DoxyCodeLine{01110\ \ \ \ \ object\_file\_path.Buffer\ =\ L\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)Device\(\backslash\)\(\backslash\)Afd\(\backslash\)\(\backslash\)Endpoint"{}};}
+\DoxyCodeLine{01111\ \ \ \ \ object\_file\_path.Length\ =\ wcslen(object\_file\_path.Buffer)\ *\ \textcolor{keyword}{sizeof}(wchar\_t);}
+\DoxyCodeLine{01112\ \ \ \ \ object\_file\_path.MaximumLength\ =\ object\_file\_path.Length;}
+\DoxyCodeLine{01113\ }
+\DoxyCodeLine{01114\ \ \ \ \ \textcolor{comment}{//\ initialise\ object\ attributes}}
+\DoxyCodeLine{01115\ \ \ \ \ memset((\textcolor{keywordtype}{void}*)\&object\_attributes,\ 0,\ \textcolor{keyword}{sizeof}(object\_attributes));}
+\DoxyCodeLine{01116\ \ \ \ \ object\_attributes.Length\ =\ \textcolor{keyword}{sizeof}(object\_attributes);}
+\DoxyCodeLine{01117\ \ \ \ \ object\_attributes.ObjectName\ =\ \&object\_file\_path;}
+\DoxyCodeLine{01118\ \ \ \ \ object\_attributes.Attributes\ =\ 0x40;}
+\DoxyCodeLine{01119\ }
+\DoxyCodeLine{01120\ \ \ \ \ \textcolor{comment}{//\ create\ socket\ handle}}
+\DoxyCodeLine{01121\ \ \ \ \ IoStatusBlock.Status\ =\ 0;}
+\DoxyCodeLine{01122\ \ \ \ \ IoStatusBlock.Information\ =\ NULL;}
+\DoxyCodeLine{01123\ }
+\DoxyCodeLine{01124\ \ \ \ \ \textcolor{comment}{//\ FILE\_NO\_EA\_KNOWLEDGE\ =\ 0x00000200}}
+\DoxyCodeLine{01125\ \ \ \ \ dwStatus\ =\ NtCreateFile(\&hSocket,}
+\DoxyCodeLine{01126\ \ \ \ \ \ \ \ \ FILE\_GENERIC\_READ\ |\ FILE\_GENERIC\_WRITE\ |\ FILE\_GENERIC\_EXECUTE,}
+\DoxyCodeLine{01127\ \ \ \ \ \ \ \ \ \&object\_attributes,\ \&IoStatusBlock,\ NULL,\ 0,\ FILE\_SHARE\_READ\ |\ FILE\_SHARE\_WRITE\ |\ FILE\_SHARE\_DELETE,}
+\DoxyCodeLine{01128\ \ \ \ \ \ \ \ \ FILE\_OPEN\_IF,\ 0x00000200,\ \&packet,\ \textcolor{keyword}{sizeof}(packet));}
+\DoxyCodeLine{01129\ }
+\DoxyCodeLine{01130\ \ \ \ \ *(HANDLE*)socket\_handle\ =\ hSocket;}
+\DoxyCodeLine{01131\ }
+\DoxyCodeLine{01132\ \ \ \ \ \textcolor{keywordflow}{return}\ dwStatus;}
+\DoxyCodeLine{01133\ \}}
+\DoxyCodeLine{01134\ }
+\DoxyCodeLine{01142\ NTSTATUS\ afd\_bind(}
+\DoxyCodeLine{01143\ \ \ \ \ HANDLE*\ socket\_handle}
+\DoxyCodeLine{01144\ )\ \{}
+\DoxyCodeLine{01145\ \ \ \ \ \textcolor{comment}{//\ bind\ a\ high\ port\ to\ futher\ TCP\ conversation}}
+\DoxyCodeLine{01146\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01147\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01148\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01149\ }
+\DoxyCodeLine{01150\ \ \ \ \ Status\ =\ NtCreateEvent(\&Event,\ EVENT\_ALL\_ACCESS,\ NULL,\ NotificationEvent,\ FALSE);}
+\DoxyCodeLine{01151\ }
+\DoxyCodeLine{01152\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))\ }
+\DoxyCodeLine{01153\ \ \ \ \ \{}
+\DoxyCodeLine{01154\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ event!"{}});}
+\DoxyCodeLine{01155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01156\ \ \ \ \ \}}
+\DoxyCodeLine{01157\ }
+\DoxyCodeLine{01158\ \ \ \ \ BYTE*\ dummy[0x777]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01159\ \ \ \ \ memset(dummy,\ \textcolor{charliteral}{'A'},\ \textcolor{keyword}{sizeof}(dummy));}
+\DoxyCodeLine{01160\ }
+\DoxyCodeLine{01161\ \ \ \ \ \textcolor{keyword}{union}}
+\DoxyCodeLine{01162\ \ \ \ \ \{}
+\DoxyCodeLine{01163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___b_i_n_d___d_a_t_a}{AFD\_BIND\_DATA}}\ binddata;}
+\DoxyCodeLine{01164\ \ \ \ \ \ \ \ \ SOCKADDR\_IN\ sockaddr;}
+\DoxyCodeLine{01165\ \ \ \ \ \}\ u;}
+\DoxyCodeLine{01166\ }
+\DoxyCodeLine{01167\ \ \ \ \ memset(\&u.binddata,\ 0,\ \textcolor{keyword}{sizeof}(u.binddata));}
+\DoxyCodeLine{01168\ \ \ \ \ u.binddata.ShareType\ =\ 0x2;}
+\DoxyCodeLine{01169\ \ \ \ \ u.binddata.addr.sin\_family\ =\ AF\_INET;}
+\DoxyCodeLine{01170\ \ \ \ \ u.binddata.addr.sin\_addr.s\_addr\ =\ INADDR\_ANY;}
+\DoxyCodeLine{01171\ \ \ \ \ u.binddata.addr.sin\_port\ =\ 0;}
+\DoxyCodeLine{01172\ }
+\DoxyCodeLine{01173\ \ \ \ \ Status\ =\ NtDeviceIoControlFile(}
+\DoxyCodeLine{01174\ \ \ \ \ \ \ \ \ socket\_handle,}
+\DoxyCodeLine{01175\ \ \ \ \ \ \ \ \ Event,}
+\DoxyCodeLine{01176\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01177\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01178\ \ \ \ \ \ \ \ \ \&IoStatus,}
+\DoxyCodeLine{01179\ \ \ \ \ \ \ \ \ IOCTL\_AFD\_BIND,}
+\DoxyCodeLine{01180\ \ \ \ \ \ \ \ \ (BYTE*)\&u,}
+\DoxyCodeLine{01181\ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(u),}
+\DoxyCodeLine{01182\ \ \ \ \ \ \ \ \ \&dummy,}
+\DoxyCodeLine{01183\ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(dummy)}
+\DoxyCodeLine{01184\ \ \ \ \ );}
+\DoxyCodeLine{01185\ }
+\DoxyCodeLine{01186\ \ \ \ \ \textcolor{keywordflow}{if}\ (Status\ ==\ STATUS\_PENDING)}
+\DoxyCodeLine{01187\ \ \ \ \ \{}
+\DoxyCodeLine{01188\ \ \ \ \ \ \ \ \ NtWaitForSingleObject(Event,\ FALSE,\ NULL);}
+\DoxyCodeLine{01189\ \ \ \ \ \ \ \ \ Status\ =\ IoStatus.Status;}
+\DoxyCodeLine{01190\ \ \ \ \ \}}
+\DoxyCodeLine{01191\ }
+\DoxyCodeLine{01192\ \ \ \ \ NtClose(Event);}
+\DoxyCodeLine{01193\ }
+\DoxyCodeLine{01194\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01195\ \}}
+\DoxyCodeLine{01196\ }
+\DoxyCodeLine{01206\ NTSTATUS\ afd\_set\_context(}
+\DoxyCodeLine{01207\ \ \ \ \ HANDLE\ socket\_handle,}
+\DoxyCodeLine{01208\ \ \ \ \ LPVOID\ input\_buf}
+\DoxyCodeLine{01209\ )\ \{}
+\DoxyCodeLine{01210\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01211\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01212\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01213\ }
+\DoxyCodeLine{01214\ \ \ \ \ Status\ =\ NtCreateEvent(\&Event,\ EVENT\_ALL\_ACCESS,\ NULL,\ NotificationEvent,\ FALSE);}
+\DoxyCodeLine{01215\ }
+\DoxyCodeLine{01216\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))\ }
+\DoxyCodeLine{01217\ \ \ \ \ \{}
+\DoxyCodeLine{01218\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ event!"{}});}
+\DoxyCodeLine{01219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01220\ \ \ \ \ \}}
+\DoxyCodeLine{01221\ }
+\DoxyCodeLine{01222\ \ \ \ \ Status\ =\ NtDeviceIoControlFile(}
+\DoxyCodeLine{01223\ \ \ \ \ \ \ \ \ socket\_handle,}
+\DoxyCodeLine{01224\ \ \ \ \ \ \ \ \ Event,}
+\DoxyCodeLine{01225\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01226\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01227\ \ \ \ \ \ \ \ \ \&IoStatus,}
+\DoxyCodeLine{01228\ \ \ \ \ \ \ \ \ IOCTL\_AFD\_SET\_CONTEXT,}
+\DoxyCodeLine{01229\ \ \ \ \ \ \ \ \ input\_buf,}
+\DoxyCodeLine{01230\ \ \ \ \ \ \ \ \ SOCK\_CONTEXT\_BUF\_SIZE,}
+\DoxyCodeLine{01231\ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{01232\ \ \ \ \ \ \ \ \ NULL}
+\DoxyCodeLine{01233\ \ \ \ \ );}
+\DoxyCodeLine{01234\ }
+\DoxyCodeLine{01235\ \ \ \ \ \textcolor{keywordflow}{if}\ (Status\ ==\ STATUS\_PENDING)}
+\DoxyCodeLine{01236\ \ \ \ \ \{}
+\DoxyCodeLine{01237\ \ \ \ \ \ \ \ \ NtWaitForSingleObject(Event,\ FALSE,\ NULL);}
+\DoxyCodeLine{01238\ \ \ \ \ \ \ \ \ Status\ =\ IoStatus.Status;}
+\DoxyCodeLine{01239\ \ \ \ \ \}}
+\DoxyCodeLine{01240\ }
+\DoxyCodeLine{01241\ \ \ \ \ NtClose(Event);}
+\DoxyCodeLine{01242\ }
+\DoxyCodeLine{01243\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01244\ \}}
+\DoxyCodeLine{01245\ }
+\DoxyCodeLine{01255\ NTSTATUS\ afd\_get\_context(}
+\DoxyCodeLine{01256\ \ \ \ \ HANDLE\ socket\_handle,}
+\DoxyCodeLine{01257\ \ \ \ \ LPVOID\ out\_buf}
+\DoxyCodeLine{01258\ )\ \{}
+\DoxyCodeLine{01259\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01260\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01261\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01262\ }
+\DoxyCodeLine{01263\ \ \ \ \ Status\ =\ NtCreateEvent(\&Event,\ EVENT\_ALL\_ACCESS,\ NULL,\ NotificationEvent,\ FALSE);}
+\DoxyCodeLine{01264\ }
+\DoxyCodeLine{01265\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01266\ \ \ \ \ \{}
+\DoxyCodeLine{01267\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ event!"{}});}
+\DoxyCodeLine{01268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01269\ \ \ \ \ \}}
+\DoxyCodeLine{01270\ }
+\DoxyCodeLine{01271\ \ \ \ \ Status\ =\ NtDeviceIoControlFile(}
+\DoxyCodeLine{01272\ \ \ \ \ \ \ \ \ socket\_handle,}
+\DoxyCodeLine{01273\ \ \ \ \ \ \ \ \ Event,}
+\DoxyCodeLine{01274\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01275\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01276\ \ \ \ \ \ \ \ \ \&IoStatus,}
+\DoxyCodeLine{01277\ \ \ \ \ \ \ \ \ IOCTL\_AFD\_GET\_CONTEXT,}
+\DoxyCodeLine{01278\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01279\ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{01280\ \ \ \ \ \ \ \ \ out\_buf,}
+\DoxyCodeLine{01281\ \ \ \ \ \ \ \ \ SOCK\_CONTEXT\_BUF\_SIZE}
+\DoxyCodeLine{01282\ \ \ \ \ );}
+\DoxyCodeLine{01283\ }
+\DoxyCodeLine{01284\ \ \ \ \ \textcolor{keywordflow}{if}\ (Status\ ==\ STATUS\_PENDING)}
+\DoxyCodeLine{01285\ \ \ \ \ \{}
+\DoxyCodeLine{01286\ \ \ \ \ \ \ \ \ NtWaitForSingleObject(Event,\ FALSE,\ NULL);}
+\DoxyCodeLine{01287\ \ \ \ \ \ \ \ \ Status\ =\ IoStatus.Status;}
+\DoxyCodeLine{01288\ \ \ \ \ \}}
+\DoxyCodeLine{01289\ }
+\DoxyCodeLine{01290\ \ \ \ \ NtClose(Event);}
+\DoxyCodeLine{01291\ }
+\DoxyCodeLine{01292\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01293\ \}}
+\DoxyCodeLine{01294\ }
+\DoxyCodeLine{01304\ NTSTATUS\ afd\_connect(}
+\DoxyCodeLine{01305\ \ \ \ \ HANDLE*\ socket\_handle,}
+\DoxyCodeLine{01306\ \ \ \ \ \textcolor{keywordtype}{char}*\ Address,}
+\DoxyCodeLine{01307\ \ \ \ \ \textcolor{keywordtype}{int}\ Port}
+\DoxyCodeLine{01308\ )\ \{}
+\DoxyCodeLine{01309\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01310\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01311\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___c_o_n_n_e_c_t___i_n_f_o}{AFD\_CONNECT\_INFO}}\ conn\_struct\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01312\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01313\ }
+\DoxyCodeLine{01314\ \ \ \ \ Status\ =\ NtCreateEvent(\&Event,\ EVENT\_ALL\_ACCESS,\ NULL,\ NotificationEvent,\ FALSE);}
+\DoxyCodeLine{01315\ }
+\DoxyCodeLine{01316\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))\ }
+\DoxyCodeLine{01317\ \ \ \ \ \{}
+\DoxyCodeLine{01318\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ event!"{}});}
+\DoxyCodeLine{01319\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01320\ \ \ \ \ \}}
+\DoxyCodeLine{01321\ }
+\DoxyCodeLine{01322\ \ \ \ \ uint32\_t\ htonl\_ip\ =\ convert\_ip\_to\_htonl(Address);}
+\DoxyCodeLine{01323\ }
+\DoxyCodeLine{01324\ \ \ \ \ memset(\&conn\_struct,\ \textcolor{charliteral}{'0'},\ \textcolor{keyword}{sizeof}(conn\_struct));}
+\DoxyCodeLine{01325\ }
+\DoxyCodeLine{01326\ \ \ \ \ conn\_struct.UseSAN\ =\ 0;}
+\DoxyCodeLine{01327\ \ \ \ \ conn\_struct.Root\ =\ 0;}
+\DoxyCodeLine{01328\ \ \ \ \ conn\_struct.Unknown\ =\ 0;}
+\DoxyCodeLine{01329\ \ \ \ \ conn\_struct.Bind.sin\_family\ =\ AF\_INET;}
+\DoxyCodeLine{01330\ \ \ \ \ conn\_struct.Bind.sin\_addr.s\_addr\ =\ htonl(htonl\_ip);}
+\DoxyCodeLine{01331\ \ \ \ \ conn\_struct.Bind.sin\_port\ =\ htons(Port);}
+\DoxyCodeLine{01332\ }
+\DoxyCodeLine{01333\ \ \ \ \ Status\ =\ NtDeviceIoControlFile(}
+\DoxyCodeLine{01334\ \ \ \ \ \ \ \ \ socket\_handle,}
+\DoxyCodeLine{01335\ \ \ \ \ \ \ \ \ Event,}
+\DoxyCodeLine{01336\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01337\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01338\ \ \ \ \ \ \ \ \ \&IoStatus,}
+\DoxyCodeLine{01339\ \ \ \ \ \ \ \ \ IOCTL\_AFD\_DOCONNECT,}
+\DoxyCodeLine{01340\ \ \ \ \ \ \ \ \ \&conn\_struct,}
+\DoxyCodeLine{01341\ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(conn\_struct),}
+\DoxyCodeLine{01342\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01343\ \ \ \ \ \ \ \ \ 0}
+\DoxyCodeLine{01344\ \ \ \ \ );}
+\DoxyCodeLine{01345\ }
+\DoxyCodeLine{01346\ \ \ \ \ \textcolor{keywordflow}{if}\ (Status\ ==\ STATUS\_PENDING)}
+\DoxyCodeLine{01347\ \ \ \ \ \{}
+\DoxyCodeLine{01348\ \ \ \ \ \ \ \ \ NtWaitForSingleObject(Event,\ FALSE,\ NULL);}
+\DoxyCodeLine{01349\ \ \ \ \ \ \ \ \ Status\ =\ IoStatus.Status;}
+\DoxyCodeLine{01350\ \ \ \ \ \}}
+\DoxyCodeLine{01351\ }
+\DoxyCodeLine{01352\ \ \ \ \ NtClose(Event);}
+\DoxyCodeLine{01353\ }
+\DoxyCodeLine{01354\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01355\ \}}
+\DoxyCodeLine{01356\ }
+\DoxyCodeLine{01367\ NTSTATUS\ afd\_send(}
+\DoxyCodeLine{01368\ \ \ \ \ HANDLE\ socket\_handle,}
+\DoxyCodeLine{01369\ \ \ \ \ LPVOID\ buf,}
+\DoxyCodeLine{01370\ \ \ \ \ \textcolor{keywordtype}{int}\ query\_len,}
+\DoxyCodeLine{01371\ \ \ \ \ BOOL\ is\_dns\_query}
+\DoxyCodeLine{01372\ )\ \{}
+\DoxyCodeLine{01373\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01374\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01375\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01376\ }
+\DoxyCodeLine{01377\ \ \ \ \ Status\ =\ NtCreateEvent(\&Event,\ EVENT\_ALL\_ACCESS,\ NULL,\ NotificationEvent,\ FALSE);}
+\DoxyCodeLine{01378\ }
+\DoxyCodeLine{01379\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))\ }
+\DoxyCodeLine{01380\ \ \ \ \ \{}
+\DoxyCodeLine{01381\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ event!"{}});}
+\DoxyCodeLine{01382\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01383\ \ \ \ \ \}}
+\DoxyCodeLine{01384\ }
+\DoxyCodeLine{01385\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___s_e_n_d___i_n_f_o}{AFD\_SEND\_INFO}}\ fb\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01386\ \ \ \ \ \textcolor{keywordtype}{int}\ finalSz\ =\ 0;}
+\DoxyCodeLine{01387\ }
+\DoxyCodeLine{01388\ \ \ \ \ \textcolor{comment}{//\ DNS\ query\ length\ must\ to\ be\ the\ final\ payload\ +\ 2}}
+\DoxyCodeLine{01389\ \ \ \ \ \textcolor{keywordflow}{if}\ ((is\_dns\_query)\ >\ 0)}
+\DoxyCodeLine{01390\ \ \ \ \ \{}
+\DoxyCodeLine{01391\ \ \ \ \ \ \ \ \ finalSz\ =\ query\_len\ +\ 2;}
+\DoxyCodeLine{01392\ \ \ \ \ \}}
+\DoxyCodeLine{01393\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01394\ \ \ \ \ \{}
+\DoxyCodeLine{01395\ \ \ \ \ \ \ \ \ finalSz\ =\ query\_len;}
+\DoxyCodeLine{01396\ \ \ \ \ \}}
+\DoxyCodeLine{01397\ }
+\DoxyCodeLine{01398\ \ \ \ \ buf\ =\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*)buf;}
+\DoxyCodeLine{01399\ }
+\DoxyCodeLine{01400\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{AFD\_WSABUF}}\ wsa\_buffers[]\ =}
+\DoxyCodeLine{01401\ \ \ \ \ \{}
+\DoxyCodeLine{01402\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01403\ \ \ \ \ \ \ \ \ \ \ \ \ .len\ =\ finalSz,}
+\DoxyCodeLine{01404\ \ \ \ \ \ \ \ \ \ \ \ \ .buf\ =\ buf}
+\DoxyCodeLine{01405\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01406\ \ \ \ \ \};}
+\DoxyCodeLine{01407\ }
+\DoxyCodeLine{01408\ \ \ \ \ fb.BufferArray\ =\ wsa\_buffers;}
+\DoxyCodeLine{01409\ \ \ \ \ fb.BufferCount\ =\ 1;}
+\DoxyCodeLine{01410\ \ \ \ \ fb.AfdFlags\ =\ 0;}
+\DoxyCodeLine{01411\ \ \ \ \ fb.TdiFlags\ =\ query\_len;}
+\DoxyCodeLine{01412\ }
+\DoxyCodeLine{01413\ \ \ \ \ Status\ =\ NtDeviceIoControlFile(}
+\DoxyCodeLine{01414\ \ \ \ \ \ \ \ \ socket\_handle,}
+\DoxyCodeLine{01415\ \ \ \ \ \ \ \ \ Event,}
+\DoxyCodeLine{01416\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01417\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01418\ \ \ \ \ \ \ \ \ \&IoStatus,}
+\DoxyCodeLine{01419\ \ \ \ \ \ \ \ \ IOCTL\_AFD\_SEND,}
+\DoxyCodeLine{01420\ \ \ \ \ \ \ \ \ \&fb,}
+\DoxyCodeLine{01421\ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(fb),}
+\DoxyCodeLine{01422\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01423\ \ \ \ \ \ \ \ \ 0}
+\DoxyCodeLine{01424\ \ \ \ \ );}
+\DoxyCodeLine{01425\ }
+\DoxyCodeLine{01426\ \ \ \ \ \textcolor{keywordflow}{if}\ (Status\ ==\ STATUS\_PENDING)}
+\DoxyCodeLine{01427\ \ \ \ \ \{}
+\DoxyCodeLine{01428\ \ \ \ \ \ \ \ \ NtWaitForSingleObject(Event,\ FALSE,\ NULL);}
+\DoxyCodeLine{01429\ \ \ \ \ \ \ \ \ Status\ =\ IoStatus.Status;}
+\DoxyCodeLine{01430\ \ \ \ \ \}}
+\DoxyCodeLine{01431\ }
+\DoxyCodeLine{01432\ \ \ \ \ NtClose(Event);}
+\DoxyCodeLine{01433\ }
+\DoxyCodeLine{01434\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01435\ \}}
+\DoxyCodeLine{01436\ }
+\DoxyCodeLine{01445\ NTSTATUS\ afd\_recv(}
+\DoxyCodeLine{01446\ \ \ \ \ HANDLE*\ socket\_handle,}
+\DoxyCodeLine{01447\ \ \ \ \ LPVOID\ wsa\_buffer}
+\DoxyCodeLine{01448\ )\ \{}
+\DoxyCodeLine{01449\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01450\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01451\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01452\ }
+\DoxyCodeLine{01453\ \ \ \ \ Status\ =\ NtCreateEvent(\&Event,\ EVENT\_ALL\_ACCESS,\ NULL,\ NotificationEvent,\ FALSE);}
+\DoxyCodeLine{01454\ }
+\DoxyCodeLine{01455\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01456\ \ \ \ \ \{}
+\DoxyCodeLine{01457\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ event!"{}});}
+\DoxyCodeLine{01458\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01459\ \ \ \ \ \}}
+\DoxyCodeLine{01460\ }
+\DoxyCodeLine{01461\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___r_e_c_v___i_n_f_o}{AFD\_RECV\_INFO}}\ recvInfo;}
+\DoxyCodeLine{01462\ \ \ \ \ \mbox{\hyperlink{struct___a_f_d___w_s_a_b_u_f}{AFD\_WSABUF}}\ FAKE\_BUF\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01463\ }
+\DoxyCodeLine{01464\ \ \ \ \ BYTE\ wsa\_recv\_buffer[MAX\_RECV\_BYTES]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01465\ }
+\DoxyCodeLine{01466\ \ \ \ \ FAKE\_BUF.buf\ =\ (LPVOID)wsa\_recv\_buffer;}
+\DoxyCodeLine{01467\ \ \ \ \ FAKE\_BUF.len\ =\ (uint32\_t)\textcolor{keyword}{sizeof}(wsa\_recv\_buffer);}
+\DoxyCodeLine{01468\ }
+\DoxyCodeLine{01469\ \ \ \ \ recvInfo.BufferArray\ =\ \&FAKE\_BUF;}
+\DoxyCodeLine{01470\ \ \ \ \ recvInfo.BufferCount\ =\ 1;}
+\DoxyCodeLine{01471\ \ \ \ \ recvInfo.TdiFlags\ =\ TDI\_RECEIVE\_NORMAL;}
+\DoxyCodeLine{01472\ \ \ \ \ recvInfo.AfdFlags\ =\ 0;}
+\DoxyCodeLine{01473\ }
+\DoxyCodeLine{01474\ \ \ \ \ Status\ =\ NtDeviceIoControlFile(}
+\DoxyCodeLine{01475\ \ \ \ \ \ \ \ \ socket\_handle,}
+\DoxyCodeLine{01476\ \ \ \ \ \ \ \ \ Event,}
+\DoxyCodeLine{01477\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01478\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01479\ \ \ \ \ \ \ \ \ \&IoStatus,}
+\DoxyCodeLine{01480\ \ \ \ \ \ \ \ \ IOCTL\_AFD\_RECV,}
+\DoxyCodeLine{01481\ \ \ \ \ \ \ \ \ \&recvInfo,}
+\DoxyCodeLine{01482\ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(recvInfo),}
+\DoxyCodeLine{01483\ \ \ \ \ \ \ \ \ NULL,}
+\DoxyCodeLine{01484\ \ \ \ \ \ \ \ \ 0}
+\DoxyCodeLine{01485\ \ \ \ \ );}
+\DoxyCodeLine{01486\ }
+\DoxyCodeLine{01487\ \ \ \ \ \textcolor{keywordflow}{if}\ (Status\ ==\ STATUS\_PENDING)}
+\DoxyCodeLine{01488\ \ \ \ \ \{}
+\DoxyCodeLine{01489\ \ \ \ \ \ \ \ \ NtWaitForSingleObject(Event,\ FALSE,\ NULL);}
+\DoxyCodeLine{01490\ \ \ \ \ \ \ \ \ Status\ =\ IoStatus.Status;}
+\DoxyCodeLine{01491\ \ \ \ \ \}}
+\DoxyCodeLine{01492\ }
+\DoxyCodeLine{01493\ \ \ \ \ memcpy(wsa\_buffer,\ \&wsa\_recv\_buffer,\ MAX\_RECV\_BYTES);}
+\DoxyCodeLine{01494\ }
+\DoxyCodeLine{01495\ \ \ \ \ NtClose(Event);}
+\DoxyCodeLine{01496\ }
+\DoxyCodeLine{01497\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01498\ \}}
+\DoxyCodeLine{01499\ }
+\DoxyCodeLine{01507\ NTSTATUS\ afd\_close(}
+\DoxyCodeLine{01508\ \ \ \ \ HANDLE\ Handle}
+\DoxyCodeLine{01509\ )\ \{}
+\DoxyCodeLine{01510\ \ \ \ \ \textcolor{keywordflow}{return}\ NtClose(Handle);}
+\DoxyCodeLine{01511\ \}}
+\DoxyCodeLine{01512\ }
+\DoxyCodeLine{01523\ NTSTATUS\ get\_ip\_from\_domain(}
+\DoxyCodeLine{01524\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host,}
+\DoxyCodeLine{01525\ \ \ \ \ \textcolor{keywordtype}{char}*\ ip\_string}
+\DoxyCodeLine{01526\ )\ \{}
+\DoxyCodeLine{01527\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01528\ \ \ \ \ \mbox{\hyperlink{struct___d_o_m_a_i_n___i_n_f_o}{DOMAIN\_INFO}}\ outBuffer\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01529\ \ \ \ \ HANDLE\ hSocket\_dns\_lookup\ =\ NULL;}
+\DoxyCodeLine{01530\ }
+\DoxyCodeLine{01531\ \ \ \ \ Status\ =\ nosa\_DNS\_lookup(\&hSocket\_dns\_lookup,\ host,\ \&outBuffer);}
+\DoxyCodeLine{01532\ }
+\DoxyCodeLine{01533\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01534\ \ \ \ \ \{}
+\DoxyCodeLine{01535\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}nosa\_DNS\_lookup()\ failed!:\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01536\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01537\ \ \ \ \ \}}
+\DoxyCodeLine{01538\ }
+\DoxyCodeLine{01539\ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}Host\ -\/>\ [\ \%s\ -\/>\ 0x\%08x\ -\/>\ \%s\ ]"{}},}
+\DoxyCodeLine{01540\ \ \ \ \ \ \ \ \ host,\ outBuffer.hex\_ip\_address,\ outBuffer.ip\_address\_str);}
+\DoxyCodeLine{01541\ }
+\DoxyCodeLine{01542\ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ lookupd\ IP\ address\ into\ the\ provided\ buffer}}
+\DoxyCodeLine{01543\ \ \ \ \ strncpy\_s(ip\_string,\ 16,\ outBuffer.ip\_address\_str,\ \_TRUNCATE);}
+\DoxyCodeLine{01544\ }
+\DoxyCodeLine{01545\ \ \ \ \ NtClose(hSocket\_dns\_lookup);}
+\DoxyCodeLine{01546\ }
+\DoxyCodeLine{01547\ \ \ \ \ Sleep(10);\ \textcolor{comment}{//\ wait\ a\ little\ to\ prevent\ bugs}}
+\DoxyCodeLine{01548\ }
+\DoxyCodeLine{01549\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01550\ \}}
+\DoxyCodeLine{01551\ }
+\DoxyCodeLine{01561\ NTSTATUS\ nosa\_DNS\_lookup(}
+\DoxyCodeLine{01562\ \ \ \ \ HANDLE\ hSocket,}
+\DoxyCodeLine{01563\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ domain\_name,}
+\DoxyCodeLine{01564\ \ \ \ \ \mbox{\hyperlink{struct___d_o_m_a_i_n___i_n_f_o}{DOMAIN\_INFO}}*\ outBuffer}
+\DoxyCodeLine{01565\ )\ \{}
+\DoxyCodeLine{01566\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01567\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01568\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01569\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ out\_buffer\_ptr\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01570\ \ \ \ \ \textcolor{keywordtype}{int}\ query\_len\ =\ 0;}
+\DoxyCodeLine{01571\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ buf[1024]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01572\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ wsa\_buffer[MAX\_RECV\_BYTES]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01573\ \ \ \ \ memset(wsa\_buffer,\ 0,\ \textcolor{keyword}{sizeof}(wsa\_buffer));}
+\DoxyCodeLine{01574\ }
+\DoxyCodeLine{01575\ \ \ \ \ Status\ =\ afd\_create(\&hSocket,\ SOCK\_STREAM,\ IPPROTO\_TCP);}
+\DoxyCodeLine{01576\ }
+\DoxyCodeLine{01577\ \ \ \ \ \textcolor{keywordflow}{if}\ (hSocket)}
+\DoxyCodeLine{01578\ \ \ \ \ \{}
+\DoxyCodeLine{01579\ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}Socket\ created\ successfully!\ HANDLE:\ [\ 0x\%x\ ]"{}},\ hSocket);}
+\DoxyCodeLine{01580\ \ \ \ \ \}}
+\DoxyCodeLine{01581\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01582\ \ \ \ \ \{}
+\DoxyCodeLine{01583\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ socket."{}});}
+\DoxyCodeLine{01584\ \ \ \ \ \}}
+\DoxyCodeLine{01585\ }
+\DoxyCodeLine{01586\ \ \ \ \ Status\ =\ afd\_bind(hSocket);}
+\DoxyCodeLine{01587\ }
+\DoxyCodeLine{01588\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01589\ \ \ \ \ \{}
+\DoxyCodeLine{01590\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}nosa\_DNS\_lookup\ -\/>\ afd\_bind()\ failed!\ \ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01591\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01592\ \ \ \ \ \}}
+\DoxyCodeLine{01593\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01594\ \ \ \ \ \{}
+\DoxyCodeLine{01595\ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}nosa\_DNS\_lookup\ -\/>\ afd\_bind()\ OK"{}});}
+\DoxyCodeLine{01596\ \ \ \ \ \}}
+\DoxyCodeLine{01597\ }
+\DoxyCodeLine{01598\ \ \ \ \ Status\ =\ afd\_connect(hSocket,\ DNS\_SERVER,\ DNS\_PORT);}
+\DoxyCodeLine{01599\ }
+\DoxyCodeLine{01600\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01601\ \ \ \ \ \{}
+\DoxyCodeLine{01602\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}nosa\_DNS\_lookup\ -\/>\ afd\_connect()\ failed!\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01603\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01604\ \ \ \ \ \}}
+\DoxyCodeLine{01605\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01606\ \ \ \ \ \{}
+\DoxyCodeLine{01607\ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}nosa\_DNS\_lookup\ -\/>\ afd\_connect()\ OK"{}});}
+\DoxyCodeLine{01608\ \ \ \ \ \}}
+\DoxyCodeLine{01609\ }
+\DoxyCodeLine{01610\ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}lookuping\ IP\ address\ by\ using\ [\ \%s\ ]\ DNS\ SERVER."{}},\ DNS\_SERVER);}
+\DoxyCodeLine{01611\ }
+\DoxyCodeLine{01612\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ query\ =\ build\_dns\_query(domain\_name,\ \&query\_len);}
+\DoxyCodeLine{01613\ }
+\DoxyCodeLine{01614\ \ \ \ \ \textcolor{comment}{//\ Send\ the\ query\ length\ and\ the\ query\ itself}}
+\DoxyCodeLine{01615\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ net\_query\_len\ =\ htons(query\_len);}
+\DoxyCodeLine{01616\ \ \ \ \ memcpy(buf,\ \&net\_query\_len,\ 2);}
+\DoxyCodeLine{01617\ \ \ \ \ memcpy(buf\ +\ 2,\ query,\ query\_len);}
+\DoxyCodeLine{01618\ }
+\DoxyCodeLine{01619\ \ \ \ \ \textcolor{comment}{//\ \ \ \ ifconfig.me\ -\/>\ example\ query\ pkt}}
+\DoxyCodeLine{01620\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{01621\ \ \ \ \ \textcolor{comment}{//\ \ \ \ 0x12,\ 0x34,\ 0x1,\ 0x0,\ 0x0,\ 0x1,\ 0x0,\ 0x0,\ 0x0,}}
+\DoxyCodeLine{01622\ \ \ \ \ \textcolor{comment}{//\ \ \ \ 0x0,\ 0x0,\ 0x0,\ 0x8,\ 0x69,\ 0x66,\ 0x63,\ 0x6f,\ 0x6e,}}
+\DoxyCodeLine{01623\ \ \ \ \ \textcolor{comment}{//\ \ \ \ 0x66,\ 0x69,\ 0x67,\ 0x2,\ 0x6d,\ 0x65,\ 0x0,\ 0x0,\ 0x1,}}
+\DoxyCodeLine{01624\ \ \ \ \ \textcolor{comment}{//\ \ \ \ 0x0,\ 0x1}}
+\DoxyCodeLine{01625\ }
+\DoxyCodeLine{01626\ \ \ \ \ \textcolor{comment}{//\ Print\ the\ DNS\ query\ bytes\ for\ verification}}
+\DoxyCodeLine{01627\ \ \ \ \ \textcolor{keywordflow}{if}\ (LOG\_LEVEL\_DEBUG)}
+\DoxyCodeLine{01628\ \ \ \ \ \{}
+\DoxyCodeLine{01629\ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}DNS\ Query:"{}});}
+\DoxyCodeLine{01630\ \ \ \ \ \ \ \ \ hexdump(query,\ query\_len);}
+\DoxyCodeLine{01631\ \ \ \ \ \}}
+\DoxyCodeLine{01632\ }
+\DoxyCodeLine{01633\ \ \ \ \ \textcolor{comment}{//\ We\ assume\ that\ socket\_handle\ are\ created\ with\ create()\ -\/>\ bind()\ -\/>\ connect()}}
+\DoxyCodeLine{01634\ \ \ \ \ Status\ =\ afd\_send(hSocket,\ buf,\ query\_len,\ 1);}
+\DoxyCodeLine{01635\ }
+\DoxyCodeLine{01636\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01637\ \ \ \ \ \{}
+\DoxyCodeLine{01638\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}afd\_send()\ failed!\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01639\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01640\ \ \ \ \ \}}
+\DoxyCodeLine{01641\ }
+\DoxyCodeLine{01642\ \ \ \ \ Status\ =\ afd\_recv(hSocket,\ \&wsa\_buffer);}
+\DoxyCodeLine{01643\ }
+\DoxyCodeLine{01644\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01645\ \ \ \ \ \{}
+\DoxyCodeLine{01646\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}afd\_recv()\ failed!\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01648\ \ \ \ \ \}}
+\DoxyCodeLine{01649\ }
+\DoxyCodeLine{01650\ \ \ \ \ \textcolor{comment}{//\ Print\ the\ DNS\ response\ bytes\ for\ verification}}
+\DoxyCodeLine{01651\ \ \ \ \ \textcolor{keywordflow}{if}\ (LOG\_LEVEL\_DEBUG)}
+\DoxyCodeLine{01652\ \ \ \ \ \{}
+\DoxyCodeLine{01653\ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}afd\_recv()\ Response:"{}});}
+\DoxyCodeLine{01654\ \ \ \ \ \ \ \ \ hexdump(wsa\_buffer,\ 0x100);}
+\DoxyCodeLine{01655\ \ \ \ \ \}}
+\DoxyCodeLine{01656\ }
+\DoxyCodeLine{01657\ \ \ \ \ \textcolor{keywordflow}{if}\ (wsa\_buffer)}
+\DoxyCodeLine{01658\ \ \ \ \ \{}
+\DoxyCodeLine{01659\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ip\_address\ =\ parse\_dns\_response(wsa\_buffer\ +\ 2,\ \textcolor{keyword}{sizeof}(wsa\_buffer));\ \textcolor{comment}{//\ Skip\ the\ length\ prefix}}
+\DoxyCodeLine{01660\ }
+\DoxyCodeLine{01661\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ip\_address\ !=\ 0)}
+\DoxyCodeLine{01662\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01663\ \ \ \ \ \ \ \ \ \ \ \ \ outBuffer-\/>hex\_ip\_address\ =\ htonl(ip\_address);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x22a06f91\ }}
+\DoxyCodeLine{01664\ \ \ \ \ \ \ \ \ \ \ \ \ strncpy\_s(outBuffer-\/>ip\_address\_str,\ \textcolor{keyword}{sizeof}(outBuffer-\/>ip\_address\_str),\ \textcolor{comment}{//\ 34.160.111.145}}
+\DoxyCodeLine{01665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ convert\_htonl\_to\_ip\_address(outBuffer-\/>hex\_ip\_address),\ \_TRUNCATE);}
+\DoxyCodeLine{01666\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01667\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01668\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01669\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}No\ IP\ address\ found\ in\ the\ DNS\ response."{}});}
+\DoxyCodeLine{01670\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01671\ \ \ \ \ \}}
+\DoxyCodeLine{01672\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01673\ \ \ \ \ \{}
+\DoxyCodeLine{01674\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}[-\/]\ No\ response\ received."{}});}
+\DoxyCodeLine{01675\ \ \ \ \ \}}
+\DoxyCodeLine{01676\ }
+\DoxyCodeLine{01677\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01678\ \}}
+\DoxyCodeLine{01679\ }
+\DoxyCodeLine{01690\ NTSTATUS\ nosa\_connect(}
+\DoxyCodeLine{01691\ \ \ \ \ HANDLE*\ hSocket,}
+\DoxyCodeLine{01692\ \ \ \ \ \textcolor{keywordtype}{char}*\ host,}
+\DoxyCodeLine{01693\ \ \ \ \ \textcolor{keywordtype}{int}\ port,}
+\DoxyCodeLine{01694\ \ \ \ \ \textcolor{keywordtype}{char}*\ socketType}
+\DoxyCodeLine{01695\ )\ \{}
+\DoxyCodeLine{01696\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01697\ \ \ \ \ DWORD\ sType\ =\ NULL;}
+\DoxyCodeLine{01698\ \ \ \ \ DWORD\ socketProtocol\ =\ NULL;}
+\DoxyCodeLine{01699\ \ \ \ \ \textcolor{keywordtype}{char}\ ip\_string[16]\ =\ \{\ 0\ \};\ \ \textcolor{comment}{//\ Allocate\ enough\ space\ for\ an\ IPv4\ address\ in\ dotted\ notation}}
+\DoxyCodeLine{01700\ }
+\DoxyCodeLine{01701\ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_nt\_functions())\ \ \textcolor{comment}{//\ load\ ntdll\ libraries}}
+\DoxyCodeLine{01702\ \ \ \ \ \{}
+\DoxyCodeLine{01703\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_domain\_name(host))\ \ \ \textcolor{comment}{//\ lookup\ the\ IP\ address\ of\ a\ given\ domain\ name\ }}
+\DoxyCodeLine{01704\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01705\ \ \ \ \ \ \ \ \ \ \ \ \ Status\ =\ get\_ip\_from\_domain(host,\ ip\_string);}
+\DoxyCodeLine{01706\ }
+\DoxyCodeLine{01707\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01708\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}get\_ip\_from\_domain()\ failed:\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01711\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01712\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01713\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01714\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01715\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Directly\ copy\ the\ IP\ address\ if\ \`{}host`\ is\ an\ IP\ address\ string}}
+\DoxyCodeLine{01716\ \ \ \ \ \ \ \ \ \ \ \ \ strncpy\_s(ip\_string,\ 16,\ host,\ \_TRUNCATE);}
+\DoxyCodeLine{01717\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}ip\_string:\ \%s"{}},\ ip\_string);}
+\DoxyCodeLine{01718\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01719\ }
+\DoxyCodeLine{01720\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (socketType\ ==\ \textcolor{stringliteral}{"{}TCP"{}})}
+\DoxyCodeLine{01721\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01722\ \ \ \ \ \ \ \ \ \ \ \ \ sType\ =\ SOCK\_STREAM;}
+\DoxyCodeLine{01723\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01724\ }
+\DoxyCodeLine{01725\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (socketType\ ==\ \textcolor{stringliteral}{"{}UDP"{}})\ \textcolor{comment}{//\ \#TODO\ -\/>\ Not\ working\ -\/>\ afd\_connect()\ send\ back\ an\ invalid\ NTSTATUS\ 0xC0000002}}
+\DoxyCodeLine{01726\ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ idk\ how\ it\ can\ be\ implemented\ since\ afd\_connect()\ Datagram\ doesn't\ help\ }}
+\DoxyCodeLine{01727\ \ \ \ \ \ \ \ \ \ \ \ \ sType\ =\ SOCK\_DGRAM;}
+\DoxyCodeLine{01728\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01729\ }
+\DoxyCodeLine{01730\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Switch\ case\ to\ handle\ different\ socket\ types}}
+\DoxyCodeLine{01731\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (sType)\ \{}
+\DoxyCodeLine{01732\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ SOCK\_STREAM:}
+\DoxyCodeLine{01733\ \ \ \ \ \ \ \ \ \ \ \ \ socketProtocol\ =\ IPPROTO\_TCP;\ \textcolor{comment}{//\ TCP}}
+\DoxyCodeLine{01734\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01735\ }
+\DoxyCodeLine{01736\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ SOCK\_DGRAM:}
+\DoxyCodeLine{01737\ \ \ \ \ \ \ \ \ \ \ \ \ socketProtocol\ =\ IPPROTO\_UDP;\ \textcolor{comment}{//\ UDP\ -\/>\ TODO}}
+\DoxyCodeLine{01738\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01739\ }
+\DoxyCodeLine{01740\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01741\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Unsupported\ socket\ type"{}});}
+\DoxyCodeLine{01742\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;\ \textcolor{comment}{//\ Return\ an\ error\ code}}
+\DoxyCodeLine{01743\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01744\ }
+\DoxyCodeLine{01745\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pass\ the\ pointer\ to\ the\ HANDLE,\ allowing\ the\ function\ to\ modify\ the\ original\ hSocket\ variable}}
+\DoxyCodeLine{01746\ \ \ \ \ \ \ \ \ Status\ =\ afd\_create(hSocket,\ sType,\ socketProtocol);}
+\DoxyCodeLine{01747\ }
+\DoxyCodeLine{01748\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*hSocket)}
+\DoxyCodeLine{01749\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01750\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}Socket\ created\ successfully.\ HANDLE:\ [\ 0x\%x\ ]"{}},\ *hSocket);}
+\DoxyCodeLine{01751\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01752\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01753\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01754\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ create\ socket."{}});}
+\DoxyCodeLine{01755\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01756\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01757\ }
+\DoxyCodeLine{01758\ \ \ \ \ \ \ \ \ Status\ =\ afd\_bind(*hSocket);}
+\DoxyCodeLine{01759\ }
+\DoxyCodeLine{01760\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01761\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01762\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ afd\_bind()\ failed!\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01763\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01764\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01765\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01766\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01767\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ afd\_bind()\ OK"{}});}
+\DoxyCodeLine{01768\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01769\ }
+\DoxyCodeLine{01770\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ generate\ a\ context\ for\ our\ created\ socket}}
+\DoxyCodeLine{01771\ \ \ \ \ \ \ \ \ BYTE*\ sockctx\_input\_buffer[SOCK\_CONTEXT\_BUF\_SIZE]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01772\ \ \ \ \ \ \ \ \ memset(sockctx\_input\_buffer,\ 0,\ \textcolor{keyword}{sizeof}(sockctx\_input\_buffer));\ \textcolor{comment}{//\ clear\ our\ created\ vm\ alloc}}
+\DoxyCodeLine{01773\ }
+\DoxyCodeLine{01774\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sockctxSz\ =\ create\_context(AF\_INET,\ sType,\ socketProtocol,\ \&sockctx\_input\_buffer);}
+\DoxyCodeLine{01775\ }
+\DoxyCodeLine{01776\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ bp\ afdsetcontext\ "{}.if\ (@rdi\ ==\ 0xcafe0000)\ \{\ .echo\ 'Breakpoint\ hit!';\ \}\ .else\ \{\ gc;\ \}"{}}}
+\DoxyCodeLine{01777\ \ \ \ \ \ \ \ \ Status\ =\ afd\_set\_context(*hSocket,\ sockctx\_input\_buffer);\ \ \ \ \ \textcolor{comment}{//\ implement\ current\ socket\ context}}
+\DoxyCodeLine{01778\ }
+\DoxyCodeLine{01779\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01780\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01781\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ afd\_set\_context()\ failed!\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01782\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01783\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01784\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01785\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01786\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ afd\_set\_context()\ OK"{}});}
+\DoxyCodeLine{01787\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01788\ }
+\DoxyCodeLine{01789\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Receive\ and\ print\ TCP\ packet\ response}}
+\DoxyCodeLine{01790\ \ \ \ \ \ \ \ \ BYTE*\ sockctx\_out\_buffer[SOCK\_CONTEXT\_BUF\_SIZE]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01791\ \ \ \ \ \ \ \ \ memset(sockctx\_out\_buffer,\ 0,\ \textcolor{keyword}{sizeof}(sockctx\_out\_buffer));\ \textcolor{comment}{//\ clear}}
+\DoxyCodeLine{01792\ }
+\DoxyCodeLine{01793\ \ \ \ \ \ \ \ \ Status\ =\ afd\_get\_context(*hSocket,\ sockctx\_out\_buffer);}
+\DoxyCodeLine{01794\ }
+\DoxyCodeLine{01795\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))\ }
+\DoxyCodeLine{01796\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01797\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ nosa\_getcontext()\ failed!\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01798\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01799\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01800\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01801\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01802\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ nosa\_getcontext()\ OK"{}});}
+\DoxyCodeLine{01803\ \ \ \ \ \ \ \ \ \ \ \ \ hexdump(sockctx\_out\_buffer,\ 0x100);}
+\DoxyCodeLine{01804\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01805\ }
+\DoxyCodeLine{01806\ \ \ \ \ \ \ \ \ Status\ =\ afd\_connect(*hSocket,\ ip\_string,\ port);}
+\DoxyCodeLine{01807\ }
+\DoxyCodeLine{01808\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01809\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01810\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ afd\_connect()\ failed!\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01811\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01812\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01813\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01814\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01815\ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_INFO(\textcolor{stringliteral}{"{}nosa\_connect()\ -\/>\ afd\_connect()\ OK"{}});}
+\DoxyCodeLine{01816\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01817\ }
+\DoxyCodeLine{01818\ \ \ \ \ \ \ \ \ Sleep(10);\ \textcolor{comment}{//\ wait\ a\ little\ bit}}
+\DoxyCodeLine{01819\ }
+\DoxyCodeLine{01820\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01821\ \ \ \ \ \}}
+\DoxyCodeLine{01822\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01823\ \ \ \ \ \{}
+\DoxyCodeLine{01824\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}Failed\ to\ start\ NTDLL\ functions"{}});}
+\DoxyCodeLine{01825\ \ \ \ \ \}}
+\DoxyCodeLine{01826\ \}}
+\DoxyCodeLine{01827\ }
+\DoxyCodeLine{01837\ NTSTATUS\ nosa\_send(}
+\DoxyCodeLine{01838\ \ \ \ \ HANDLE*\ hSocket,}
+\DoxyCodeLine{01839\ \ \ \ \ LPVOID\ packet\_data,}
+\DoxyCodeLine{01840\ \ \ \ \ \textcolor{keywordtype}{int}\ packet\_data\_sz}
+\DoxyCodeLine{01841\ )\ \{}
+\DoxyCodeLine{01842\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01843\ }
+\DoxyCodeLine{01844\ \ \ \ \ Status\ =\ afd\_send(*hSocket,\ packet\_data,\ packet\_data\_sz,\ 0);\ \textcolor{comment}{//\ Note:\ query\_len\ +\ 2\ includes\ the\ length\ prefix}}
+\DoxyCodeLine{01845\ }
+\DoxyCodeLine{01846\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))\ }
+\DoxyCodeLine{01847\ \ \ \ \ \{}
+\DoxyCodeLine{01848\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}afd\_send()\ failed!:\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01849\ \ \ \ \ \}}
+\DoxyCodeLine{01850\ }
+\DoxyCodeLine{01851\ \ \ \ \ Sleep(10);\ \textcolor{comment}{//\ wait\ a\ little\ bit}}
+\DoxyCodeLine{01852\ }
+\DoxyCodeLine{01853\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01854\ \}}
+\DoxyCodeLine{01855\ }
+\DoxyCodeLine{01864\ NTSTATUS\ nosa\_recv(}
+\DoxyCodeLine{01865\ \ \ \ \ HANDLE\ hSocket,}
+\DoxyCodeLine{01866\ \ \ \ \ LPVOID\ packet\_data\_received}
+\DoxyCodeLine{01867\ )\ \{}
+\DoxyCodeLine{01868\ \ \ \ \ NTSTATUS\ Status\ =\ NULL;}
+\DoxyCodeLine{01869\ \ \ \ \ \mbox{\hyperlink{struct___i_o___s_t_a_t_u_s___b_l_o_c_k}{IO\_STATUS\_BLOCK}}\ IoStatus\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01870\ \ \ \ \ HANDLE\ Event\ =\ NULL;}
+\DoxyCodeLine{01871\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ out\_buffer\_ptr\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01872\ \ \ \ \ \textcolor{keywordtype}{int}\ query\_len\ =\ 0;}
+\DoxyCodeLine{01873\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ buf[MAX\_RECV\_BYTES]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01874\ }
+\DoxyCodeLine{01875\ \ \ \ \ Status\ =\ afd\_recv(hSocket,\ packet\_data\_received);}
+\DoxyCodeLine{01876\ }
+\DoxyCodeLine{01877\ \ \ \ \ \textcolor{keywordflow}{if}\ (!NT\_SUCCESS(Status))}
+\DoxyCodeLine{01878\ \ \ \ \ \{}
+\DoxyCodeLine{01879\ \ \ \ \ \ \ \ \ LOG\_ERROR(\textcolor{stringliteral}{"{}afd\_recv()\ failed!:\ [\ 0x\%x\ ]"{}},\ Status);}
+\DoxyCodeLine{01880\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01881\ \ \ \ \ \}}
+\DoxyCodeLine{01882\ }
+\DoxyCodeLine{01883\ \ \ \ \ \textcolor{keywordflow}{return}\ Status;}
+\DoxyCodeLine{01884\ \}}
+\DoxyCodeLine{01885\ }
+
+\end{DoxyCode}

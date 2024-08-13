@@ -1,0 +1,6 @@
+This file credits all the contributors of the lib-nosa project.
+
+Key developers
+==============
+Alexa Da Cruz Souza (@w4fz5uck5) - alexa-at-viperx.io
+@crimsonskylark - https://github.com/crimsonskylark

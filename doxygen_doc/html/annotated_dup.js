@@ -1,0 +1,28 @@
+var annotated_dup =
+[
+    [ "_AFD_ACCEPT_DATA", "a00071.html", "a00071" ],
+    [ "_AFD_BIND_DATA", "a00063.html", "a00063" ],
+    [ "_AFD_CONNECT_INFO", "a00091.html", "a00091" ],
+    [ "_AFD_CREATE_PACKET", "a00059.html", "a00059" ],
+    [ "_AFD_LISTEN_DATA", "a00067.html", "a00067" ],
+    [ "_AFD_RECV_INFO", "a00099.html", "a00099" ],
+    [ "_AFD_RECV_INFO_UDP", "a00103.html", "a00103" ],
+    [ "_AFD_SEND_INFO", "a00107.html", "a00107" ],
+    [ "_AFD_SEND_INFO_UDP", "a00111.html", "a00111" ],
+    [ "_AFD_WSABUF", "a00095.html", "a00095" ],
+    [ "_CLIENT_ID", "a00035.html", "a00035" ],
+    [ "_DOMAIN_INFO", "a00115.html", "a00115" ],
+    [ "_INITIAL_TEB", "a00055.html", "a00055" ],
+    [ "_IO_STATUS_BLOCK", "a00039.html", "a00039" ],
+    [ "_OBJECT_ATTRIBUTES", "a00051.html", "a00051" ],
+    [ "_SOCK_SHARED_INFO", "a00079.html", "a00079" ],
+    [ "_SOCKADDR_STORAGE", "a00075.html", "a00075" ],
+    [ "_SOCKET_CONTEXT", "a00087.html", "a00087" ],
+    [ "_SYSTEM_HANDLE_INFORMATION", "a00031.html", "a00031" ],
+    [ "_SYSTEM_HANDLE_TABLE_ENTRY_INFO", "a00027.html", "a00027" ],
+    [ "_UNICODE_STRING", "a00047.html", "a00047" ],
+    [ "_WSAPROTOCOL_INFOW", "a00023.html", "a00023" ],
+    [ "_WSAPROTOCOLCHAIN", "a00019.html", "a00019" ],
+    [ "buffer_data_t", "a00011.html", "a00011" ],
+    [ "userbuf_t", "a00015.html", "a00015" ]
+];
