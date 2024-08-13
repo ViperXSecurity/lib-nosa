@@ -1,0 +1,77 @@
+\chapter{lib-\/nosa ( No Socket API )}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{lib-\/nosa ( No Socket API )@{lib-\/nosa ( No Socket API )}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+
+
+{\bfseries{lib-\/nosa}} is a minimalist C library designed to facilitate socket connections through AFD driver IOCTL operations on Windows. By bypassing the traditional {\ttfamily winsock2.\+h -\/\texorpdfstring{$>$}{>} (ws2\+\_\+dll.\+dll)} header, {\bfseries{lib-\/nosa}} directly interacts with the internal socket APIs of the AFD (Ancillary Function Driver for Win\+Sock), offering developers a lightweight and low-\/level alternative for network programming.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md__r_e_a_d_m_e_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Establishes socket connections directly through AFD driver IOCTL calls, {\bfseries{bypassing}} the standard Winsock2 interface.
+\item Focuses on simplicity and performance, with a small footprint and no unnecessary dependencies.
+\item Provides direct access to internal socket APIs, giving developers fine-\/grained control over network operations.
+\item Avoids the overhead and abstraction of the Winsock2 API, making it ideal for performance-\/critical applications.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{Getting Started}{Getting Started}}\label{md__r_e_a_d_m_e_autotoc_md2}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyItemize}
+\item Windows operating system (x64 Only) -\/\texorpdfstring{$>$}{>} Windows Vista+ \texorpdfstring{$\sim$}{\string~} Windows 10/11
+\item C compiler (e.\+g., GCC, MSVC)
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{Installation}{Installation}}\label{md__r_e_a_d_m_e_autotoc_md4}
+To use {\bfseries{lib-\/nosa}} in your project, clone the repository and include the library files in your build process.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/ViperXSecurity/lib-\/nosa}
+\DoxyCodeLine{}
+\DoxyCodeLine{[linux]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ sudo\ apt-\/get\ install\ gcc-\/mingw-\/w64-\/x86-\/64}
+\DoxyCodeLine{\ \ x86\_64-\/w64-\/mingw32-\/gcc\ \ -\/o\ nosa-\/example.exe\ nosa-\/example.c}
+\DoxyCodeLine{}
+\DoxyCodeLine{[Windows]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Install\ https://sourceforge.net/projects/mingw/}
+\DoxyCodeLine{\ \ x86\_64-\/w64-\/mingw32-\/gcc.exe\ -\/o\ nosa-\/example.exe\ nosa-\/example.c}
+\DoxyCodeLine{or}
+\DoxyCodeLine{\ \ Create\ a\ new\ project\ on\ Visual\ Studio\ 2019+}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{APIs}{APIs}}\label{md__r_e_a_d_m_e_autotoc_md5}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{NTSTATUS\ \mbox{\hyperlink{nosa_8h_a416de916cc9f1349b869a319876b569d}{nosa\_dns\_lookup}}(HANDLE\ hSocket,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ domain\_name,\ \mbox{\hyperlink{struct___d_o_m_a_i_n___i_n_f_o}{DOMAIN\_INFO}}*\ outBuffer)}
+\DoxyCodeLine{NTSTATUS\ \mbox{\hyperlink{nosa_8h_aff3d4c0d742440ae685facbe9719450b}{nosa\_connect}}(HANDLE*\ hSocket,\ \textcolor{keywordtype}{char}*\ host,\ \textcolor{keywordtype}{int}\ port,\ \textcolor{keywordtype}{char}*\ socketType)}
+\DoxyCodeLine{NTSTATUS\ \mbox{\hyperlink{nosa_8h_a24e6de3630bdde6bfafe37c9daffaded}{nosa\_send}}(HANDLE*\ hSocket,\ LPVOID\ packet\_data,\ \textcolor{keywordtype}{int}\ packet\_data\_sz)}
+\DoxyCodeLine{NTSTATUS\ \mbox{\hyperlink{nosa_8h_a8d6d9897d8ed6972c05ba5a6a0a8fa9d}{nosa\_recv}}(HANDLE\ hSocket,\ LPVOID\ packet\_data\_received)}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{\texorpdfstring{Key definitions (nosa.\+h)}{Key definitions (nosa.\+h)}}\label{md__r_e_a_d_m_e_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\#define\ CURRENT\_LOG\_LEVEL\ 0\ //\ uncomment\ to\ hide\ log\ informations}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ CURRENT\_LOG\_LEVEL}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ CURRENT\_LOG\_LEVEL\ LOG\_LEVEL\_DEBUG}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{<...>}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ DNS\_SERVER\ "{}8.8.8.8"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ DNS\_PORT\ 53}}
+\DoxyCodeLine{<...>}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MAX\_RECV\_BYTES\ 0x1000}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MAX\_SENT\_BYTES\ 0x1000}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{md__r_e_a_d_m_e_autotoc_md7}
+
+\begin{DoxyItemize}
+\item We generated a helpful doxygen documentation (doxygen\+\_\+doc)
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsection{\texorpdfstring{TODO}{TODO}}\label{md__r_e_a_d_m_e_autotoc_md8}
+
+\begin{DoxyItemize}
+\item x86 AFD.\+sys driver connection.
+\item Subdomains for some reason doesn\textquotesingle{}t work properly, even with the correct aligned bytes for DNS queries.
+\item UDP connections (it ONLY supports TCP for now).
+\item \#\#\# (For bind connections)
+\item nosa\+\_\+listen()
+\item nosa\+\_\+accept() 
+\end{DoxyItemize}

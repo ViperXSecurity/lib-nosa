@@ -1,0 +1,112 @@
+.TH "_AFD_CREATE_PACKET" 3 "Version 0.0.1" "Lib Nosa (No Socket API)" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+_AFD_CREATE_PACKET
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <nosa\&.h>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBuint32_t\fP \fBNextEntryOffset\fP"
+.br
+.ti -1c
+.RI "\fBuint8_t\fP \fBFlags\fP"
+.br
+.ti -1c
+.RI "\fBuint8_t\fP \fBEaNameLength\fP"
+.br
+.ti -1c
+.RI "\fBuint16_t\fP \fBEaValueLength\fP"
+.br
+.ti -1c
+.RI "char \fBEaName\fP [16]"
+.br
+.ti -1c
+.RI "\fBuint32_t\fP \fBEndpointFlags\fP"
+.br
+.ti -1c
+.RI "\fBuint32_t\fP \fBGroupID\fP"
+.br
+.ti -1c
+.RI "\fBuint32_t\fP \fBAddressFamily\fP"
+.br
+.ti -1c
+.RI "\fBuint32_t\fP \fBSocketType\fP"
+.br
+.ti -1c
+.RI "\fBuint32_t\fP \fBProtocol\fP"
+.br
+.ti -1c
+.RI "\fBuint64_t\fP \fBSizeOfTransportName\fP"
+.br
+.ti -1c
+.RI "char \fBTransportName\fP [5]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Structure representing an AFD_CREATE_PACKET\&.
+
+.PP
+This structure contains information related to creating an AFD packet\&. It includes fields for various parameters such as NextEntryOffset, Flags, EaNameLength, EaValueLength, EaName, EndpointFlags, GroupID, AddressFamily, SocketType, Protocol, SizeOfTransportName, and TransportName\&. 
+.PP
+Definition at line \fB287\fP of file \fBnosa\&.h\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBuint32_t\fP _AFD_CREATE_PACKET::AddressFamily"
+
+.PP
+Definition at line \fB296\fP of file \fBnosa\&.h\fP\&.
+.SS "char _AFD_CREATE_PACKET::EaName[16]"
+
+.PP
+Definition at line \fB293\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint8_t\fP _AFD_CREATE_PACKET::EaNameLength"
+
+.PP
+Definition at line \fB291\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint16_t\fP _AFD_CREATE_PACKET::EaValueLength"
+
+.PP
+Definition at line \fB292\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint32_t\fP _AFD_CREATE_PACKET::EndpointFlags"
+
+.PP
+Definition at line \fB294\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint8_t\fP _AFD_CREATE_PACKET::Flags"
+
+.PP
+Definition at line \fB290\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint32_t\fP _AFD_CREATE_PACKET::GroupID"
+
+.PP
+Definition at line \fB295\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint32_t\fP _AFD_CREATE_PACKET::NextEntryOffset"
+
+.PP
+Definition at line \fB289\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint32_t\fP _AFD_CREATE_PACKET::Protocol"
+
+.PP
+Definition at line \fB298\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint64_t\fP _AFD_CREATE_PACKET::SizeOfTransportName"
+
+.PP
+Definition at line \fB299\fP of file \fBnosa\&.h\fP\&.
+.SS "\fBuint32_t\fP _AFD_CREATE_PACKET::SocketType"
+
+.PP
+Definition at line \fB297\fP of file \fBnosa\&.h\fP\&.
+.SS "char _AFD_CREATE_PACKET::TransportName[5]"
+
+.PP
+Definition at line \fB300\fP of file \fBnosa\&.h\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Lib Nosa (No Socket API) from the source code\&.

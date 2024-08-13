@@ -11,6 +11,8 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -50,17 +52,29 @@ $(function() { codefold.init(0); });
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Search',false);
+  initMenu('',true,false,'search.php','Search',true);
   $(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,8 +96,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">_WSAPROTOCOL_INFOW Member List</div></div>
 </div><!--header-->
@@ -91,31 +103,33 @@ $(function(){ initResizable(false); });
 
 <p>This is the complete list of members for <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>dwCatalogEntryId</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>dwMessageSize</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>dwProviderFlags</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>dwProviderReserved</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>dwServiceFlags1</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>dwServiceFlags2</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>dwServiceFlags3</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>dwServiceFlags4</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>iAddressFamily</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>iMaxSockAddr</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>iMinSockAddr</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>iNetworkByteOrder</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>iProtocol</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>iProtocolMaxOffset</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>iSecurityScheme</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>iSocketType</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>iVersion</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>ProtocolChain</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>ProviderId</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>szProtocol</b> (defined in <a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a>)</td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a63c128eee5e12814c1ddb663c299b4ce">dwCatalogEntryId</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a3b247313409c0fd7fb52df60169d27db">dwMessageSize</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a907f1670cbcb3b431993ff587f3798d5">dwProviderFlags</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a8e38edca62308cc6e7e1a817bedbbfc2">dwProviderReserved</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a8e0e65f8a8631fa8305110b563d835e5">dwServiceFlags1</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a637012a79f0eaa1d8f1e4b0c4ce66574">dwServiceFlags2</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a0ace4443aedf7b0d4ffee1b148080e8b">dwServiceFlags3</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a8a698afc5493641b04d569d8ea04482f">dwServiceFlags4</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a6ced7dc463d3b3de6d15f09632671a8a">iAddressFamily</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#ae74d347f1e3d93d289d481deb9f00ab5">iMaxSockAddr</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#ab872ad9fb9201eaa029191e24bb32637">iMinSockAddr</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a51fd65cb835f0edd609a141415e0c63f">iNetworkByteOrder</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#aa3cb5d6d20ef3d8412c95fa5fde8403e">iProtocol</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a5e20f6a51ca7c474f454dc360c55e8e7">iProtocolMaxOffset</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#ac071d2ce0e1bc0c68e1e2b71b6de05ab">iSecurityScheme</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a9423457a17852922f240413cf8c0b999">iSocketType</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a490596bb1a8031c886764955d96d8cbd">iVersion</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#ac7cac25b833606b2964859f228628fd8">ProtocolChain</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#aae9470f26ee0ee9f13c20d1538145021">ProviderId</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html#a0d76268e5f6640d1a2be5a43974b0278">szProtocol</a></td><td class="entry"><a class="el" href="struct___w_s_a_p_r_o_t_o_c_o_l___i_n_f_o_w.html">_WSAPROTOCOL_INFOW</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
 </body>
 </html>

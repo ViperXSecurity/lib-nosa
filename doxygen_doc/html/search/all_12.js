@@ -1,16 +1,19 @@
 var searchData=
 [
-  ['uint16_5ft_0',['uint16_t',['../a00005.html#a273cf69d639a59973b6019625df33e30',1,'nosa.h']]],
-  ['uint32_5ft_1',['uint32_t',['../a00005.html#a435d1572bf3f880d55459d9805097f62',1,'nosa.h']]],
-  ['uint64_5ft_2',['uint64_t',['../a00005.html#aaa5d1cd013383c889537491c3cfd9aad',1,'nosa.h']]],
-  ['uint8_5ft_3',['uint8_t',['../a00005.html#aba7bc1797add20fe3efdf37ced1182c5',1,'nosa.h']]],
-  ['unicode_5fstring_4',['UNICODE_STRING',['../a00005.html#ac3cdef6ef4b9dc0593a4418019f3cbda',1,'nosa.h']]],
-  ['uniqueprocess_5',['UniqueProcess',['../a00035.html#abb0a773960bff0abda53454fd7921a07',1,'_CLIENT_ID']]],
-  ['uniqueprocessid_6',['UniqueProcessId',['../a00027.html#a3cb6830afe5edf8b4cf5f02016dce2ce',1,'_SYSTEM_HANDLE_TABLE_ENTRY_INFO']]],
-  ['uniquethread_7',['UniqueThread',['../a00035.html#a48899a44b4edcb3f44ccde218a33f35f',1,'_CLIENT_ID']]],
-  ['unknown_8',['Unknown',['../a00091.html#a48327306b2687d6d3777e1932d3cbb57',1,'_AFD_CONNECT_INFO']]],
-  ['unknowngap_9',['UnknownGap',['../a00111.html#a091d45c126c989ceaf411329a2c66230',1,'_AFD_SEND_INFO_UDP']]],
-  ['usedelayedacceptance_10',['UseDelayedAcceptance',['../a00067.html#a643bee0c0e0199a36a9105d3ea8ed927',1,'_AFD_LISTEN_DATA::UseDelayedAcceptance'],['../a00079.html#acce061e16fafdfc7a813e32868e13ec2',1,'_SOCK_SHARED_INFO::UseDelayedAcceptance']]],
-  ['userbuf_5ft_11',['userbuf_t',['../a00015.html',1,'']]],
-  ['usesan_12',['UseSAN',['../a00067.html#a5797c6743b509ff8bfc0b1b2ccb76106',1,'_AFD_LISTEN_DATA::UseSAN'],['../a00071.html#aca247c517706f8faf208419266d5d60e',1,'_AFD_ACCEPT_DATA::UseSAN'],['../a00079.html#a59e307064ffdcf6553105fd0bd258503',1,'_SOCK_SHARED_INFO::UseSAN'],['../a00091.html#a7ad0a9a3c1f7e97e9547298715a2532e',1,'_AFD_CONNECT_INFO::UseSAN']]]
+  ['tdi_5freceive_5fat_5fdispatch_5flevel_0',['TDI_RECEIVE_AT_DISPATCH_LEVEL',['../nosa_8h.html#acc92df0b6d356116393c0188b6d6852b',1,'nosa.h']]],
+  ['tdi_5freceive_5fbroadcast_1',['TDI_RECEIVE_BROADCAST',['../nosa_8h.html#a090896e812b286de3bb1591a4ca3b2a1',1,'nosa.h']]],
+  ['tdi_5freceive_5fcontrol_5finfo_2',['TDI_RECEIVE_CONTROL_INFO',['../nosa_8h.html#a45dfd2bced4fb039b60ee3249dfd5c74',1,'nosa.h']]],
+  ['tdi_5freceive_5fcopy_5flookahead_3',['TDI_RECEIVE_COPY_LOOKAHEAD',['../nosa_8h.html#a0861f56123350d4ef56b1e547f4d643a',1,'nosa.h']]],
+  ['tdi_5freceive_5fentire_5fmessage_4',['TDI_RECEIVE_ENTIRE_MESSAGE',['../nosa_8h.html#a68551f74c005710c74e759df356f55e1',1,'nosa.h']]],
+  ['tdi_5freceive_5fexpedited_5',['TDI_RECEIVE_EXPEDITED',['../nosa_8h.html#a0e82502107aff0caf102a7f98e6ae019',1,'nosa.h']]],
+  ['tdi_5freceive_5fforce_5findication_6',['TDI_RECEIVE_FORCE_INDICATION',['../nosa_8h.html#a6b66ecd8e7c72f1e18efe6cabcfae2a5',1,'nosa.h']]],
+  ['tdi_5freceive_5fmulticast_7',['TDI_RECEIVE_MULTICAST',['../nosa_8h.html#a9c44b0d431b6958073ab91cac41f60ed',1,'nosa.h']]],
+  ['tdi_5freceive_5fno_5fpush_8',['TDI_RECEIVE_NO_PUSH',['../nosa_8h.html#a514b796d98a40efc460b9a54489ba540',1,'nosa.h']]],
+  ['tdi_5freceive_5fno_5fresponse_5fexp_9',['TDI_RECEIVE_NO_RESPONSE_EXP',['../nosa_8h.html#ad03b54876ec53a381d130e042ce35f07',1,'nosa.h']]],
+  ['tdi_5freceive_5fnormal_10',['TDI_RECEIVE_NORMAL',['../nosa_8h.html#a78564f65d97318d30c53e032760e34c7',1,'nosa.h']]],
+  ['tdi_5freceive_5fpartial_11',['TDI_RECEIVE_PARTIAL',['../nosa_8h.html#a0d60118ba881204886f4e6cf6afc11b3',1,'nosa.h']]],
+  ['tdi_5freceive_5fpeek_12',['TDI_RECEIVE_PEEK',['../nosa_8h.html#a77e8d19659b27015bc5a36e4d648c1d7',1,'nosa.h']]],
+  ['tdiflags_13',['TdiFlags',['../struct___a_f_d___r_e_c_v___i_n_f_o.html#afbe70e032b2f27793dc7b794ba6d7cc7',1,'_AFD_RECV_INFO::TdiFlags'],['../struct___a_f_d___r_e_c_v___i_n_f_o___u_d_p.html#af5acd98eca784470b3994a6c68d876f4',1,'_AFD_RECV_INFO_UDP::TdiFlags'],['../struct___a_f_d___s_e_n_d___i_n_f_o.html#a8b2c1d6187d194fa3a133c6e5c5e07cd',1,'_AFD_SEND_INFO::TdiFlags']]],
+  ['todo_14',['TODO',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]],
+  ['transportname_15',['TransportName',['../struct___a_f_d___c_r_e_a_t_e___p_a_c_k_e_t.html#a53db27f789dfb22cefbf929a3ae5f4d5',1,'_AFD_CREATE_PACKET']]]
 ];

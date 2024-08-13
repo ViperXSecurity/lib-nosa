@@ -11,6 +11,8 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -50,17 +52,29 @@ $(function() { codefold.init(0); });
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Search',false);
+  initMenu('',true,false,'search.php','Search',true);
   $(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,8 +96,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
@@ -96,136 +108,725 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a3c6458b0022cbf811176c10da7b5c307" id="r_a3c6458b0022cbf811176c10da7b5c307"><td class="memItemLeft" align="right" valign="top"><a id="a3c6458b0022cbf811176c10da7b5c307" name="a3c6458b0022cbf811176c10da7b5c307"></a>
-SOCKET_STATE&#160;</td><td class="memItemRight" valign="bottom"><b>State</b></td></tr>
+<tr class="memitem:a3c6458b0022cbf811176c10da7b5c307" id="r_a3c6458b0022cbf811176c10da7b5c307"><td class="memItemLeft" align="right" valign="top"><a class="el" href="nosa_8h.html#a47bb75c135c295c5e1f6edccbbefe71a">SOCKET_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c6458b0022cbf811176c10da7b5c307">State</a></td></tr>
 <tr class="separator:a3c6458b0022cbf811176c10da7b5c307"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cea555d737508db44be06ab8bfcf5b7" id="r_a3cea555d737508db44be06ab8bfcf5b7"><td class="memItemLeft" align="right" valign="top"><a id="a3cea555d737508db44be06ab8bfcf5b7" name="a3cea555d737508db44be06ab8bfcf5b7"></a>
-INT&#160;</td><td class="memItemRight" valign="bottom"><b>AddressFamily</b></td></tr>
+<tr class="memitem:a3cea555d737508db44be06ab8bfcf5b7" id="r_a3cea555d737508db44be06ab8bfcf5b7"><td class="memItemLeft" align="right" valign="top">INT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cea555d737508db44be06ab8bfcf5b7">AddressFamily</a></td></tr>
 <tr class="separator:a3cea555d737508db44be06ab8bfcf5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab54e9d41e6c82092e24a06d50e10975f" id="r_ab54e9d41e6c82092e24a06d50e10975f"><td class="memItemLeft" align="right" valign="top"><a id="ab54e9d41e6c82092e24a06d50e10975f" name="ab54e9d41e6c82092e24a06d50e10975f"></a>
-INT&#160;</td><td class="memItemRight" valign="bottom"><b>SocketType</b></td></tr>
+<tr class="memitem:ab54e9d41e6c82092e24a06d50e10975f" id="r_ab54e9d41e6c82092e24a06d50e10975f"><td class="memItemLeft" align="right" valign="top">INT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab54e9d41e6c82092e24a06d50e10975f">SocketType</a></td></tr>
 <tr class="separator:ab54e9d41e6c82092e24a06d50e10975f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02ea32d0cf89340e8bd9e7b3f16a4f04" id="r_a02ea32d0cf89340e8bd9e7b3f16a4f04"><td class="memItemLeft" align="right" valign="top"><a id="a02ea32d0cf89340e8bd9e7b3f16a4f04" name="a02ea32d0cf89340e8bd9e7b3f16a4f04"></a>
-INT&#160;</td><td class="memItemRight" valign="bottom"><b>Protocol</b></td></tr>
+<tr class="memitem:a02ea32d0cf89340e8bd9e7b3f16a4f04" id="r_a02ea32d0cf89340e8bd9e7b3f16a4f04"><td class="memItemLeft" align="right" valign="top">INT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02ea32d0cf89340e8bd9e7b3f16a4f04">Protocol</a></td></tr>
 <tr class="separator:a02ea32d0cf89340e8bd9e7b3f16a4f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23de3d5c137ae7e3140d3ddb00b52a8e" id="r_a23de3d5c137ae7e3140d3ddb00b52a8e"><td class="memItemLeft" align="right" valign="top"><a id="a23de3d5c137ae7e3140d3ddb00b52a8e" name="a23de3d5c137ae7e3140d3ddb00b52a8e"></a>
-INT&#160;</td><td class="memItemRight" valign="bottom"><b>SizeOfLocalAddress</b></td></tr>
+<tr class="memitem:a23de3d5c137ae7e3140d3ddb00b52a8e" id="r_a23de3d5c137ae7e3140d3ddb00b52a8e"><td class="memItemLeft" align="right" valign="top">INT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a23de3d5c137ae7e3140d3ddb00b52a8e">SizeOfLocalAddress</a></td></tr>
 <tr class="separator:a23de3d5c137ae7e3140d3ddb00b52a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c7257062e377d3f2957f35508709ed5" id="r_a9c7257062e377d3f2957f35508709ed5"><td class="memItemLeft" align="right" valign="top"><a id="a9c7257062e377d3f2957f35508709ed5" name="a9c7257062e377d3f2957f35508709ed5"></a>
-INT&#160;</td><td class="memItemRight" valign="bottom"><b>SizeOfRemoteAddress</b></td></tr>
+<tr class="memitem:a9c7257062e377d3f2957f35508709ed5" id="r_a9c7257062e377d3f2957f35508709ed5"><td class="memItemLeft" align="right" valign="top">INT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c7257062e377d3f2957f35508709ed5">SizeOfRemoteAddress</a></td></tr>
 <tr class="separator:a9c7257062e377d3f2957f35508709ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9181c883a3f14e66e5b751f08045444d" id="r_a9181c883a3f14e66e5b751f08045444d"><td class="memItemLeft" align="right" valign="top"><a id="a9181c883a3f14e66e5b751f08045444d" name="a9181c883a3f14e66e5b751f08045444d"></a>
-struct linger&#160;</td><td class="memItemRight" valign="bottom"><b>LingerData</b></td></tr>
+<tr class="memitem:a9181c883a3f14e66e5b751f08045444d" id="r_a9181c883a3f14e66e5b751f08045444d"><td class="memItemLeft" align="right" valign="top">struct linger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9181c883a3f14e66e5b751f08045444d">LingerData</a></td></tr>
 <tr class="separator:a9181c883a3f14e66e5b751f08045444d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa84df60a9f9a57417d9b71db5d450aaf" id="r_aa84df60a9f9a57417d9b71db5d450aaf"><td class="memItemLeft" align="right" valign="top"><a id="aa84df60a9f9a57417d9b71db5d450aaf" name="aa84df60a9f9a57417d9b71db5d450aaf"></a>
-ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>SendTimeout</b></td></tr>
+<tr class="memitem:aa84df60a9f9a57417d9b71db5d450aaf" id="r_aa84df60a9f9a57417d9b71db5d450aaf"><td class="memItemLeft" align="right" valign="top">ULONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa84df60a9f9a57417d9b71db5d450aaf">SendTimeout</a></td></tr>
 <tr class="separator:aa84df60a9f9a57417d9b71db5d450aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25858e3312946269101566b093437b53" id="r_a25858e3312946269101566b093437b53"><td class="memItemLeft" align="right" valign="top"><a id="a25858e3312946269101566b093437b53" name="a25858e3312946269101566b093437b53"></a>
-ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>RecvTimeout</b></td></tr>
+<tr class="memitem:a25858e3312946269101566b093437b53" id="r_a25858e3312946269101566b093437b53"><td class="memItemLeft" align="right" valign="top">ULONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25858e3312946269101566b093437b53">RecvTimeout</a></td></tr>
 <tr class="separator:a25858e3312946269101566b093437b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f65f92365a0030b977952e22e8f7503" id="r_a7f65f92365a0030b977952e22e8f7503"><td class="memItemLeft" align="right" valign="top"><a id="a7f65f92365a0030b977952e22e8f7503" name="a7f65f92365a0030b977952e22e8f7503"></a>
-ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>SizeOfRecvBuffer</b></td></tr>
+<tr class="memitem:a7f65f92365a0030b977952e22e8f7503" id="r_a7f65f92365a0030b977952e22e8f7503"><td class="memItemLeft" align="right" valign="top">ULONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f65f92365a0030b977952e22e8f7503">SizeOfRecvBuffer</a></td></tr>
 <tr class="separator:a7f65f92365a0030b977952e22e8f7503"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fa68d91a36a3c5c77b1ddfddbfd5b67" id="r_a3fa68d91a36a3c5c77b1ddfddbfd5b67"><td class="memItemLeft" align="right" valign="top"><a id="a3fa68d91a36a3c5c77b1ddfddbfd5b67" name="a3fa68d91a36a3c5c77b1ddfddbfd5b67"></a>
-ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>SizeOfSendBuffer</b></td></tr>
+<tr class="memitem:a3fa68d91a36a3c5c77b1ddfddbfd5b67" id="r_a3fa68d91a36a3c5c77b1ddfddbfd5b67"><td class="memItemLeft" align="right" valign="top">ULONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fa68d91a36a3c5c77b1ddfddbfd5b67">SizeOfSendBuffer</a></td></tr>
 <tr class="separator:a3fa68d91a36a3c5c77b1ddfddbfd5b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad709525e0abd5e2c536a3323512e35c4" id="r_ad709525e0abd5e2c536a3323512e35c4"><td class="memItemLeft" ><a id="ad709525e0abd5e2c536a3323512e35c4" name="ad709525e0abd5e2c536a3323512e35c4"></a>
-struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:ad709525e0abd5e2c536a3323512e35c4" id="r_ad709525e0abd5e2c536a3323512e35c4"><td class="memItemLeft" >struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a903dbc96aa76ace1f5da3ad96002d3fd" id="r_a903dbc96aa76ace1f5da3ad96002d3fd"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>Listening</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a903dbc96aa76ace1f5da3ad96002d3fd" id="r_a903dbc96aa76ace1f5da3ad96002d3fd"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#ab5e99f0a78a69b01752920d1453b7db4">Listening</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a903dbc96aa76ace1f5da3ad96002d3fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e1b91b26da10fc7ca9e17462f52f5f9" id="r_a1e1b91b26da10fc7ca9e17462f52f5f9"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>Broadcast</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a1e1b91b26da10fc7ca9e17462f52f5f9" id="r_a1e1b91b26da10fc7ca9e17462f52f5f9"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a0bf9578e5b54aebb18afcf1000ca618e">Broadcast</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a1e1b91b26da10fc7ca9e17462f52f5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30b1f87ec8e73619961965f5e2c4fbe5" id="r_a30b1f87ec8e73619961965f5e2c4fbe5"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>Debug</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a30b1f87ec8e73619961965f5e2c4fbe5" id="r_a30b1f87ec8e73619961965f5e2c4fbe5"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a16c0764256bf3fbfcd099bcfbcb25514">Debug</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a30b1f87ec8e73619961965f5e2c4fbe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab80f2aedfcfa5c58f4debb4bf58c6332" id="r_ab80f2aedfcfa5c58f4debb4bf58c6332"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>OobInline</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:ab80f2aedfcfa5c58f4debb4bf58c6332" id="r_ab80f2aedfcfa5c58f4debb4bf58c6332"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a3abf37af8a1e7248d72dc3662087789d">OobInline</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:ab80f2aedfcfa5c58f4debb4bf58c6332"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa25200eea1a15eb417a6690c58f2fc6b" id="r_aa25200eea1a15eb417a6690c58f2fc6b"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>ReuseAddresses</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:aa25200eea1a15eb417a6690c58f2fc6b" id="r_aa25200eea1a15eb417a6690c58f2fc6b"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a77caf71a9262b9f6cec10eb65470229b">ReuseAddresses</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:aa25200eea1a15eb417a6690c58f2fc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9da77ddf3e37a67b1f75b3674248e298" id="r_a9da77ddf3e37a67b1f75b3674248e298"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>ExclusiveAddressUse</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a9da77ddf3e37a67b1f75b3674248e298" id="r_a9da77ddf3e37a67b1f75b3674248e298"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a28fb84d3c4e2205eedba66d8b04fb711">ExclusiveAddressUse</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a9da77ddf3e37a67b1f75b3674248e298"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2efc9e090fb41709c5a64f83ac2a5b9" id="r_af2efc9e090fb41709c5a64f83ac2a5b9"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>NonBlocking</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:af2efc9e090fb41709c5a64f83ac2a5b9" id="r_af2efc9e090fb41709c5a64f83ac2a5b9"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a598312a4deb3717c921daa9f1597f9e1">NonBlocking</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:af2efc9e090fb41709c5a64f83ac2a5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9394474afa7c619e05833d6e803388b7" id="r_a9394474afa7c619e05833d6e803388b7"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>DontUseWildcard</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a9394474afa7c619e05833d6e803388b7" id="r_a9394474afa7c619e05833d6e803388b7"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#abe45b1f5f333d7cc4391b8fa89f790ce">DontUseWildcard</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a9394474afa7c619e05833d6e803388b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7e6e6efe4dc17932f469b27feb84d27" id="r_ae7e6e6efe4dc17932f469b27feb84d27"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>ReceiveShutdown</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:ae7e6e6efe4dc17932f469b27feb84d27" id="r_ae7e6e6efe4dc17932f469b27feb84d27"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a9f33270b2da49a2971fa5f2e81295316">ReceiveShutdown</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:ae7e6e6efe4dc17932f469b27feb84d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f61fec498ccdc204ffc53fb91267dba" id="r_a0f61fec498ccdc204ffc53fb91267dba"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>SendShutdown</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a0f61fec498ccdc204ffc53fb91267dba" id="r_a0f61fec498ccdc204ffc53fb91267dba"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a6764e2efdeabd40e49b279ec4bc51ec6">SendShutdown</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a0f61fec498ccdc204ffc53fb91267dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5863c81d1d53c4a5318d9da6a7a71f7" id="r_ac5863c81d1d53c4a5318d9da6a7a71f7"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>UseDelayedAcceptance</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:ac5863c81d1d53c4a5318d9da6a7a71f7" id="r_ac5863c81d1d53c4a5318d9da6a7a71f7"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#acce061e16fafdfc7a813e32868e13ec2">UseDelayedAcceptance</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:ac5863c81d1d53c4a5318d9da6a7a71f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64980a224f22f0f96d8483d5cd389d97" id="r_a64980a224f22f0f96d8483d5cd389d97"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>UseSAN</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a64980a224f22f0f96d8483d5cd389d97" id="r_a64980a224f22f0f96d8483d5cd389d97"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a59e307064ffdcf6553105fd0bd258503">UseSAN</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a64980a224f22f0f96d8483d5cd389d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2806e3f07a013ee80d47a00ed1ea41f4" id="r_a2806e3f07a013ee80d47a00ed1ea41f4"><td class="memItemLeft" >
-&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<b>HasGUID</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:a2806e3f07a013ee80d47a00ed1ea41f4" id="r_a2806e3f07a013ee80d47a00ed1ea41f4"><td class="memItemLeft" >&#160;&#160;&#160;BOOLEAN&#160;&#160;&#160;<a class="el" href="#a8982c50a52e2ce5987608a852d4d1541">HasGUID</a>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a2806e3f07a013ee80d47a00ed1ea41f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad709525e0abd5e2c536a3323512e35c4" id="r_ad709525e0abd5e2c536a3323512e35c4"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>Flags</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:ad709525e0abd5e2c536a3323512e35c4" id="r_ad709525e0abd5e2c536a3323512e35c4"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad709525e0abd5e2c536a3323512e35c4">Flags</a>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:ad709525e0abd5e2c536a3323512e35c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc2c867c855e51093fd37493bed94394" id="r_afc2c867c855e51093fd37493bed94394"><td class="memItemLeft" align="right" valign="top"><a id="afc2c867c855e51093fd37493bed94394" name="afc2c867c855e51093fd37493bed94394"></a>
-DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>CreateFlags</b></td></tr>
+<tr class="memitem:afc2c867c855e51093fd37493bed94394" id="r_afc2c867c855e51093fd37493bed94394"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc2c867c855e51093fd37493bed94394">CreateFlags</a></td></tr>
 <tr class="separator:afc2c867c855e51093fd37493bed94394"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef8b86ad468b0fb56d30ca7c60b5909b" id="r_aef8b86ad468b0fb56d30ca7c60b5909b"><td class="memItemLeft" align="right" valign="top"><a id="aef8b86ad468b0fb56d30ca7c60b5909b" name="aef8b86ad468b0fb56d30ca7c60b5909b"></a>
-DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>CatalogEntryId</b></td></tr>
+<tr class="memitem:aef8b86ad468b0fb56d30ca7c60b5909b" id="r_aef8b86ad468b0fb56d30ca7c60b5909b"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef8b86ad468b0fb56d30ca7c60b5909b">CatalogEntryId</a></td></tr>
 <tr class="separator:aef8b86ad468b0fb56d30ca7c60b5909b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5773ad5fc0b4bb7a197f5545af964d5" id="r_ad5773ad5fc0b4bb7a197f5545af964d5"><td class="memItemLeft" align="right" valign="top"><a id="ad5773ad5fc0b4bb7a197f5545af964d5" name="ad5773ad5fc0b4bb7a197f5545af964d5"></a>
-DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>ServiceFlags1</b></td></tr>
+<tr class="memitem:ad5773ad5fc0b4bb7a197f5545af964d5" id="r_ad5773ad5fc0b4bb7a197f5545af964d5"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5773ad5fc0b4bb7a197f5545af964d5">ServiceFlags1</a></td></tr>
 <tr class="separator:ad5773ad5fc0b4bb7a197f5545af964d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a727da5cd979fa750cce6a2394124e9" id="r_a9a727da5cd979fa750cce6a2394124e9"><td class="memItemLeft" align="right" valign="top"><a id="a9a727da5cd979fa750cce6a2394124e9" name="a9a727da5cd979fa750cce6a2394124e9"></a>
-DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>ProviderFlags</b></td></tr>
+<tr class="memitem:a9a727da5cd979fa750cce6a2394124e9" id="r_a9a727da5cd979fa750cce6a2394124e9"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a727da5cd979fa750cce6a2394124e9">ProviderFlags</a></td></tr>
 <tr class="separator:a9a727da5cd979fa750cce6a2394124e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf58362193a53f8ea9ea93b961387477" id="r_acf58362193a53f8ea9ea93b961387477"><td class="memItemLeft" align="right" valign="top"><a id="acf58362193a53f8ea9ea93b961387477" name="acf58362193a53f8ea9ea93b961387477"></a>
-DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>GroupID</b></td></tr>
+<tr class="memitem:acf58362193a53f8ea9ea93b961387477" id="r_acf58362193a53f8ea9ea93b961387477"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf58362193a53f8ea9ea93b961387477">GroupID</a></td></tr>
 <tr class="separator:acf58362193a53f8ea9ea93b961387477"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a035f966606f97424972ae7260968f9d4" id="r_a035f966606f97424972ae7260968f9d4"><td class="memItemLeft" align="right" valign="top"><a id="a035f966606f97424972ae7260968f9d4" name="a035f966606f97424972ae7260968f9d4"></a>
-DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>GroupType</b></td></tr>
+<tr class="memitem:a035f966606f97424972ae7260968f9d4" id="r_a035f966606f97424972ae7260968f9d4"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a035f966606f97424972ae7260968f9d4">GroupType</a></td></tr>
 <tr class="separator:a035f966606f97424972ae7260968f9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab48c1f4fdb60705dbf304efe76852fe2" id="r_ab48c1f4fdb60705dbf304efe76852fe2"><td class="memItemLeft" align="right" valign="top"><a id="ab48c1f4fdb60705dbf304efe76852fe2" name="ab48c1f4fdb60705dbf304efe76852fe2"></a>
-INT&#160;</td><td class="memItemRight" valign="bottom"><b>GroupPriority</b></td></tr>
+<tr class="memitem:ab48c1f4fdb60705dbf304efe76852fe2" id="r_ab48c1f4fdb60705dbf304efe76852fe2"><td class="memItemLeft" align="right" valign="top">INT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab48c1f4fdb60705dbf304efe76852fe2">GroupPriority</a></td></tr>
 <tr class="separator:ab48c1f4fdb60705dbf304efe76852fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85734d58e5276286c92b8bdcf1513a56" id="r_a85734d58e5276286c92b8bdcf1513a56"><td class="memItemLeft" align="right" valign="top"><a id="a85734d58e5276286c92b8bdcf1513a56" name="a85734d58e5276286c92b8bdcf1513a56"></a>
-INT&#160;</td><td class="memItemRight" valign="bottom"><b>SocketLastError</b></td></tr>
+<tr class="memitem:a85734d58e5276286c92b8bdcf1513a56" id="r_a85734d58e5276286c92b8bdcf1513a56"><td class="memItemLeft" align="right" valign="top">INT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85734d58e5276286c92b8bdcf1513a56">SocketLastError</a></td></tr>
 <tr class="separator:a85734d58e5276286c92b8bdcf1513a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab68059d83091d120bcf1236428c322fa" id="r_ab68059d83091d120bcf1236428c322fa"><td class="memItemLeft" align="right" valign="top"><a id="ab68059d83091d120bcf1236428c322fa" name="ab68059d83091d120bcf1236428c322fa"></a>
-HWND&#160;</td><td class="memItemRight" valign="bottom"><b>hWnd</b></td></tr>
+<tr class="memitem:ab68059d83091d120bcf1236428c322fa" id="r_ab68059d83091d120bcf1236428c322fa"><td class="memItemLeft" align="right" valign="top">HWND&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab68059d83091d120bcf1236428c322fa">hWnd</a></td></tr>
 <tr class="separator:ab68059d83091d120bcf1236428c322fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83a9feab706c4875dc877643c6556bb2" id="r_a83a9feab706c4875dc877643c6556bb2"><td class="memItemLeft" align="right" valign="top"><a id="a83a9feab706c4875dc877643c6556bb2" name="a83a9feab706c4875dc877643c6556bb2"></a>
-LONG&#160;</td><td class="memItemRight" valign="bottom"><b>Padding</b></td></tr>
+<tr class="memitem:a83a9feab706c4875dc877643c6556bb2" id="r_a83a9feab706c4875dc877643c6556bb2"><td class="memItemLeft" align="right" valign="top">LONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83a9feab706c4875dc877643c6556bb2">Padding</a></td></tr>
 <tr class="separator:a83a9feab706c4875dc877643c6556bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9536d1222297fed2744b6b709ef0bef1" id="r_a9536d1222297fed2744b6b709ef0bef1"><td class="memItemLeft" align="right" valign="top"><a id="a9536d1222297fed2744b6b709ef0bef1" name="a9536d1222297fed2744b6b709ef0bef1"></a>
-DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>SequenceNumber</b></td></tr>
+<tr class="memitem:a9536d1222297fed2744b6b709ef0bef1" id="r_a9536d1222297fed2744b6b709ef0bef1"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9536d1222297fed2744b6b709ef0bef1">SequenceNumber</a></td></tr>
 <tr class="separator:a9536d1222297fed2744b6b709ef0bef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95ddfb4430fc9398b00b5716be4029e6" id="r_a95ddfb4430fc9398b00b5716be4029e6"><td class="memItemLeft" align="right" valign="top"><a id="a95ddfb4430fc9398b00b5716be4029e6" name="a95ddfb4430fc9398b00b5716be4029e6"></a>
-UINT&#160;</td><td class="memItemRight" valign="bottom"><b>wMsg</b></td></tr>
+<tr class="memitem:a95ddfb4430fc9398b00b5716be4029e6" id="r_a95ddfb4430fc9398b00b5716be4029e6"><td class="memItemLeft" align="right" valign="top">UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95ddfb4430fc9398b00b5716be4029e6">wMsg</a></td></tr>
 <tr class="separator:a95ddfb4430fc9398b00b5716be4029e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7beeafd43026ea3e61037b13ee3af606" id="r_a7beeafd43026ea3e61037b13ee3af606"><td class="memItemLeft" align="right" valign="top"><a id="a7beeafd43026ea3e61037b13ee3af606" name="a7beeafd43026ea3e61037b13ee3af606"></a>
-LONG&#160;</td><td class="memItemRight" valign="bottom"><b>AsyncEvents</b></td></tr>
+<tr class="memitem:a7beeafd43026ea3e61037b13ee3af606" id="r_a7beeafd43026ea3e61037b13ee3af606"><td class="memItemLeft" align="right" valign="top">LONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7beeafd43026ea3e61037b13ee3af606">AsyncEvents</a></td></tr>
 <tr class="separator:a7beeafd43026ea3e61037b13ee3af606"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2171459992057101541b09d155078343" id="r_a2171459992057101541b09d155078343"><td class="memItemLeft" align="right" valign="top"><a id="a2171459992057101541b09d155078343" name="a2171459992057101541b09d155078343"></a>
-LONG&#160;</td><td class="memItemRight" valign="bottom"><b>AsyncDisabledEvents</b></td></tr>
+<tr class="memitem:a2171459992057101541b09d155078343" id="r_a2171459992057101541b09d155078343"><td class="memItemLeft" align="right" valign="top">LONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2171459992057101541b09d155078343">AsyncDisabledEvents</a></td></tr>
 <tr class="separator:a2171459992057101541b09d155078343"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Structure representing AFD (Ancillary Function Driver) shared informations. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>C:/Users/AlexaSouza/source/repos/ConsoleApplication1/ConsoleApplication1/<a class="el" href="nosa_8h_source.html">nosa.h</a></li>
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00355">355</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3cea555d737508db44be06ab8bfcf5b7" name="a3cea555d737508db44be06ab8bfcf5b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cea555d737508db44be06ab8bfcf5b7">&#9670;&#160;</a></span>AddressFamily</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT _SOCK_SHARED_INFO::AddressFamily</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00357">357</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a2171459992057101541b09d155078343" name="a2171459992057101541b09d155078343"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2171459992057101541b09d155078343">&#9670;&#160;</a></span>AsyncDisabledEvents</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LONG _SOCK_SHARED_INFO::AsyncDisabledEvents</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00397">397</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a7beeafd43026ea3e61037b13ee3af606" name="a7beeafd43026ea3e61037b13ee3af606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7beeafd43026ea3e61037b13ee3af606">&#9670;&#160;</a></span>AsyncEvents</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LONG _SOCK_SHARED_INFO::AsyncEvents</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00396">396</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a0bf9578e5b54aebb18afcf1000ca618e" name="a0bf9578e5b54aebb18afcf1000ca618e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bf9578e5b54aebb18afcf1000ca618e">&#9670;&#160;</a></span>Broadcast</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::Broadcast</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00369">369</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="aef8b86ad468b0fb56d30ca7c60b5909b" name="aef8b86ad468b0fb56d30ca7c60b5909b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef8b86ad468b0fb56d30ca7c60b5909b">&#9670;&#160;</a></span>CatalogEntryId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD _SOCK_SHARED_INFO::CatalogEntryId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00383">383</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="afc2c867c855e51093fd37493bed94394" name="afc2c867c855e51093fd37493bed94394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc2c867c855e51093fd37493bed94394">&#9670;&#160;</a></span>CreateFlags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD _SOCK_SHARED_INFO::CreateFlags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00382">382</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a16c0764256bf3fbfcd099bcfbcb25514" name="a16c0764256bf3fbfcd099bcfbcb25514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c0764256bf3fbfcd099bcfbcb25514">&#9670;&#160;</a></span>Debug</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::Debug</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00370">370</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="abe45b1f5f333d7cc4391b8fa89f790ce" name="abe45b1f5f333d7cc4391b8fa89f790ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe45b1f5f333d7cc4391b8fa89f790ce">&#9670;&#160;</a></span>DontUseWildcard</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::DontUseWildcard</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00375">375</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a28fb84d3c4e2205eedba66d8b04fb711" name="a28fb84d3c4e2205eedba66d8b04fb711"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28fb84d3c4e2205eedba66d8b04fb711">&#9670;&#160;</a></span>ExclusiveAddressUse</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::ExclusiveAddressUse</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00373">373</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="ad709525e0abd5e2c536a3323512e35c4" name="ad709525e0abd5e2c536a3323512e35c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad709525e0abd5e2c536a3323512e35c4">&#9670;&#160;</a></span>[struct]</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct  { ... }  _SOCK_SHARED_INFO::Flags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf58362193a53f8ea9ea93b961387477" name="acf58362193a53f8ea9ea93b961387477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf58362193a53f8ea9ea93b961387477">&#9670;&#160;</a></span>GroupID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD _SOCK_SHARED_INFO::GroupID</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00386">386</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="ab48c1f4fdb60705dbf304efe76852fe2" name="ab48c1f4fdb60705dbf304efe76852fe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab48c1f4fdb60705dbf304efe76852fe2">&#9670;&#160;</a></span>GroupPriority</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT _SOCK_SHARED_INFO::GroupPriority</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00388">388</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a035f966606f97424972ae7260968f9d4" name="a035f966606f97424972ae7260968f9d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a035f966606f97424972ae7260968f9d4">&#9670;&#160;</a></span>GroupType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD _SOCK_SHARED_INFO::GroupType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00387">387</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a8982c50a52e2ce5987608a852d4d1541" name="a8982c50a52e2ce5987608a852d4d1541"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8982c50a52e2ce5987608a852d4d1541">&#9670;&#160;</a></span>HasGUID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::HasGUID</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00380">380</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="ab68059d83091d120bcf1236428c322fa" name="ab68059d83091d120bcf1236428c322fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab68059d83091d120bcf1236428c322fa">&#9670;&#160;</a></span>hWnd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HWND _SOCK_SHARED_INFO::hWnd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00390">390</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a9181c883a3f14e66e5b751f08045444d" name="a9181c883a3f14e66e5b751f08045444d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9181c883a3f14e66e5b751f08045444d">&#9670;&#160;</a></span>LingerData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct linger _SOCK_SHARED_INFO::LingerData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00362">362</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="ab5e99f0a78a69b01752920d1453b7db4" name="ab5e99f0a78a69b01752920d1453b7db4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5e99f0a78a69b01752920d1453b7db4">&#9670;&#160;</a></span>Listening</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::Listening</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00368">368</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a598312a4deb3717c921daa9f1597f9e1" name="a598312a4deb3717c921daa9f1597f9e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a598312a4deb3717c921daa9f1597f9e1">&#9670;&#160;</a></span>NonBlocking</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::NonBlocking</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00374">374</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a3abf37af8a1e7248d72dc3662087789d" name="a3abf37af8a1e7248d72dc3662087789d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3abf37af8a1e7248d72dc3662087789d">&#9670;&#160;</a></span>OobInline</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::OobInline</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00371">371</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a83a9feab706c4875dc877643c6556bb2" name="a83a9feab706c4875dc877643c6556bb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83a9feab706c4875dc877643c6556bb2">&#9670;&#160;</a></span>Padding</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LONG _SOCK_SHARED_INFO::Padding</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00392">392</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a02ea32d0cf89340e8bd9e7b3f16a4f04" name="a02ea32d0cf89340e8bd9e7b3f16a4f04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02ea32d0cf89340e8bd9e7b3f16a4f04">&#9670;&#160;</a></span>Protocol</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT _SOCK_SHARED_INFO::Protocol</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00359">359</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a9a727da5cd979fa750cce6a2394124e9" name="a9a727da5cd979fa750cce6a2394124e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a727da5cd979fa750cce6a2394124e9">&#9670;&#160;</a></span>ProviderFlags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD _SOCK_SHARED_INFO::ProviderFlags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00385">385</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a9f33270b2da49a2971fa5f2e81295316" name="a9f33270b2da49a2971fa5f2e81295316"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f33270b2da49a2971fa5f2e81295316">&#9670;&#160;</a></span>ReceiveShutdown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::ReceiveShutdown</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00376">376</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a25858e3312946269101566b093437b53" name="a25858e3312946269101566b093437b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25858e3312946269101566b093437b53">&#9670;&#160;</a></span>RecvTimeout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG _SOCK_SHARED_INFO::RecvTimeout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00364">364</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a77caf71a9262b9f6cec10eb65470229b" name="a77caf71a9262b9f6cec10eb65470229b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77caf71a9262b9f6cec10eb65470229b">&#9670;&#160;</a></span>ReuseAddresses</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::ReuseAddresses</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00372">372</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a6764e2efdeabd40e49b279ec4bc51ec6" name="a6764e2efdeabd40e49b279ec4bc51ec6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6764e2efdeabd40e49b279ec4bc51ec6">&#9670;&#160;</a></span>SendShutdown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::SendShutdown</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00377">377</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="aa84df60a9f9a57417d9b71db5d450aaf" name="aa84df60a9f9a57417d9b71db5d450aaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa84df60a9f9a57417d9b71db5d450aaf">&#9670;&#160;</a></span>SendTimeout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG _SOCK_SHARED_INFO::SendTimeout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00363">363</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a9536d1222297fed2744b6b709ef0bef1" name="a9536d1222297fed2744b6b709ef0bef1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9536d1222297fed2744b6b709ef0bef1">&#9670;&#160;</a></span>SequenceNumber</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD _SOCK_SHARED_INFO::SequenceNumber</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00394">394</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="ad5773ad5fc0b4bb7a197f5545af964d5" name="ad5773ad5fc0b4bb7a197f5545af964d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5773ad5fc0b4bb7a197f5545af964d5">&#9670;&#160;</a></span>ServiceFlags1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD _SOCK_SHARED_INFO::ServiceFlags1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00384">384</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a23de3d5c137ae7e3140d3ddb00b52a8e" name="a23de3d5c137ae7e3140d3ddb00b52a8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23de3d5c137ae7e3140d3ddb00b52a8e">&#9670;&#160;</a></span>SizeOfLocalAddress</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT _SOCK_SHARED_INFO::SizeOfLocalAddress</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00360">360</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a7f65f92365a0030b977952e22e8f7503" name="a7f65f92365a0030b977952e22e8f7503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f65f92365a0030b977952e22e8f7503">&#9670;&#160;</a></span>SizeOfRecvBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG _SOCK_SHARED_INFO::SizeOfRecvBuffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00365">365</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a9c7257062e377d3f2957f35508709ed5" name="a9c7257062e377d3f2957f35508709ed5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c7257062e377d3f2957f35508709ed5">&#9670;&#160;</a></span>SizeOfRemoteAddress</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT _SOCK_SHARED_INFO::SizeOfRemoteAddress</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00361">361</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a3fa68d91a36a3c5c77b1ddfddbfd5b67" name="a3fa68d91a36a3c5c77b1ddfddbfd5b67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fa68d91a36a3c5c77b1ddfddbfd5b67">&#9670;&#160;</a></span>SizeOfSendBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG _SOCK_SHARED_INFO::SizeOfSendBuffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00366">366</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a85734d58e5276286c92b8bdcf1513a56" name="a85734d58e5276286c92b8bdcf1513a56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85734d58e5276286c92b8bdcf1513a56">&#9670;&#160;</a></span>SocketLastError</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT _SOCK_SHARED_INFO::SocketLastError</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00389">389</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="ab54e9d41e6c82092e24a06d50e10975f" name="ab54e9d41e6c82092e24a06d50e10975f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab54e9d41e6c82092e24a06d50e10975f">&#9670;&#160;</a></span>SocketType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT _SOCK_SHARED_INFO::SocketType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00358">358</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a3c6458b0022cbf811176c10da7b5c307" name="a3c6458b0022cbf811176c10da7b5c307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c6458b0022cbf811176c10da7b5c307">&#9670;&#160;</a></span>State</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="nosa_8h.html#a47bb75c135c295c5e1f6edccbbefe71a">SOCKET_STATE</a> _SOCK_SHARED_INFO::State</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00356">356</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="acce061e16fafdfc7a813e32868e13ec2" name="acce061e16fafdfc7a813e32868e13ec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acce061e16fafdfc7a813e32868e13ec2">&#9670;&#160;</a></span>UseDelayedAcceptance</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::UseDelayedAcceptance</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00378">378</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a59e307064ffdcf6553105fd0bd258503" name="a59e307064ffdcf6553105fd0bd258503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59e307064ffdcf6553105fd0bd258503">&#9670;&#160;</a></span>UseSAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOLEAN _SOCK_SHARED_INFO::UseSAN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00379">379</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<a id="a95ddfb4430fc9398b00b5716be4029e6" name="a95ddfb4430fc9398b00b5716be4029e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95ddfb4430fc9398b00b5716be4029e6">&#9670;&#160;</a></span>wMsg</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UINT _SOCK_SHARED_INFO::wMsg</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nosa_8h_source.html#l00395">395</a> of file <a class="el" href="nosa_8h_source.html">nosa.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="nosa_8h_source.html">nosa.h</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="struct___s_o_c_k___s_h_a_r_e_d___i_n_f_o.html">_SOCK_SHARED_INFO</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
 </body>
 </html>

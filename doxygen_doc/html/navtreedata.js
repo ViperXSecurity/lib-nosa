@@ -25,6 +25,17 @@
 var NAVTREE =
 [
   [ "Lib Nosa (No Socket API)", "index.html", [
+    [ "lib-nosa ( No Socket API )", "md__r_e_a_d_m_e.html", [
+      [ "Features", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
+      [ "Getting Started", "md__r_e_a_d_m_e.html#autotoc_md2", [
+        [ "Prerequisites", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
+        [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
+        [ "APIs", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
+        [ "Key definitions (nosa.h)", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
+        [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
+        [ "TODO", "md__r_e_a_d_m_e.html#autotoc_md8", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -50,8 +61,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"a00002.html",
-"a00059.html#a2949b8a9bbde8bb3309aa3c1723f563c"
+"annotated.html",
+"struct___a_f_d___s_e_n_d___i_n_f_o___u_d_p.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,24 +1,8 @@
 var searchData=
 [
-  ['nextentryoffset_0',['NextEntryOffset',['../a00059.html#ab13007028d8b2f24fd0956a117bdd7a9',1,'_AFD_CREATE_PACKET']]],
-  ['nonblocking_1',['NonBlocking',['../a00079.html#a598312a4deb3717c921daa9f1597f9e1',1,'_SOCK_SHARED_INFO']]],
-  ['nosa_2ec_2',['nosa.c',['../a00002.html',1,'']]],
-  ['nosa_2eh_3',['nosa.h',['../a00005.html',1,'']]],
-  ['nosa_5fconnect_4',['nosa_connect',['../a00005.html#abc134047ed0d1f697efcc2954f9a3c0c',1,'nosa.h']]],
-  ['nosa_5fdns_5flookup_5',['nosa_DNS_lookup',['../a00005.html#a0da3b68d22b5f383d182ee80dcb7fe5a',1,'nosa.h']]],
-  ['nosa_5frecv_6',['nosa_recv',['../a00005.html#a8d6d9897d8ed6972c05ba5a6a0a8fa9d',1,'nosa.h']]],
-  ['nosa_5fsend_7',['nosa_send',['../a00005.html#a24e6de3630bdde6bfafe37c9daffaded',1,'nosa.h']]],
-  ['notificationevent_8',['NotificationEvent',['../a00005.html#a4fd8d54f196d53e4f9494e1874200d9ca0f0a3001be54605ffe444d2c19466d81',1,'nosa.h']]],
-  ['nt_5fsuccess_9',['NT_SUCCESS',['../a00005.html#ad14231612b7a675d33f0ead0b695d21a',1,'nosa.h']]],
-  ['ntclose_10',['NtClose',['../a00005.html#ad84cbe444d02ff1d3a373518a6ee954e',1,'nosa.h']]],
-  ['ntclose_5ft_11',['NtClose_t',['../a00005.html#a36629acb2bf65aaa4633a3100cdc1cd3',1,'nosa.h']]],
-  ['ntcreateevent_12',['NtCreateEvent',['../a00005.html#ac5b7f386cfa99a9092459e8bc1df7239',1,'nosa.h']]],
-  ['ntcreateevent_5ft_13',['NtCreateEvent_t',['../a00005.html#a0783a34d200853cc7f65c2b19366bd1e',1,'nosa.h']]],
-  ['ntdeviceiocontrolfile_14',['NtDeviceIoControlFile',['../a00005.html#ab0436f7b5ac89fbad79a4638200651fe',1,'nosa.h']]],
-  ['ntdeviceiocontrolfile_5ft_15',['NtDeviceIoControlFile_t',['../a00005.html#a8c7c8426cd8c6183bbf023e0c8e1addc',1,'nosa.h']]],
-  ['ntohs_16',['ntohs',['../a00005.html#a52848e6aa9d5aff6123d10f55d0f647f',1,'nosa.h']]],
-  ['ntwaitforsingleobject_17',['NtWaitForSingleObject',['../a00005.html#a405800e892e07e737e3f6b59936d9ec5',1,'nosa.h']]],
-  ['ntwaitforsingleobject_5ft_18',['NtWaitForSingleObject_t',['../a00005.html#a283229137f4a4bdadcf0635edd2c581d',1,'nosa.h']]],
-  ['num_5fbuffers_19',['num_buffers',['../a00015.html#ae9db6ddf73d8e2be0af5f1b73654bfe1',1,'userbuf_t']]],
-  ['numberofhandles_20',['NumberOfHandles',['../a00031.html#a0723dddea4a4b3a693c414cf636b836f',1,'_SYSTEM_HANDLE_INFORMATION']]]
+  ['main_0',['main',['../nosa-example_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'nosa-example.c']]],
+  ['max_5fprotocol_5fchain_1',['MAX_PROTOCOL_CHAIN',['../nosa_8h.html#a276b13005a092b10e1f468b9c67ffdd0',1,'nosa.h']]],
+  ['max_5frecv_5fbytes_2',['MAX_RECV_BYTES',['../nosa_8h.html#aa5c6c483dfdc71950b3190163d9e0721',1,'nosa.h']]],
+  ['max_5fsent_5fbytes_3',['MAX_SENT_BYTES',['../nosa_8h.html#a8e87a5797199cf9431e0379a61e137d4',1,'nosa.h']]],
+  ['maximumlength_4',['MaximumLength',['../struct___u_n_i_c_o_d_e___s_t_r_i_n_g.html#ae0487ecc173e55918bcee834bd3d107b',1,'_UNICODE_STRING']]]
 ];
