@@ -22,7 +22,8 @@ int main()
     // 
     // You can reuse the existing handle to perform iterative operations [request -> response].
     // After the handle is created for the first time, you can follow the follow steps:
-    // '-> while (1) { nosa_connect(); nosa_send(); nosa_recv(); } 
+    // nosa_connect();
+    // '-> while (1) {  nosa_send(); nosa_recv(); } 
     //
 
     // Connect into remote host
