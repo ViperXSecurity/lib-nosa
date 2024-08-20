@@ -9,7 +9,7 @@
 #define LOG_LEVEL_WARN  2
 #define LOG_LEVEL_ERROR 3
 
-#define CURRENT_LOG_LEVEL 1
+//#define CURRENT_LOG_LEVEL 0
 
 // Set the current log level
 #ifndef CURRENT_LOG_LEVEL < 1
