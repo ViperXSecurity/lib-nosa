@@ -4,7 +4,7 @@
 
 ## Features
 
-- Establishes socket connections directly through AFD driver IOCTL calls, **bypassing** the standard Winsock2 interface.
+- Establishes (TCP, UDP, RAW) connections directly through AFD driver IOCTL calls, **bypassing** the standard Winsock2 interface.
 - Focuses on simplicity and performance, with a small footprint and no unnecessary dependencies.
 - Provides direct access to internal socket APIs, giving developers fine-grained control over network operations.
 - Avoids the overhead and abstraction of the Winsock2 API, making it ideal for performance-critical applications.
@@ -46,8 +46,8 @@ NTSTATUS nosa_recv(HANDLE hSocket, LPVOID packet_data_received)
 
 ### Key definitions (nosa.h)
 ```C
-//#define CURRENT_LOG_LEVEL 0 // uncomment to hide log informations
-#ifndef CURRENT_LOG_LEVEL
+//#define CURRENT_LOG_LEVEL 1 // uncomment to hide log informations
+#ifndef CURRENT_LOG_LEVEL < 1
 #define CURRENT_LOG_LEVEL LOG_LEVEL_DEBUG
 #endif
 <...>
@@ -62,10 +62,7 @@ NTSTATUS nosa_recv(HANDLE hSocket, LPVOID packet_data_received)
 - We generated a helpful doxygen documentation (doxygen_doc)
   
 ### TODO
-
 - x86 AFD.sys driver connection.
-- Subdomains for some reason doesn't work properly, even with the correct aligned bytes for DNS queries.
-- UDP connections (it ONLY supports TCP for now).
 
 - ### (For bind connections)
 - nosa_listen()
