@@ -998,7 +998,6 @@ unsigned int parse_dns_response(unsigned char* response, int response_len)
     return 0;  // No IP address found
 }
 
-
 /**
  * Displays a hex dump of the given buffer.
  *
