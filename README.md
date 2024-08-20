@@ -46,7 +46,7 @@ NTSTATUS nosa_recv(HANDLE hSocket, LPVOID packet_data_received)
 
 ### Key definitions (nosa.h)
 ```C
-//#define CURRENT_LOG_LEVEL 1 // uncomment to hide log informations
+//#define CURRENT_LOG_LEVEL 0 // uncomment to hide log informations
 #ifndef CURRENT_LOG_LEVEL < 1
 #define CURRENT_LOG_LEVEL LOG_LEVEL_DEBUG
 #endif
