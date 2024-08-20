@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <windows.h>
-
 #ifndef LOG_H
 #define LOG_H
 
 // Logging levels
-#define LOG_LEVEL_DEBUG 0
+#define LOG_LEVEL_DEBUG 1
 #define LOG_LEVEL_INFO  1
 #define LOG_LEVEL_WARN  2
 #define LOG_LEVEL_ERROR 3
 
+#define CURRENT_LOG_LEVEL 1
+
 // Set the current log level
-#ifndef CURRENT_LOG_LEVEL
+#ifndef CURRENT_LOG_LEVEL < 1
 #define CURRENT_LOG_LEVEL LOG_LEVEL_DEBUG
 #endif
 
@@ -25,6 +26,7 @@
     } while (0)
 
 // Base logging macro, used by other macros
+#if CURRENT_LOG_LEVEL > 0
 #define LOG(level, level_str, format, ...) \
     do { \
         if (level >= CURRENT_LOG_LEVEL) { \
@@ -32,12 +34,16 @@
             char *filename = strrchr(__FILE__, '\\'); \
             GET_CURRENT_TIME_STR(time_str, sizeof(time_str)); \
             fprintf(stderr, "[%s] %s:%s:%d: " format "\n\n", \
-                    time_str, level_str, filename, __LINE__, ##__VA_ARGS__); \
+                    time_str, level_str, filename ? filename + 1 : __FILE__, __LINE__, ##__VA_ARGS__); \
         } \
     } while (0)
+#else
+#define LOG(level, level_str, format, ...) \
+    do { /* Logging disabled */ } while (0)
+#endif
 
 // Log macros for different levels
-#define LOG_DEBUG(format, ...) LOG(LOG_LEVEL_DEBUG, "DEBUG", format, ##__VA_ARGS__)
+#define LOG_DEBUG(format, ...) LOG(CURRENT_LOG_LEVEL, "DEBUG", format, ##__VA_ARGS__)
 #define LOG_INFO(format, ...)  LOG(LOG_LEVEL_INFO,  "INFO",  format, ##__VA_ARGS__)
 #define LOG_WARN(format, ...)  LOG(LOG_LEVEL_WARN,  "WARN",  format, ##__VA_ARGS__)
 #define LOG_ERROR(format, ...) LOG(LOG_LEVEL_ERROR, "ERROR", format, ##__VA_ARGS__)
@@ -88,8 +94,8 @@ struct userbuf_t
 
 #pragma push(pop)
 
-const GUID GUID_NULL = { 
-    0x00000000, 0x0000, 0x0000, 
+const GUID GUID_NULL = {
+    0x00000000, 0x0000, 0x0000,
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } };
 
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
@@ -142,11 +148,19 @@ const GUID GUID_NULL = {
 #define MAX_PROTOCOL_CHAIN                  7
 #define WSAPROTOCOL_LEN                     255
 
+/* AFD SEND/RECV Flags */
+#define AFD_SKIP_FIO                	    0x1L
+#define AFD_OVERLAPPED                      0x2L
+#define AFD_IMMEDIATE                       0x4L
+
 #define IOCTL_AFD_BIND			    0x12003
 #define IOCTL_AFD_DOCONNECT		    0x12007
 #define IOCTL_AFD_DOCONNECT_EX	            0x120c7
-#define IOCTL_AFD_RECV			    0x12017
 #define IOCTL_AFD_SEND			    0x1201F
+#define IOCTL_AFD_SEND_DATAGRAM	            0x12023
+#define IOCTL_AFD_RECV			    0x12017
+#define IOCTL_AFD_RECV_DATAGRAM             0x1201b
+
 
 #define IOCTL_AFD_SET_CONTEXT               0x12047
 #define IOCTL_AFD_GET_CONTEXT               0x12043
@@ -169,40 +183,13 @@ const GUID GUID_NULL = {
 #define MAX_RECV_BYTES 0x1000
 #define MAX_SENT_BYTES 0x1000
 
+// Declare a global variable to store socket values
+char globalContext[MAX_SENT_BYTES] = { 0 };
+char globalSocketType[3] = { 0 };
+char globalRemoteAddr[16] = { 0 };
+uint32_t globalRemotePort = 0;
+
 #pragma comment(lib, "ntdll.lib")
-
-typedef struct _WSAPROTOCOLCHAIN
-{
-    int ChainLen;                  /* the length of the chain,     */
-    /* length = 0 means layered protocol, */
-    /* length = 1 means base protocol, */
-    /* length > 1 means protocol chain */
-    DWORD ChainEntries[MAX_PROTOCOL_CHAIN]; /* a list of dwCatalogEntryIds */
-} WSAPROTOCOLCHAIN, * LPWSAPROTOCOLCHAIN;
-
-typedef struct _WSAPROTOCOL_INFOW
-{
-    DWORD dwServiceFlags1;
-    DWORD dwServiceFlags2;
-    DWORD dwServiceFlags3;
-    DWORD dwServiceFlags4;
-    DWORD dwProviderFlags;
-    GUID ProviderId;
-    DWORD dwCatalogEntryId;
-    WSAPROTOCOLCHAIN ProtocolChain;
-    int iVersion;
-    int iAddressFamily;
-    int iMaxSockAddr;
-    int iMinSockAddr;
-    int iSocketType;
-    int iProtocol;
-    int iProtocolMaxOffset;
-    int iNetworkByteOrder;
-    int iSecurityScheme;
-    DWORD dwMessageSize;
-    DWORD dwProviderReserved;
-    WCHAR szProtocol[WSAPROTOCOL_LEN + 1];
-} WSAPROTOCOL_INFOW, * LPWSAPROTOCOL_INFOW;
 
 typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO
 {
@@ -274,8 +261,38 @@ typedef VOID(NTAPI* PIO_APC_ROUTINE)(
     ULONG Reserved
     );
 
-// Define the AFD_CREATE_PACKET structure with proper packing
-#pragma pack(push, 1)
+typedef struct _WSAPROTOCOLCHAIN
+{
+    int ChainLen;                  /* the length of the chain,     */
+    /* length = 0 means layered protocol, */
+    /* length = 1 means base protocol, */
+    /* length > 1 means protocol chain */
+    DWORD ChainEntries[MAX_PROTOCOL_CHAIN]; /* a list of dwCatalogEntryIds */
+} WSAPROTOCOLCHAIN, * LPWSAPROTOCOLCHAIN;
+
+typedef struct _WSAPROTOCOL_INFOW
+{
+    DWORD dwServiceFlags1;
+    DWORD dwServiceFlags2;
+    DWORD dwServiceFlags3;
+    DWORD dwServiceFlags4;
+    DWORD dwProviderFlags;
+    GUID ProviderId;
+    DWORD dwCatalogEntryId;
+    WSAPROTOCOLCHAIN ProtocolChain;
+    int iVersion;
+    int iAddressFamily;
+    int iMaxSockAddr;
+    int iMinSockAddr;
+    int iSocketType;
+    int iProtocol;
+    int iProtocolMaxOffset;
+    int iNetworkByteOrder;
+    int iSecurityScheme;
+    DWORD dwMessageSize;
+    DWORD dwProviderReserved;
+    WCHAR szProtocol[WSAPROTOCOL_LEN + 1];
+} WSAPROTOCOL_INFOW, * LPWSAPROTOCOL_INFOW;
 
 /**
  * Structure representing an AFD_CREATE_PACKET.
@@ -284,6 +301,9 @@ typedef VOID(NTAPI* PIO_APC_ROUTINE)(
  * It includes fields for various parameters such as NextEntryOffset, Flags, EaNameLength, EaValueLength, EaName,
  * EndpointFlags, GroupID, AddressFamily, SocketType, Protocol, SizeOfTransportName, and TransportName.
  */
+
+ // Define the AFD_CREATE_PACKET structure
+#pragma pack(push, 1) // Ensure tight packing
 typedef struct _AFD_CREATE_PACKET
 {
     uint32_t NextEntryOffset;
@@ -291,13 +311,15 @@ typedef struct _AFD_CREATE_PACKET
     uint8_t EaNameLength;
     uint16_t EaValueLength;
     char EaName[16];
-    uint32_t EndpointFlags;
+    uint16_t unknown1;
+    uint16_t EndpointFlags;
     uint32_t GroupID;
     uint32_t AddressFamily;
     uint32_t SocketType;
     uint32_t Protocol;
-    uint64_t SizeOfTransportName;
-    char TransportName[5]; // 2 wchar_t characters
+    uint64_t unknow2;
+    uint64_t unknow3;
+    uint32_t unknow4;
 } AFD_CREATE_PACKET;
 #pragma pack(pop)
 
@@ -464,21 +486,58 @@ typedef struct  _AFD_SEND_INFO {
 } AFD_SEND_INFO, * PAFD_SEND_INFO;
 
 /**
+ * Structure representing TDI  Connection Interface.
+ */
+typedef struct _TDI_CONNECTION_INFORMATION {
+    LONG UserDataLength;        // length of user data buffer
+    PVOID UserData;             // pointer to user data buffer
+    LONG OptionsLength;         // length of follwoing buffer
+    PVOID Options;              // pointer to buffer containing options
+    LONG RemoteAddressLength;   // length of following buffer
+    PVOID RemoteAddress;        // buffer containing the remote address
+} TDI_CONNECTION_INFORMATION, * PTDI_CONNECTION_INFORMATION;
+
+//
+// Include Transport driver interface definitions
+// All of the following have two definitions; ones that correspond exactly to
+// the TDI spec, and those that correspond to the NT coding standards. They
+// should be equivalent.
+//
+
+typedef LONG TDI_STATUS;
+typedef PVOID CONNECTION_CONTEXT;       // connection context
+
+//
+// This structure is passed with every request to TDI. It describes that
+// request and the parameters to it.
+//
+typedef struct _TDI_REQUEST {
+    union {
+        HANDLE AddressHandle;
+        CONNECTION_CONTEXT ConnectionContext;
+        HANDLE ControlChannel;
+    } Handle;
+
+    PVOID RequestNotifyObject;
+    PVOID RequestContext;
+    TDI_STATUS TdiStatus;
+} TDI_REQUEST, * PTDI_REQUEST;
+
+typedef struct _TDI_REQUEST_SEND_DATAGRAM {
+    TDI_REQUEST Request;
+    PTDI_CONNECTION_INFORMATION SendDatagramInformation;
+} TDI_REQUEST_SEND_DATAGRAM, * PTDI_REQUEST_SEND_DATAGRAM;
+
+/**
  * Structure representing information for sending data over UDP using AFD.
  */
 typedef struct _AFD_SEND_INFO_UDP {
-    PAFD_WSABUF				BufferArray;
-    ULONG				BufferCount;
-    ULONG				AfdFlags;
-#if 1 /* timurrrr: based on XP+win7 observation: i#418 */
-    ULONG				UnknownGap[9];
-    ULONG				SizeOfRemoteAddress;
-    PVOID				RemoteAddress;
-#else
-    TDI_REQUEST_SEND_DATAGRAM		TdiRequest;
-    TDI_CONNECTION_INFORMATION		TdiConnection;
-#endif
-} AFD_SEND_INFO_UDP, * PAFD_SEND_INFO_UDP;
+    PAFD_WSABUF BufferArray;
+    ULONG BufferCount;
+    ULONG AfdFlags;
+    TDI_REQUEST_SEND_DATAGRAM   TdiRequest;
+    TDI_CONNECTION_INFORMATION  TdiConnInfo;
+} AFD_SEND_DATAGRAM_INFO, * PAFD_SEND_DATAGRAM_INFO;
 
 /**
  * Structure representing information for further DNS query lookup.
@@ -489,7 +548,7 @@ typedef struct _DOMAIN_INFO
     unsigned char ip_address_str[16];
 }DOMAIN_INFO;
 
-
+// Import our function pointers from NTAPI*
 typedef NTSTATUS(NTAPI* NtClose_t)(HANDLE Handle);
 typedef NTSTATUS(NTAPI* NtCreateEvent_t)(PHANDLE EventHandle, ACCESS_MASK DesiredAccess, POBJECT_ATTRIBUTES object_attributes, EVENT_TYPE EventType,
     BOOLEAN InitialState);
@@ -506,9 +565,8 @@ NtCreateFile_t NtCreateFile;
 NtDeviceIoControlFile_t NtDeviceIoControlFile;
 NtWaitForSingleObject_t NtWaitForSingleObject;
 
-
-
-NTSTATUS nosa_dns_lookup(HANDLE hSocket, const char* host, DOMAIN_INFO* outBuffer);
+NTSTATUS nosa_dns_lookup(PHANDLE hSocket, char* domain_name, DOMAIN_INFO* outBuffer);
+NTSTATUS afd_close(HANDLE hHandle);
 
 /**
  * Check if a character is a digit.
@@ -821,10 +879,12 @@ char* convert_htonl_to_ip_address(unsigned long network_order_ip) {
     bytes[3] = network_order_ip & 0xFF;
 
     // Format the bytes into a string
-    snprintf(ip_address, sizeof(ip_address), "%u.%u.%u.%u", bytes[0], bytes[1], bytes[2], bytes[3]);
+    snprintf(ip_address, sizeof(ip_address), 
+        "%u.%u.%u.%u", bytes[0], bytes[1], bytes[2], bytes[3]);
 
     return ip_address;
 }
+
 /**
  * Builds a DNS query for the given domain.
  *
@@ -836,15 +896,15 @@ char* convert_htonl_to_ip_address(unsigned long network_order_ip) {
 unsigned char* build_dns_query(const char* domain, int* query_len) {
     static unsigned char query[512];  // DNS query buffer
     unsigned char* qname;
-    int i, len;
+    int len;
 
     // DNS Header
-    unsigned short transaction_id = htons(0x2);
-    unsigned short flags = htons(0x0100);
-    unsigned short questions = htons(1);
-    unsigned short answer_rrs = htons(0);
-    unsigned short authority_rrs = htons(0);
-    unsigned short additional_rrs = htons(0);
+    unsigned short transaction_id = htons(0x1234); // Transaction ID
+    unsigned short flags = htons(0x0100);          // Standard query with recursion desired
+    unsigned short questions = htons(1);           // Number of questions
+    unsigned short answer_rrs = htons(0);          // Number of answer resource records
+    unsigned short authority_rrs = htons(0);       // Number of authority resource records
+    unsigned short additional_rrs = htons(0);      // Number of additional resource records
 
     // Build header
     memcpy(query, &transaction_id, 2);
@@ -854,24 +914,26 @@ unsigned char* build_dns_query(const char* domain, int* query_len) {
     memcpy(query + 8, &authority_rrs, 2);
     memcpy(query + 10, &additional_rrs, 2);
 
-    // Build question
+    // Build question section
     qname = query + 12;
+    const char* label_start = domain;
     const char* dot_pos = strchr(domain, '.');
-    int subdomain_detected = (dot_pos != NULL && strchr(dot_pos + 1, '.') != NULL);
 
     while (dot_pos) {
-        len = dot_pos - domain;
-        *qname++ = len;
-        memcpy(qname, domain, len);
+        len = dot_pos - label_start;
+        *qname++ = len;                // Length of the label
+        memcpy(qname, label_start, len); // Copy the label
         qname += len;
-        domain = dot_pos + 1;
-        dot_pos = strchr(domain, '.');
+        label_start = dot_pos + 1;      // Move to the next label
+        dot_pos = strchr(label_start, '.');
     }
-    len = strlen(domain);
+
+    // Handle the last label (the part after the last dot or the whole domain if no dot)
+    len = strlen(label_start);
     *qname++ = len;
-    memcpy(qname, domain, len);
+    memcpy(qname, label_start, len);
     qname += len;
-    *qname++ = 0x00;
+    *qname++ = 0x00;  // End of the QNAME
 
     // Type and Class
     unsigned short qtype = htons(1);  // Type A for IPv4 addresses
@@ -880,14 +942,6 @@ unsigned char* build_dns_query(const char* domain, int* query_len) {
     memcpy(qname + 2, &qclass, 2);
 
     *query_len = qname + 4 - query;
-
-    // Debug or logging purposes
-    if (subdomain_detected) {
-        printf("Subdomain detected.\n");
-    }
-    else {
-        printf("No subdomain detected.\n");
-    }
 
     return query;
 }
@@ -898,14 +952,14 @@ unsigned char* build_dns_query(const char* domain, int* query_len) {
  * @param response The DNS response buffer.
  * @param response_len The length of the DNS response buffer.
  *
- * @returns The extracted IP address as an unsigned integer.
+ * @returns The extracted IP address as an unsigned integer (in network byte order).
  */
 unsigned int parse_dns_response(unsigned char* response, int response_len)
 {
     // Skip the DNS header and question section
     unsigned char* answer_section = response + 12;
-    while (*answer_section != 0) answer_section++;
-    answer_section += 5; // Skip the null byte and QTYPE, QCLASS
+    while (*answer_section != 0) answer_section++;  // Skip QNAME
+    answer_section += 5;  // Skip the null byte at the end of QNAME and QTYPE, QCLASS
 
     // Parse the answer section
     unsigned short answer_type;
@@ -913,23 +967,37 @@ unsigned int parse_dns_response(unsigned char* response, int response_len)
 
     while (answer_section - response < response_len)
     {
-        answer_section += 2; // Skip the NAME field
-        answer_type = ntohs(*(unsigned short*)(answer_section));
-        answer_section += 8; // Skip TYPE, CLASS, TTL
-        answer_data_len = ntohs(*(unsigned short*)(answer_section));
-        answer_section += 2;
-
-        if (answer_type == 1 && answer_data_len == 4) // A record
+        // Skip the NAME field (2 bytes if it's a pointer, otherwise variable length)
+        if ((*answer_section & 0xC0) == 0xC0)
         {
-            unsigned int ip_address = *(unsigned int*)(answer_section);
-            return ip_address;
+            answer_section += 2; // Compressed name pointer (2 bytes)
+        }
+        else
+        {
+            while (*answer_section != 0) answer_section++; // Skip full name
+            answer_section++; // Skip the null terminator
         }
 
-        answer_section += answer_data_len;
+        answer_type = ntohs(*(unsigned short*)(answer_section));  // TYPE
+        answer_section += 2;
+        answer_section += 2;  // Skip CLASS
+        answer_section += 4;  // Skip TTL
+        answer_data_len = ntohs(*(unsigned short*)(answer_section));  // RDLENGTH
+        answer_section += 2;
+
+        if (answer_type == 1 && answer_data_len == 4)  // A record with 4 bytes for IPv4
+        {
+            unsigned int ip_address;
+            memcpy(&ip_address, answer_section, 4);  // Copy the 4-byte IP address
+            return ip_address;  // Return IP address in network byte order
+        }
+
+        answer_section += answer_data_len;  // Move to the next record
     }
 
-    return 0; // No IP address found
+    return 0;  // No IP address found
 }
+
 
 /**
  * Displays a hex dump of the given buffer.
@@ -1040,9 +1108,9 @@ NTSTATUS get_ip_from_domain(
     // Copy the lookupd IP address into the provided buffer
     strncpy_s(ip_string, 16, outBuffer.ip_address_str, _TRUNCATE);
 
-    NtClose(hSocket_dns_lookup);
+    afd_close(hSocket_dns_lookup);
 
-    Sleep(10); // wait a little to prevent bugs
+    Sleep(10); // Wait a little to prevent bugs
 
     return Status;
 }
@@ -1125,11 +1193,12 @@ NTSTATUS create_context(
  * @param SocketType The type of the socket to be created.
  * @param socketProtocol The protocol of the socket to be created.
  * @returns The status of the AFD socket creation operation.
+ * 
  */
 NTSTATUS afd_create(
     PHANDLE socket_handle,
-    DWORD SocketType,
-    DWORD socketProtocol
+    int SocketType,
+    int socketProtocol
 ) {
     HANDLE hEvent = NULL;
     HANDLE hSocket = socket_handle;
@@ -1144,42 +1213,60 @@ NTSTATUS afd_create(
     {
         .NextEntryOffset = 0x00000000,
         .Flags = 0x00,
+        .EaNameLength = sizeof("AfdOpenPacketXX") - 1,
         .EaValueLength = 0x001E,
-        .EaName = "AfdOpenPacketXX\0",
-        .EaNameLength = (sizeof(packet.EaName) - 1),
+        .EaName = "AfdOpenPacketXX",
         .EndpointFlags = 0x00000000,
         .GroupID = 0x00000000,
         .AddressFamily = AF_INET,
         .SocketType = SocketType,
-        .Protocol = socketProtocol,
-        .SizeOfTransportName = 0x0,
-        .TransportName = "\x60\xEF\x3D\x47\xFE"
-        //.TransportName = "\x41\x41\x41\x41" // whatever
+        .Protocol = socketProtocol
     };
 
-    // set afd endpoint path
+    // DGRAM protocol type must to be placed at [packet.unknow1] as uint16_t
+    if (socketProtocol == IPPROTO_UDP)
+    {
+        packet.unknown1 = socketProtocol;
+    }
+
+    LOG_INFO("afd_create() -> AFD_CREATE_PACKET packet ->\n");
+    if (CURRENT_LOG_LEVEL)
+    {
+        hexdump(&packet, sizeof(packet));
+    }
+   
+    // Set afd endpoint path
     memset((void*)&object_file_path, 0, sizeof(object_file_path));
     object_file_path.Buffer = L"\\Device\\Afd\\Endpoint";
     object_file_path.Length = wcslen(object_file_path.Buffer) * sizeof(wchar_t);
     object_file_path.MaximumLength = object_file_path.Length;
 
-    // initialise object attributes
+    // Initialise object attributes
     memset((void*)&object_attributes, 0, sizeof(object_attributes));
     object_attributes.Length = sizeof(object_attributes);
     object_attributes.ObjectName = &object_file_path;
     object_attributes.Attributes = 0x40;
 
-    // create socket handle
+    // Create socket handle
     IoStatusBlock.Status = 0;
     IoStatusBlock.Information = NULL;
 
-    // FILE_NO_EA_KNOWLEDGE = 0x00000200
     dwStatus = NtCreateFile(&hSocket,
-        FILE_GENERIC_READ | FILE_GENERIC_WRITE | FILE_GENERIC_EXECUTE,
-        &object_attributes, &IoStatusBlock, NULL, 0, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-        FILE_OPEN_IF, 0x00000200, &packet, sizeof(packet));
+        GENERIC_READ | GENERIC_WRITE | SYNCHRONIZE | WRITE_DAC,
+        &object_attributes, &IoStatusBlock, NULL, 0,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        FILE_OPEN_IF, 0, &packet, sizeof(packet));
 
     *(HANDLE*)socket_handle = hSocket;
+
+    if (!NT_SUCCESS(dwStatus)) {
+        return dwStatus;
+    }
+
+    LOG_INFO("status -> 0x%d", dwStatus);
+
+    // Assign the socket handle to the output parameter
+    *socket_handle = hSocket;
 
     return dwStatus;
 }
@@ -1194,7 +1281,7 @@ NTSTATUS afd_create(
 NTSTATUS afd_bind(
     HANDLE* socket_handle
 ) {
-    // bind a high port to futher TCP conversation
+    // Bind a client port to futher TCP/UDP/RAW communication
     NTSTATUS Status = NULL;
     IO_STATUS_BLOCK IoStatus = { 0 };
     HANDLE Event = NULL;
@@ -1371,15 +1458,12 @@ NTSTATUS afd_connect(
         return Status;
     }
 
-    uint32_t htonl_ip = convert_ip_to_htonl(Address);
-
     memset(&conn_struct, '0', sizeof(conn_struct));
-
     conn_struct.UseSAN = 0;
     conn_struct.Root = 0;
     conn_struct.Unknown = 0;
     conn_struct.Bind.sin_family = AF_INET;
-    conn_struct.Bind.sin_addr.s_addr = htonl(htonl_ip);
+    conn_struct.Bind.sin_addr.s_addr = htonl(convert_ip_to_htonl(Address));
     conn_struct.Bind.sin_port = htons(Port);
 
     Status = NtDeviceIoControlFile(
@@ -1447,8 +1531,8 @@ NTSTATUS afd_send(
         finalSz = query_len;
     }
 
-    buf = (unsigned char*)buf;
-
+    buf = (unsigned char*)buf; // Sent buffer
+    
     AFD_WSABUF wsa_buffers[] =
     {
         {
@@ -1457,29 +1541,81 @@ NTSTATUS afd_send(
         }
     };
 
-    fb.BufferArray = wsa_buffers;
-    fb.BufferCount = 1;
-    fb.AfdFlags = 0;
-    fb.TdiFlags = query_len;
+    LOG_INFO("afd_send() -> Sending globalSocketType: [%s]", globalSocketType);
 
-    Status = NtDeviceIoControlFile(
-        socket_handle,
-        Event,
-        NULL,
-        NULL,
-        &IoStatus,
-        IOCTL_AFD_SEND,
-        &fb,
-        sizeof(fb),
-        NULL,
-        0
-    );
+    if ((strcmp(globalSocketType, "TCP") == 0) || (strcmp(globalSocketType, "RAW") == 0))
+    {
+        fb.BufferArray = wsa_buffers;
+        fb.BufferCount = 1;
+        fb.AfdFlags = 0;
+        fb.TdiFlags = finalSz;
 
+        Status = NtDeviceIoControlFile(
+            socket_handle,
+            Event,
+            NULL,
+            NULL,
+            &IoStatus,
+            IOCTL_AFD_SEND,
+            &fb,
+            sizeof(fb),
+            NULL,
+            0
+        );
+    }
+    else if (strcmp(globalSocketType, "UDP") == 0)
+    {        
+        SOCKADDR_IN conn_struct = { 0 };
+        memset(&conn_struct, 0, sizeof(conn_struct));
+        conn_struct.sin_family = AF_INET;
+        conn_struct.sin_addr.s_addr = htonl((uint32_t)convert_ip_to_htonl(globalRemoteAddr));
+        conn_struct.sin_port = htons(globalRemotePort);
+
+        // Allocate and initialize AFD_SEND_DATAGRAM_INFO structure
+        AFD_SEND_DATAGRAM_INFO dgramInfo = { 0 };
+        memset(&dgramInfo, 0, sizeof(dgramInfo));
+        dgramInfo.BufferArray = wsa_buffers;
+        dgramInfo.BufferCount = 1;
+        dgramInfo.AfdFlags = AFD_IMMEDIATE;
+        if (is_dns_query > 0) 
+        {
+            dgramInfo.TdiConnInfo.UserDataLength = finalSz;
+        }
+        else 
+        {
+            dgramInfo.TdiConnInfo.UserDataLength = strlen(buf);
+        }
+        dgramInfo.TdiConnInfo.UserData = buf;
+        dgramInfo.TdiConnInfo.RemoteAddressLength = sizeof(conn_struct);
+        dgramInfo.TdiConnInfo.RemoteAddress = &conn_struct;
+
+        // Example: Now you can use dgramInfo for further processing
+        Status = NtDeviceIoControlFile(
+            socket_handle,
+            Event,
+            NULL,
+            NULL,
+            &IoStatus,
+            IOCTL_AFD_SEND_DATAGRAM,
+            &dgramInfo,
+            0x777,
+            0,
+            NULL
+        );
+    }
+   
     if (Status == STATUS_PENDING)
     {
         NtWaitForSingleObject(Event, FALSE, NULL);
         Status = IoStatus.Status;
     }
+
+    if (!NT_SUCCESS(Status)) {
+        LOG_ERROR("afd_send() -> Failed! -> Status: 0x%x", Status);
+        return Status;
+    }
+
+    LOG_INFO("afd_send() -> OK STATUS");
 
     NtClose(Event);
 
@@ -1510,7 +1646,6 @@ NTSTATUS afd_recv(
         return Status;
     }
 
-    AFD_RECV_INFO recvInfo;
     AFD_WSABUF FAKE_BUF = { 0 };
 
     BYTE wsa_recv_buffer[MAX_RECV_BYTES] = { 0 };
@@ -1518,23 +1653,61 @@ NTSTATUS afd_recv(
     FAKE_BUF.buf = (LPVOID)wsa_recv_buffer;
     FAKE_BUF.len = (uint32_t)sizeof(wsa_recv_buffer);
 
-    recvInfo.BufferArray = &FAKE_BUF;
-    recvInfo.BufferCount = 1;
-    recvInfo.TdiFlags = TDI_RECEIVE_NORMAL;
-    recvInfo.AfdFlags = 0;
+    if ((strcmp(globalSocketType, "TCP") == 0)|| (strcmp(globalSocketType, "RAW") == 0))
+    {
+        AFD_RECV_INFO recvInfo = { 0 };
+        memset(&recvInfo, 0, sizeof(recvInfo));
 
-    Status = NtDeviceIoControlFile(
-        socket_handle,
-        Event,
-        NULL,
-        NULL,
-        &IoStatus,
-        IOCTL_AFD_RECV,
-        &recvInfo,
-        sizeof(recvInfo),
-        NULL,
-        0
-    );
+        recvInfo.BufferArray = &FAKE_BUF;
+        recvInfo.BufferCount = 1;
+        recvInfo.TdiFlags = TDI_RECEIVE_NORMAL;
+        recvInfo.AfdFlags = 0;
+
+        Status = NtDeviceIoControlFile(
+            socket_handle,
+            Event,
+            NULL,
+            NULL,
+            &IoStatus,
+            IOCTL_AFD_RECV,
+            &recvInfo,
+            sizeof(recvInfo),
+            NULL,
+            0
+        );
+    }
+    else if (strcmp(globalSocketType, "UDP") == 0)
+    {
+        SOCKADDR_IN conn_struct = { 0 };
+        memset(&conn_struct, 0, sizeof(conn_struct));
+        conn_struct.sin_family = AF_INET;
+        conn_struct.sin_addr.s_addr = htonl((uint32_t)convert_ip_to_htonl(globalRemoteAddr));
+        conn_struct.sin_port = htons(globalRemotePort);
+
+        int szConn = sizeof(conn_struct);
+
+        AFD_RECV_INFO_UDP recvInfo = { 0 };
+        memset(&recvInfo, 0, sizeof(recvInfo));
+        recvInfo.BufferArray = &FAKE_BUF;
+        recvInfo.BufferCount = 1;
+        recvInfo.TdiFlags = TDI_RECEIVE_NORMAL;
+        recvInfo.AfdFlags = AFD_IMMEDIATE;
+        recvInfo.Address = &conn_struct;
+        recvInfo.AddressLength = &szConn;
+
+        Status = NtDeviceIoControlFile(
+            socket_handle,
+            Event,
+            NULL,
+            NULL,
+            &IoStatus,
+            IOCTL_AFD_RECV_DATAGRAM,
+            &recvInfo,
+            sizeof(recvInfo),
+            NULL,
+            0
+        );
+    }
 
     if (Status == STATUS_PENDING)
     {
@@ -1557,13 +1730,20 @@ NTSTATUS afd_recv(
  * @return NTSTATUS indicating the result of the close operation.
  */
 NTSTATUS afd_close(
-    HANDLE Handle
+    HANDLE hHandle
 ) {
-    return NtClose(Handle);
+    // Clear globalSocketType Buffer
+    memset(&globalSocketType, 0, sizeof(globalSocketType));
+    memset(&globalRemoteAddr, 0, sizeof(globalRemoteAddr));
+    memset(&globalRemotePort, 0, sizeof(globalRemotePort));
+    if (hHandle)  // Close only when hHandle != 0
+    {
+        return NtClose(hHandle);
+    }
 }
 
 /**
- * lookups a domain name to an IP address using the specified socket handle.
+ * Lookups a domain name to an IP address using the specified socket handle.
  *
  * @param hSocket The handle to the socket for DNS resolution.
  * @param domain_name The domain name to lookup.
@@ -1572,28 +1752,40 @@ NTSTATUS afd_close(
  * @return NTSTATUS The status of the domain resolution operation.
  */
 NTSTATUS nosa_dns_lookup(
-    HANDLE hSocket,
-    const char* domain_name,
+    PHANDLE hSocket,
+    char* domain_name,
     DOMAIN_INFO* outBuffer
 ) {
     NTSTATUS Status = NULL;
     IO_STATUS_BLOCK IoStatus = { 0 };
     HANDLE Event = NULL;
+
+    char *dnsHost = DNS_SERVER;
+    int dnsPort = DNS_PORT;
+    DWORD sType = SOCK_DGRAM;
+    DWORD sProtocol = IPPROTO_UDP;
+
     unsigned char out_buffer_ptr = { 0 };
-    int query_len = 0;
     unsigned char buf[1024] = { 0 };
+    int query_len = 0;
+
     unsigned char wsa_buffer[MAX_RECV_BYTES] = { 0 };
     memset(wsa_buffer, 0, sizeof(wsa_buffer));
 
-    Status = afd_create(&hSocket, SOCK_STREAM, IPPROTO_TCP);
+    // Define Global variables to be used in current connection
+    strncpy_s(globalSocketType, sizeof(globalSocketType) + 1, "UDP", _TRUNCATE);
+    strncpy_s(globalRemoteAddr, 16, DNS_SERVER, _TRUNCATE);
+    memcpy(&globalRemotePort, &dnsPort, sizeof(globalRemotePort));
 
-    if (hSocket)
+    Status = afd_create(&hSocket, sType, sProtocol);
+
+    if (!NT_SUCCESS(Status))
     {
-        LOG_INFO("Socket created successfully! HANDLE: [ 0x%x ]", hSocket);
+        LOG_ERROR("nosa_dns_lookup->afd_create() failed! [ 0x%x ]", Status);
     }
     else
     {
-        LOG_ERROR("Failed to create socket.");
+        LOG_INFO("Socket created successfully! HANDLE: [ 0x%x ]", hSocket);
     }
 
     Status = afd_bind(hSocket);
@@ -1608,7 +1800,7 @@ NTSTATUS nosa_dns_lookup(
         LOG_INFO("nosa_dns_lookup -> afd_bind() OK");
     }
 
-    Status = afd_connect(hSocket, DNS_SERVER, DNS_PORT);
+    Status = afd_connect(hSocket, dnsHost, dnsPort);
 
     if (!NT_SUCCESS(Status))
     {
@@ -1637,14 +1829,14 @@ NTSTATUS nosa_dns_lookup(
     //    0x0, 0x1
 
     // Print the DNS query bytes for verification
-    if (LOG_LEVEL_DEBUG)
+    LOG_INFO("DNS Query:");
+    if (CURRENT_LOG_LEVEL)
     {
-        LOG_INFO("DNS Query:");
         hexdump(query, query_len);
     }
 
     // We assume that socket_handle are created with create() -> bind() -> connect()
-    Status = afd_send(hSocket, buf, query_len, 1);
+    Status = afd_send(hSocket, query, query_len, 1);
 
     if (!NT_SUCCESS(Status))
     {
@@ -1661,9 +1853,9 @@ NTSTATUS nosa_dns_lookup(
     }
 
     // Print the DNS response bytes for verification
-    if (LOG_LEVEL_DEBUG)
+    LOG_INFO("afd_recv() Response:");
+    if (CURRENT_LOG_LEVEL)
     {
-        LOG_INFO("afd_recv() Response:");
         hexdump(wsa_buffer, 0x100);
     }
 
@@ -1701,16 +1893,16 @@ NTSTATUS nosa_dns_lookup(
  * @returns NTSTATUS indicating the status of the connection attempt.
  */
 NTSTATUS nosa_connect(
-    HANDLE* hSocket,
+    PHANDLE hSocket,
     char* host,
     int port,
-    const char* socketType
+    char *socketType
 ) {
     NTSTATUS Status = NULL;
     DWORD sType = NULL;
     DWORD socketProtocol = NULL;
     char ip_string[16] = { 0 };  // Allocate enough space for an IPv4 address in dotted notation
-
+    
     if (get_nt_functions())  // load ntdll libraries
     {
         if (is_domain_name(host))   // lookup the IP address of a given domain name 
@@ -1730,29 +1922,44 @@ NTSTATUS nosa_connect(
             LOG_INFO("ip_string: %s", ip_string);
         }
 
-        if (socketType == "TCP")
+        if (strcmp(socketType, "TCP") == 0)
         {
             sType = SOCK_STREAM;
+            strncpy_s(globalSocketType, sizeof(globalSocketType) + 1, "TCP", _TRUNCATE);
         }
-
-        if (socketType == "UDP") // #TODO -> Not working -> afd_connect() send back an invalid NTSTATUS 0xC0000002
-        {                        // idk how it can be implemented since afd_connect() Datagram doesn't help 
+        else if (strcmp(socketType, "UDP") == 0)
+        {
             sType = SOCK_DGRAM;
+            // Define Global variables to be used in current connection
+            strncpy_s(globalSocketType, sizeof(globalSocketType) + 1, "UDP", _TRUNCATE);
+            strncpy_s(globalRemoteAddr, 16, ip_string, _TRUNCATE);
+            memcpy(&globalRemotePort, &port, sizeof(globalRemotePort));
+        }
+        else if (strcmp(socketType, "RAW") == 0) 
+        {
+            sType = SOCK_RAW;
+            strncpy_s(globalSocketType, sizeof(globalSocketType) + 1, "RAW", _TRUNCATE);
+        }
+        else
+        {
+            LOG_ERROR("Unsupported Socket Type!\n");
+            return -1;
         }
 
         // Switch case to handle different socket types
-        switch (sType) {
-        case SOCK_STREAM:
-            socketProtocol = IPPROTO_TCP; // TCP
-            break;
+        switch (sType) 
+        {
+            case SOCK_STREAM:
+                socketProtocol = IPPROTO_TCP;
+                break;
 
-        case SOCK_DGRAM:
-            socketProtocol = IPPROTO_UDP; // UDP -> TODO
-            break;
+            case SOCK_DGRAM:
+                socketProtocol = IPPROTO_UDP;
+                break;
 
-        default:
-            LOG_ERROR("Unsupported socket type");
-            return -1; // Return an error code
+            case SOCK_RAW:
+                socketProtocol = IPPROTO_RAW;
+                break;
         }
 
         // Pass the pointer to the HANDLE, allowing the function to modify the original hSocket variable
@@ -1767,7 +1974,7 @@ NTSTATUS nosa_connect(
             LOG_ERROR("Failed to create socket.");
             return Status;
         }
-
+        
         Status = afd_bind(*hSocket);
 
         if (!NT_SUCCESS(Status))
@@ -1779,12 +1986,12 @@ NTSTATUS nosa_connect(
         {
             LOG_INFO("nosa_connect() -> afd_bind() OK");
         }
-
+       
         // generate a context for our created socket
         BYTE* sockctx_input_buffer[SOCK_CONTEXT_BUF_SIZE] = { 0 };
         memset(sockctx_input_buffer, 0, sizeof(sockctx_input_buffer)); // clear our created vm alloc
 
-        int sockctxSz = create_context(AF_INET, sType, socketProtocol, &sockctx_input_buffer);
+        Status = create_context(AF_INET, sType, socketProtocol, &sockctx_input_buffer);
 
         // bp afdsetcontext ".if (@rdi == 0xcafe0000) { .echo 'Breakpoint hit!'; } .else { gc; }"
         Status = afd_set_context(*hSocket, sockctx_input_buffer);     // implement current socket context
@@ -1813,19 +2020,28 @@ NTSTATUS nosa_connect(
         else
         {
             LOG_INFO("nosa_connect() -> nosa_getcontext() OK");
-            hexdump(sockctx_out_buffer, 0x100);
         }
 
-        Status = afd_connect(*hSocket, ip_string, port);
+        memcpy(&globalContext, &sockctx_out_buffer, sizeof(globalContext));
 
-        if (!NT_SUCCESS(Status))
+        LOG_INFO("GLOBAL CONTEXT");
+        if (CURRENT_LOG_LEVEL)
         {
-            LOG_ERROR("nosa_connect() -> afd_connect() failed! [ 0x%x ]", Status);
-            return Status;
+            hexdump(globalContext, 0x100);
         }
-        else
-        {
-            LOG_INFO("nosa_connect() -> afd_connect() OK");
+
+        if (sType == SOCK_STREAM) { // UDP (DRGAM) is connectionless, which means we don't need afd_connect()
+            Status = afd_connect(*hSocket, ip_string, port);
+
+            if (!NT_SUCCESS(Status))
+            {
+                LOG_ERROR("nosa_connect() -> afd_connect() failed! [ 0x%x ]", Status);
+                return Status;
+            }
+            else
+            {
+                LOG_INFO("nosa_connect() -> afd_connect() OK");
+            }
         }
 
         Sleep(10); // wait a little bit
