@@ -58,9 +58,6 @@ NTSTATUS nosa_recv(HANDLE hSocket, LPVOID packet_data_received)
 #define MAX_SENT_BYTES 0x1000
 ```
 
-### Documentation
-- We generated a helpful doxygen documentation (doxygen_doc)
-  
 ### TODO
 - x86 AFD.sys driver connection.
 
