@@ -62,7 +62,7 @@ int main() {
     hexdump(&pktPtr_send, 0x100);
 
     // Receive and print TCP packet response
-    nosa_recv((HANDLE*)hSocket, &pktPtr_resp);
+    nosa_recv((HANDLE*)hSocket, pktPtr_resp);
     printf("nosa_recv() -> Response:\n");
     hexdump(&pktPtr_resp, 0x100);
 
